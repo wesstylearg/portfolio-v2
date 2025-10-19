@@ -439,3 +439,100 @@ body {
 .left-panel::-webkit-scrollbar-thumb:hover {
   background-color: var(--muted);
 }
+
+/* ======================================= */
+/* ====== MEDIA QUERIES PARA MÓVIL ======= */
+/* ======================================= */
+@media (max-width: 600px) {
+  /* Ocultar el panel de navegación lateral */
+  .sidebar {
+    display: none;
+  }
+
+  /* El contenido principal debe ocupar todo el ancho */
+  .content {
+    /* Eliminamos la sidebar, el left-panel ahora ocupa todo el espacio */
+    flex-direction: column; 
+  }
+
+  /* Ajustar padding y margen del topbar */
+  .topbar {
+    padding: 0 15px;
+  }
+  
+  /* Reducir el tamaño de fuente de la marca en el topbar */
+  .brand-name {
+    font-size: 20px;
+  }
+  
+  /* Ajustar el tamaño y padding de los botones de navegación */
+  .nav-btn {
+    padding: 4px 12px;
+    font-size: 14px;
+  }
+
+  /* Ocultar el panel derecho de vista previa */
+  .right-panel {
+    display: none;
+  }
+
+  /* El panel izquierdo ocupa el ancho total */
+  .left-panel {
+    padding: 20px 15px; /* Reducir padding en móvil */
+    /* Ajustar la altura total menos el topbar y el player */
+    height: calc(100vh - 60px - 60px); 
+    /* El player está fixed, pero para el cálculo de altura del panel, 
+       consideramos el espacio que ocupa en la parte inferior.
+       Si se usa en `app` la altura de `calc(100vh - 60px)`, 
+       el `left-panel` puede expandirse si no hay `right-panel` 
+       y el scroll será correcto.  
+       Mantendremos la altura del app y el left-panel hará scroll.
+    */
+  }
+
+  /* Hacer que los items de la grilla ocupen el 100% horizontalmente (1 columna) */
+  .grid {
+    grid-template-columns: 1fr; /* Una sola columna */
+    gap: 15px; /* Reducir el espacio entre ítems */
+    margin-bottom: 2rem; /* Reducir el margen inferior */
+  }
+  
+  /* Asegurar que el efecto hover no sea disruptivo en móvil, aunque transform es mejor no usarlo en móvil */
+  .card:hover {
+    transform: none; /* Eliminar el zoom en hover para móviles */
+  }
+
+  /* Ajustes en el reproductor (player) */
+  .player {
+    padding: 0 15px; /* Reducir padding horizontal */
+    height: 60px; /* Asegurar altura */
+  }
+  
+  /* En el player, los contenedores de info y placeholder pueden simplificarse */
+  .track-info {
+    flex-basis: auto; /* Dejar que el contenido defina el tamaño */
+    flex-grow: 1; /* Para que la info ocupe más espacio */
+  }
+
+  .track-placeholder {
+    display: none; /* Ocultar el placeholder en móvil para ahorrar espacio */
+  }
+
+  .player-controls {
+     flex-basis: auto; /* Dejar que el contenido defina el tamaño */
+  }
+
+  .track-cover {
+    width: 40px; 
+    height: 40px;
+    margin-right: 10px;
+  }
+
+  .track-info h2 {
+      font-size: 0.9rem;
+  }
+
+  .track-info p {
+      font-size: 0.7rem;
+  }
+}
