@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>wesstyle.arg — contacto</title>
+  <link rel="icon" type="image/ico" href="img/iconos/logo.ico" />
+  <link rel="stylesheet" href="style.css" />
+  <link href="fonts/circular.woff2" rel="stylesheet" />
+  <style>
+    /* Estilos específicos para la página de Contacto */
+    .app-contact {
+        display: flex;
+        flex-grow: 1; 
+        align-items: stretch;
+        height: calc(100vh - 60px); 
+    }
+
+    .main-contact {
+        flex: 1;
+        padding: 30px;
+        overflow-y: auto;
+        background: var(--bg);
+        display: flex; /* Añadido para centrar el contenido */
+        justify-content: center; /* Centrar horizontalmente */
+        align-items: flex-start; /* Alinear arriba */
+        padding-top: 80px; /* Espacio extra desde el top */
+    }
+
+    .contact-wrapper {
+        max-width: 600px;
+        width: 100%;
+        text-align: center;
+        color: #fff;
+        /* Reutilizamos la animación fadeInUp */
+        animation: fadeInUp 0.5s ease-out forwards; 
+        opacity: 0;
+        animation-delay: 0.1s;
+    }
+
+    /* Definición de la animación (copiada de precios.html) */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .contact-wrapper h1 {
+        font-family: 'expend', sans-serif;
+        font-size: 3rem;
+        margin-bottom: 50px;
+        color: var(--wesstyle);
+    }
+
+    .contact-item {
+        margin-bottom: 25px;
+    }
+
+    .contact-item h2 {
+        font-size: 1.5rem;
+        margin: 0;
+        color: var(--muted);
+        font-weight: 400;
+    }
+
+
+    .contact-item a {
+        font-size: 2rem;
+        color: #fff;
+        text-decoration: none;
+        font-family: 'expend', sans-serif;
+        transition: color 0.2s;
+        display: block; /* Para que ocupe todo el ancho */
+    }
+
+    .contact-item a:hover {
+        color: var(--wesstyle);
+    }
+    
+    .player { /* Oculta el player */
+        display: none; 
+    }
+
+    /* Media Queries para móvil */
+    @media (max-width: 600px) {
+        .contact-wrapper h1 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+        .contact-item a {
+            font-size: 1.5rem;
+        }
+        .main-contact {
+            padding: 40px 15px;
+        }
+    }
+  </style>
+</head>
+
+<body>
+  
+  <header class="topbar">
+    <div class="brand">
+      <img src="img/iconos/logo.svg" alt="Logo" class="logo">
+      <span class="brand-name">wesstyle arg</span>
+    </div>
+
+    <nav class="top-nav">
+      <a href="index.html" class="nav-btn outline">Diseños</a>
+      <a href="precios.html" class="nav-btn outline">Precios</a>
+      <button class="nav-btn active">Contacto</button>
+    </nav>
+  </header>
+
+  <div class="app-contact">
+    <main class="content main-contact">
+        
+        <div class="contact-wrapper">
+            <h1>Hablemos de tu proximo lanzamiento:</h1>
+            <div class="contact-item">
+                <h2>INSTAGRAM</h2>
+                <a href="https://instagram.com/wesstyle.arg" target="_blank">@wesstyle.arg</a>
+            </div>
+
+            <div class="contact-item">
+                <h2>WHATSAPP</h2>
+                <a href="http://wa.me/+5492983448645" target="_blank">+54 9 2983 44-8645</a>
+            </div>
+            
+            <div class="contact-item">
+                <h2>EMAIL</h2>
+                <a href="mailto:wesstyle.arg@email.com">wesstyle.arg@email.com</a>
+            </div>
+
+<div class="contact-item">
+                <h2>Más de 50 artistas de todo el mundo que confíaron en wesstyle.arg. Tu próxima portada puede ser la siguiente</h2>
+            </div>
+
+
+      
+
+        </div>
+    </main>
+  </div>
+  
+</body>
+</html>
