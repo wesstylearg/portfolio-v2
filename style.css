@@ -534,19 +534,7 @@ body {
 
     /* 5. PLAYER (FOOTER) */
     .player {
-        height: 60px;
-        padding: 0 15px; /* Menos padding */
-        /* Asegura que el player esté siempre en la parte inferior de la VISTA */
-        position: fixed; 
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        z-index: 1000;
-        
-        /* Reorganización: ocultamos los controles de avance/retroceso en móviles */
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        display: none;
     }
     
     .track-info {
@@ -620,4 +608,5 @@ body {
     .player-controls .main-player-btn {
         margin: 0 10px;
     }
+
 }
