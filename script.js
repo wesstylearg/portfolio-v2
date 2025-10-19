@@ -234,8 +234,15 @@ function renderSection(section) {
   grid.innerHTML = "";
   currentDisplayCount = 0; // Reinicia el contador de tarjetas mostradas
 
-  // Muestra el panel derecho y el reproductor
-  document.querySelector('.right-panel').style.display = 'flex'; 
+  // Muestra el panel derecho solo si la pantalla NO es móvil (ancho > 600px)
+  if (window.matchMedia('(min-width: 601px)').matches) {
+      document.querySelector('.right-panel').style.display = 'flex'; 
+  } else {
+      // En móvil, asegura que el panel de preview esté oculto
+      document.querySelector('.right-panel').style.display = 'none';
+  }
+
+  // El reproductor inferior siempre se muestra (position: fixed)
   document.querySelector('.player').style.display = 'flex'; 
 
   sectionNameTitle.textContent = categoryTitles[section] || section.charAt(0).toUpperCase() + section.slice(1);
