@@ -100,7 +100,6 @@ body {
 /* LAYOUT */
 .app {
   display: flex;
-  /* Corregido para ocupar todo el espacio cuando el player está oculto */
   flex-grow: 1; 
   align-items: stretch;
   height: calc(100vh - 60px); 
@@ -110,7 +109,6 @@ body {
 .left-panel {
   flex: 1;
   padding: 30px;
-  /* Permite que el panel izquierdo tenga scroll interno */
   overflow-y: auto; 
 }
 /* SIDEBAR */
@@ -250,7 +248,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-        align-items: center;
+    align-items: center;
 }
 
 .preview-image {
@@ -262,7 +260,7 @@ body {
     object-fit: cover;
     align-items: center;
     justify-content: center;
-    cursor: pointer; /* Indica que es cliqueable */
+    cursor: pointer; 
 }
 
 .preview-image img {
@@ -270,7 +268,7 @@ body {
   top: 0;
   width: 100%;
   height: 100%;
- object-fit: contain; 
+  object-fit: contain; 
 
 }
 
@@ -444,173 +442,67 @@ body {
 /* ====== MEDIA QUERIES PARA MÓVIL ======= */
 /* ======================================= */
 @media (max-width: 600px) {
-  /* Ocultar el panel de navegación lateral */
+  /* 1. OCULTAR ELEMENTOS NO DESEADOS */
   .sidebar {
     display: none;
   }
 
-  /* El contenido principal debe ocupar todo el ancho */
+  /* **CRUCIAL:** Ocultar el panel derecho de vista previa (el reproductor grande) */
+  .right-panel {
+    display: none; 
+    visibility: hidden; 
+    width: 0;
+  }
+  
+  /* 2. AJUSTAR EL CONTENEDOR PRINCIPAL Y EL PANEL DE CONTENIDO */
   .content {
-    /* Eliminamos la sidebar, el left-panel ahora ocupa todo el espacio */
-    flex-direction: column; 
+    /* Aseguramos que los paneles se traten como elementos en una fila,
+       aunque uno de ellos esté oculto */
+    flex-direction: row; 
   }
 
-  /* Ajustar padding y margen del topbar */
-  .topbar {
-    padding: 0 15px;
-  }
-  
-  /* Reducir el tamaño de fuente de la marca en el topbar */
-  .brand-name {
-    font-size: 20px;
-  }
-  
-  /* Ajustar el tamaño y padding de los botones de navegación */
-  .nav-btn {
-    padding: 4px 12px;
-    font-size: 14px;
-  }
-
-  /* Ocultar el panel derecho de vista previa */
-  .right-panel {
-    display: none;
-  }
-
-  /* El panel izquierdo ocupa el ancho total */
+  /* **CRUCIAL:** El panel izquierdo debe ocupar el 100% del espacio horizontal */
   .left-panel {
+    flex: 1 1 100%; /* Ocupa todo el ancho disponible */
     padding: 20px 15px; /* Reducir padding en móvil */
-    /* Ajustar la altura total menos el topbar y el player */
+    /* Ajusta la altura: Altura de la ventana - Topbar (60px) - Player (60px) */
     height: calc(100vh - 60px - 60px); 
-    /* El player está fixed, pero para el cálculo de altura del panel, 
-       consideramos el espacio que ocupa en la parte inferior.
-       Si se usa en `app` la altura de `calc(100vh - 60px)`, 
-       el `left-panel` puede expandirse si no hay `right-panel` 
-       y el scroll será correcto.  
-       Mantendremos la altura del app y el left-panel hará scroll.
-    */
+    margin-bottom: 0; 
   }
 
-  /* Hacer que los items de la grilla ocupen el 100% horizontalmente (1 columna) */
+  /* 3. FORMATO DE ÍTEMS */
   .grid {
-    grid-template-columns: 1fr; /* Una sola columna */
-    gap: 15px; /* Reducir el espacio entre ítems */
-    margin-bottom: 2rem; /* Reducir el margen inferior */
-  }
-  
-  /* Asegurar que el efecto hover no sea disruptivo en móvil, aunque transform es mejor no usarlo en móvil */
-  .card:hover {
-    transform: none; /* Eliminar el zoom en hover para móviles */
-  }
-
-  /* Ajustes en el reproductor (player) */
-  .player {
-    padding: 0 15px; /* Reducir padding horizontal */
-    height: 60px; /* Asegurar altura */
-  }
-  
-  /* En el player, los contenedores de info y placeholder pueden simplificarse */
-  .track-info {
-    flex-basis: auto; /* Dejar que el contenido defina el tamaño */
-    flex-grow: 1; /* Para que la info ocupe más espacio */
-  }
-
-  .track-placeholder {
-    display: none; /* Ocultar el placeholder en móvil para ahorrar espacio */
-  }
-
-  .player-controls {
-     flex-basis: auto; /* Dejar que el contenido defina el tamaño */
-  }
-
-  .track-cover {
-    width: 40px; 
-    height: 40px;
-    margin-right: 10px;
-  }
-
-  .track-info h2 {
-      font-size: 0.9rem;
-  }
-
-  .track-info p {
-      font-size: 0.7rem;
-  }
-}
-
-/* ... (Todo el contenido anterior de style.css) ... */
-
-/* ESTILOS PARA LA BARRA DE DESPLAZAMIENTO (SCROLLBAR) */
-/* Aplica solo al .left-panel */
-.left-panel::-webkit-scrollbar {
-  width: 12px;
-}
-
-.left-panel::-webkit-scrollbar-track {
-  background: var(--bg);
-}
-
-.left-panel::-webkit-scrollbar-thumb {
-  background-color: #333;
-  border-radius: 4px; 
-}
-
-.left-panel::-webkit-scrollbar-thumb:hover {
-  background-color: var(--muted);
-}
-
-/* ======================================= */
-/* ====== MEDIA QUERIES PARA MÓVIL ======= */
-/* ======================================= */
-@media (max-width: 600px) {
-  /* Ocultar el panel de navegación lateral */
-  .sidebar {
-    display: none; /* */
-  }
-
-  /* Ocultar el panel derecho de vista previa */
-  .right-panel {
-    display: none; /* */
-  }
-  
-  /* Ajustar padding y margen del topbar */
-  .topbar {
-    padding: 0 15px; /* */
-  }
-  
-  /* Reducir el tamaño de fuente de la marca en el topbar */
-  .brand-name {
-    font-size: 20px; /* */
-  }
-  
-  /* Ajustar el tamaño y padding de los botones de navegación */
-  .nav-btn {
-    padding: 4px 10px; /* */
-    font-size: 14px; /* */
-  }
-
-  /* El panel izquierdo ocupa el ancho total y tiene la altura correcta */
-  .left-panel {
-    padding: 20px 15px; /* Reducir padding en móvil */
-    /* Calcula la altura total para que el scroll termine justo antes del player */
-    height: calc(100vh - 60px - 60px); 
-  }
-
-  /* Hacer que los items de la grilla ocupen el 100% horizontalmente (1 columna) */
-  .grid {
-    grid-template-columns: 1fr; /* */
-    gap: 15px; /* Reducir el espacio entre ítems */
+    /* **CRUCIAL:** Una sola columna para que cada ítem ocupe todo el ancho */
+    grid-template-columns: 1fr; 
+    gap: 15px; 
     margin-bottom: 2rem; 
   }
   
-  /* Ajustes en el reproductor (player) */
+  .card:hover {
+    transform: none; /* Eliminar el zoom en hover para mejor UX táctil */
+  }
+
+  /* 4. AJUSTES EN EL ENCABEZADO Y REPRODUCTOR INFERIOR */
+  .topbar {
+    padding: 0 15px; 
+  }
+  
+  .brand-name {
+    font-size: 20px; 
+  }
+  
+  .nav-btn {
+    padding: 4px 10px; 
+    font-size: 14px; 
+  }
+  
   .player {
-    padding: 0 15px; /* Reducir padding horizontal */
+    padding: 0 15px; 
     height: 60px; 
   }
   
-  /* Ocultar el elemento de relleno del player en móvil para ahorrar espacio */
   .track-placeholder {
-    display: none; /* */
+    display: none; 
   }
   
   .track-cover {
@@ -626,9 +518,4 @@ body {
   .track-info p {
       font-size: 0.7rem;
   }
-  
-  .card:hover {
-    transform: none; /* Eliminar el zoom en hover para móviles */
-  }
 }
-
