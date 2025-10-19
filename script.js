@@ -48,6 +48,10 @@ const categoryTitles = {
 
 let currentSection = null; 
 let currentIndex = 0;
+// --- NUEVAS VARIABLES DE PAGINACIÓN ---
+let currentDisplayCount = 0;
+const CARDS_PER_LOAD = 4;
+// ------------------------------------
 
 const grid = document.getElementById("grid");
 const previewImage = document.getElementById("preview-image");
@@ -95,6 +99,11 @@ function renderCategories() {
   document.querySelector('.player').style.display = 'none';
 
   sectionNameTitle.textContent = "Menú Principal";
+  
+  // Oculta el botón de "Ver más" (si existiera)
+  const loadMoreBtn = document.getElementById('load-more-btn');
+  if (loadMoreBtn) loadMoreBtn.remove();
+
 
   // Obtenemos todas las categorías EXCLUYENDO 'menu'
   const categories = Object.keys(data).filter(key => key !== 'menu' && data.hasOwnProperty(key));
@@ -131,6 +140,88 @@ function renderCategories() {
   }
 }
 
+// FUNCIÓN NUEVA: Añade el botón "Ver más"
+function createLoadMoreButton() {
+    let loadMoreBtn = document.getElementById('load-more-btn');
+    if (!loadMoreBtn) {
+        loadMoreBtn = document.createElement('button');
+        loadMoreBtn.id = 'load-more-btn';
+        loadMoreBtn.textContent = 'Ver más';
+        // Estilo básico para el botón (se puede mejorar en style.css)
+        loadMoreBtn.style.cssText = `
+            grid-column: 1 / -1;
+            padding: 10px 20px;
+            margin: 20px auto 40px auto;
+            display: block;
+            background: var(--wesstyle);
+            color: #fff;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: opacity 0.2s;
+            font-family: circular;
+        `;
+        loadMoreBtn.onmouseover = () => loadMoreBtn.style.opacity = 0.9;
+        loadMoreBtn.onmouseout = () => loadMoreBtn.style.opacity = 1;
+        loadMoreBtn.addEventListener('click', loadNextBatch);
+        document.querySelector('.left-panel').appendChild(loadMoreBtn);
+    }
+    return loadMoreBtn;
+}
+
+// FUNCIÓN NUEVA: Carga las siguientes 4 tarjetas
+function loadNextBatch() {
+    const items = data[currentSection];
+    if (!items) return;
+    
+    const start = currentDisplayCount;
+    const end = Math.min(items.length, start + CARDS_PER_LOAD);
+    
+    // Renderiza el nuevo lote
+    renderBatch(items, start, end);
+    
+    currentDisplayCount = end;
+    
+    // Actualiza o esconde el botón
+    updateLoadMoreButton(items.length);
+}
+
+// FUNCIÓN NUEVA: Renderiza un lote específico de tarjetas
+function renderBatch(items, start, end) {
+    for (let i = start; i < end; i++) {
+        const item = items[i];
+        const card = document.createElement("div");
+        card.classList.add("card");
+        
+        // ESTRUCTURA DE CARD IDÉNTICA (img, h4, p)
+        card.innerHTML = `
+          <img src="${item.src}" alt="${item.title}" onerror="this.src='img/placeholder.jpg'">
+          <h4>${item.title}</h4>
+          <p>${item.client}</p>
+        `;
+        card.addEventListener("click", () => openPreview(i));
+        grid.appendChild(card);
+        
+        // Activa la animación escalonada (el retraso usa el índice relativo dentro del lote)
+        setTimeout(() => {
+            card.classList.add('animate');
+        }, (i - start) * 75); 
+    }
+}
+
+// FUNCIÓN NUEVA: Controla la visibilidad del botón "Ver más"
+function updateLoadMoreButton(totalItems) {
+    const loadMoreBtn = document.getElementById('load-more-btn');
+    if (loadMoreBtn) {
+        if (currentDisplayCount < totalItems) {
+            loadMoreBtn.style.display = 'block';
+        } else {
+            loadMoreBtn.style.display = 'none';
+        }
+    }
+}
+
 
 function renderSection(section) {
   // Si la sección es 'menu', mostramos la vista de categorías
@@ -141,6 +232,7 @@ function renderSection(section) {
   
   currentSection = section;
   grid.innerHTML = "";
+  currentDisplayCount = 0; // Reinicia el contador de tarjetas mostradas
 
   // Muestra el panel derecho y el reproductor
   document.querySelector('.right-panel').style.display = 'flex'; 
@@ -150,25 +242,13 @@ function renderSection(section) {
   
   const items = data[section];
   if (!items) return;
+  
+  // Carga el primer lote (o todos si son menos de CARDS_PER_LOAD)
+  loadNextBatch(); 
 
-  items.forEach((item, i) => { // 'i' es el índice para el retraso
-    const card = document.createElement("div");
-    card.classList.add("card");
-    // ESTRUCTURA DE CARD IDÉNTICA (img, h4, p)
-    card.innerHTML = `
-      <img src="${item.src}" alt="${item.title}" onerror="this.src='img/placeholder.jpg'">
-      <h4>${item.title}</h4>
-      <p>${item.client}</p>
-    `;
-    card.addEventListener("click", () => openPreview(i));
-    grid.appendChild(card);
-    
-    // === NUEVO: Activa la animación escalonada ===
-    setTimeout(() => {
-        card.classList.add('animate');
-    }, i * 75); // 75ms de retraso entre cada tarjeta
-    // ===========================================
-  });
+  // Crea y actualiza el botón "Ver más"
+  createLoadMoreButton();
+  updateLoadMoreButton(items.length);
 
   // Si la sección tiene elementos, abre la primera vista previa
   if (items.length > 0) {
@@ -183,6 +263,9 @@ function renderSection(section) {
       playerCover.src = "img/placeholder.jpg";
       document.querySelector('.right-panel').style.display = 'none';
       document.querySelector('.player').style.display = 'none';
+      
+      // Asegura que el botón se oculte
+      updateLoadMoreButton(0);
   }
 }
 
@@ -203,9 +286,34 @@ function openPreview(index) {
 // Event Listeners para la sidebar
 document.querySelectorAll(".side-item").forEach((btn) => {
   btn.addEventListener("click", () => {
+    // Primero, elimina la clase 'active' de todos los botones de navegación principales si están en la página index
+    document.querySelectorAll(".top-nav .nav-btn").forEach(navBtn => {
+        if(navBtn.textContent === 'Diseños') {
+            navBtn.classList.add('active');
+        } else {
+            navBtn.classList.remove('active');
+        }
+    });
+
     renderSection(btn.dataset.section);
   });
 });
+
+// Event Listener para el botón 'Diseños' en el topbar (si existe y es el activo)
+document.getElementById("btn-disenos")?.addEventListener("click", () => {
+    // Al hacer clic en 'Diseños', volvemos al menú de categorías
+    renderCategories();
+    
+    // Asegura que 'Diseños' se mantenga activo y los demás inactivos
+    document.querySelectorAll(".top-nav .nav-btn").forEach(navBtn => {
+        if(navBtn.textContent === 'Diseños') {
+            navBtn.classList.add('active');
+        } else {
+            navBtn.classList.remove('active');
+        }
+    });
+});
+
 
 document.getElementById("prev").addEventListener("click", () => {
   const items = data[currentSection];
