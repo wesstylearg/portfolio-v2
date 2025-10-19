@@ -532,6 +532,14 @@ body {
         margin-top: -10px;
     }
 
+  .right-panel {
+  display:none;
+}
+
+.preview {
+    display: none;
+}
+
     /* 5. PLAYER (FOOTER) */
     .player {
         display: none;
@@ -590,8 +598,15 @@ body {
     
     /* Aún más compacto el player */
     .player {
-        height: 55px;
+        display: none;
     }
+  .right-panel {
+  display:none;
+}
+
+.preview {
+    display: none;
+}
     
     .track-info h2 {
         font-size: 0.9rem;
@@ -608,5 +623,7 @@ body {
     .player-controls .main-player-btn {
         margin: 0 10px;
     }
+    
 
 }
+
