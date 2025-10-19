@@ -456,8 +456,6 @@ body {
   
   /* 2. AJUSTAR EL CONTENEDOR PRINCIPAL Y EL PANEL DE CONTENIDO */
   .content {
-    /* Aseguramos que los paneles se traten como elementos en una fila,
-       aunque uno de ellos esté oculto */
     flex-direction: row; 
   }
 
