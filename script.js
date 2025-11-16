@@ -2,12 +2,13 @@ const data = {
   // Los datos de 'menu' se mantienen
   menu: [],
   portadas: [
-    { title: "FRONTEOTOUR", client: "NEBU", src: "img/portadas/fronteotour.png" },
+    { title: "Thanos", client: "Rull Royce", src: "img/portadas/thanos.png" },
     { title: "El genesis", client: "Frannko", src: "img/portadas/genesis.png" },
     { title: "En Mi Mente <3", client: "Siroe", src: "img/portadas/en_mi_mente.jpg" },
     { title: "SELATROP", client: "Berti", src: "img/portadas/selatrop.png" },
     { title: "Vuelvo a caer", client: "Niro", src: "img/portadas/vuelvo-a-caer.jpeg" },
     { title: "CHINA LAKE", client: "ORBE", src: "img/portadas/china-lake.png" },
+    { title: "FRONTEOTOUR", client: "NEBU", src: "img/portadas/fronteotour.png" },
     { title: "TAMO NUEVO", client: "Gondra", src: "img/portadas/tamonuevo.png" },
     { title: "Make it happn", client: "TWK", src: "img/portadas/makeithappn.png" },
     { title: "Parcerita", client: "Chemz LP", src: "img/portadas/parcerita.png" },
@@ -23,14 +24,16 @@ const data = {
   
   ],
   flyers: [
-    { title: "Sorteo de entradas Niceto", client: "FRN", src: "img/flyers/frn-emerfst.png" },
+    { title: "Poster Fvck Luv", client: "wesstyle.arg", src: "img/flyers/fuck_luv_poster.png" },
+    { title: "Sorteo de entradas Niceto", client: "FRN", src: "img/flyers/frn-emerfst.png" },
     { title: "Flyer promocional spotify", client: "Gondra", src: "img/flyers/tamonuevo-flyer.png" },
     { title: "Plugtwrd Studio", client: "Yvng Golden", src: "img/flyers/plugtwrd.png" },
     { title: "Invitado a Niceto", client: "FRN", src: "img/flyers/frn-niceto.png" },
     { title: "Poster C.R.O.", client: "wesstyle.arg", src: "img/flyers/cro.png" },
-    { title: "Poster Fvck Luv", client: "wesstyle.arg", src: "img/flyers/fuckluv.png" },
+    
   ],
   logos: [
+    { title: "Niro", client: "Logotipo", src: "img/logos/wesstyle.png" },
     { title: "JvnRoman", client: "Logotipo", src: "img/logos/jvnroman.png" },
     { title: "D9", client: "Monograma", src: "img/logos/d9.png" },
     { title: "Wesstyle", client: "Isotipo", src: "img/logos/wesstyle.png" },
@@ -338,3 +341,4 @@ document.getElementById("next").addEventListener("click", () => {
 
 // INICIO: Llama a renderCategories() al cargar la página para mostrar el índice.
 renderCategories();
+
