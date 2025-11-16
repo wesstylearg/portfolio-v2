@@ -3,6 +3,7 @@ const data = {
   menu: [],
   portadas: [
     { title: "Thanos", client: "Rull Royce", src: "img/portadas/thanos.png" },
+    { title: "Fvck luv", client: "Duki, C.R.O (Concepto)", src: "img/portadas/fuck_luv.png" },
     { title: "El genesis", client: "Frannko", src: "img/portadas/genesis.png" },
     { title: "En Mi Mente <3", client: "Siroe", src: "img/portadas/en_mi_mente.jpg" },
     { title: "SELATROP", client: "Berti", src: "img/portadas/selatrop.png" },
@@ -341,4 +342,5 @@ document.getElementById("next").addEventListener("click", () => {
 
 // INICIO: Llama a renderCategories() al cargar la página para mostrar el índice.
 renderCategories();
+
 
