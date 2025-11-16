@@ -35,7 +35,7 @@ const data = {
     
   ],
   logos: [
-    { title: "Niro", client: "Logotipo", src: "img/logos/wesstyle.png" },
+    { title: "Niro", client: "Logotipo", src: "img/logos/niro.png" },
     { title: "JvnRoman", client: "Logotipo", src: "img/logos/jvnroman.png" },
     { title: "D9", client: "Monograma", src: "img/logos/d9.png" },
     { title: "Wesstyle", client: "Isotipo", src: "img/logos/wesstyle.png" },
@@ -343,6 +343,7 @@ document.getElementById("next").addEventListener("click", () => {
 
 // INICIO: Llama a renderCategories() al cargar la página para mostrar el índice.
 renderCategories();
+
 
 
 
