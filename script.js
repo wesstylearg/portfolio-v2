@@ -8,9 +8,9 @@ const data = {
     { title: "En Mi Mente <3", client: "Siroe", src: "img/portadas/en_mi_mente.jpg" },
     { title: "SELATROP", client: "Berti", src: "img/portadas/selatrop.png" },
     { title: "Vuelvo a caer", client: "Niro", src: "img/portadas/vuelvo-a-caer.jpeg" },
-    { title: "CHINA LAKE", client: "ORBE", src: "img/portadas/china-lake.png" },
     { title: "FRONTEOTOUR", client: "NEBU", src: "img/portadas/fronteotour.png" },
     { title: "TAMO NUEVO", client: "Gondra", src: "img/portadas/tamonuevo.png" },
+    { title: "TONY MONTANA", client: "C.R..O (Concepto)", src: "img/portadas/tony_montana.png" },
     { title: "Make it happn", client: "TWK", src: "img/portadas/makeithappn.png" },
     { title: "Parcerita", client: "Chemz LP", src: "img/portadas/parcerita.png" },
     { title: "Chantas", client: "Valuto, Ara, Sixto (Concepto)", src: "img/portadas/chantas.png" },
@@ -21,6 +21,7 @@ const data = {
     { title: "Reversionado", client: "RodriiLA", src: "img/portadas/reversionado.png" },
     { title: "DOPAMINA", client: "D CHINX", src: "img/portadas/dopamina.png" },
     { title: "AW", client: "ONCE", src: "img/portadas/aw.png" },
+    { title: "CHINA LAKE", client: "ORBE", src: "img/portadas/china-lake.png" },
   
   
   ],
@@ -342,5 +343,6 @@ document.getElementById("next").addEventListener("click", () => {
 
 // INICIO: Llama a renderCategories() al cargar la página para mostrar el índice.
 renderCategories();
+
 
 
