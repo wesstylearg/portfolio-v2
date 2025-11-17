@@ -2,11 +2,13 @@ const data = {
   // Los datos de 'menu' se mantienen
   menu: [],
   portadas: [
+    { title: "Como te pensé", client: "Waru Lavv)", src: "img/portadas/como_te_pense.png" },
     { title: "Thanos", client: "Rull Royce", src: "img/portadas/thanos.png" },
-    { title: "Fvck luv", client: "Duki, C.R.O (Concepto)", src: "img/portadas/fuck_luv.png" },
     { title: "El genesis", client: "Frannko", src: "img/portadas/genesis.png" },
     { title: "En Mi Mente <3", client: "Siroe", src: "img/portadas/en_mi_mente.jpg" },
     { title: "SELATROP", client: "Berti", src: "img/portadas/selatrop.png" },
+    { title: "Fvck luv", client: "Duki, C.R.O (Concepto)", src: "img/portadas/fuck_luv.png" },
+    { title: "Vampiros", client: "Duki, C.R.O (Concepto)", src: "img/portadas/vampiros.png" },
     { title: "Vuelvo a caer", client: "Niro", src: "img/portadas/vuelvo-a-caer.jpeg" },
     { title: "FRONTEOTOUR", client: "NEBU", src: "img/portadas/fronteotour.png" },
     { title: "TAMO NUEVO", client: "Gondra", src: "img/portadas/tamonuevo.png" },
@@ -343,6 +345,7 @@ document.getElementById("next").addEventListener("click", () => {
 
 // INICIO: Llama a renderCategories() al cargar la página para mostrar el índice.
 renderCategories();
+
 
 
 
