@@ -28,7 +28,9 @@ const data = {
   
   ],
   flyers: [
-    { title: "Poster Fvck Luv", client: "wesstyle.arg", src: "img/flyers/fuck_luv_poster.png" },
+    { title: "Poster Saturacion Pop", client: "wesstyle.arg", src: "img/flyers/saturacionpop.png" },
+    { title: "Poster FRO!", client: "wesstyle.arg", src: "img/flyers/fro.png" },
+    { title: "Poster Fvck Luv", client: "wesstyle.arg", src: "img/flyers/fuck_luv_poster.png" },
     { title: "Sorteo de entradas Niceto", client: "FRN", src: "img/flyers/frn-emerfst.png" },
     { title: "Flyer promocional spotify", client: "Gondra", src: "img/flyers/tamonuevo-flyer.png" },
     { title: "Plugtwrd Studio", client: "Yvng Golden", src: "img/flyers/plugtwrd.png" },
@@ -345,6 +347,7 @@ document.getElementById("next").addEventListener("click", () => {
 
 // INICIO: Llama a renderCategories() al cargar la página para mostrar el índice.
 renderCategories();
+
 
 
 
