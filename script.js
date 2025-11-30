@@ -2,7 +2,11 @@ const data = {
   // Los datos de 'menu' se mantienen
   menu: [],
   portadas: [
-    { title: "Como te pensé", client: "Waru Lavv)", src: "img/portadas/como_te_pense.png" },
+    { title: "Te vi", client: "Gondra", src: "img/portadas/te-vi.png" },
+    { title: "PUCCA", client: "Niro", src: "img/portadas/Portada Pucca v1 final.png" },
+    { title: "Altibajos", client: "Leitoo", src: "img/portadas/altibajos.png" },
+    { title: "Mi ataúd", client: "Gondra", src: "img/portadas/mi-ataud.png" },
+    { title: "Como te pensé", client: "Waru Lavv", src: "img/portadas/como_te_pense.png" },
     { title: "Thanos", client: "Rull Royce", src: "img/portadas/thanos.png" },
     { title: "El genesis", client: "Frannko", src: "img/portadas/genesis.png" },
     { title: "En Mi Mente <3", client: "Siroe", src: "img/portadas/en_mi_mente.jpg" },
@@ -347,6 +351,7 @@ document.getElementById("next").addEventListener("click", () => {
 
 // INICIO: Llama a renderCategories() al cargar la página para mostrar el índice.
 renderCategories();
+
 
 
 
