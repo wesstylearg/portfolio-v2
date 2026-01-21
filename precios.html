@@ -13,12 +13,10 @@
   <meta property="og:type" content="website" />
   
   <style>
-    /* 1. Asegurar que el fondo del cuerpo sea negro, aunque ya está en style.css */
     body {
-        background: var(--bg); /* #000 */
+        background: var(--bg);
     }
     
-    /* DEFINICIÓN DE LA ANIMACIÓN */
     @keyframes fadeInUp {
         from {
             opacity: 0;
@@ -30,32 +28,20 @@
         }
     }
 
-
-    /* 2. El contenedor principal de la app */
-    .app {
-        display: flex;
-        flex-grow: 1; 
-        align-items: stretch;
-        height: calc(100vh - 60px); 
-    }
-
     .app-prices {
         display: flex;
         flex-grow: 1;
         align-items: stretch;
-        /* Ocupa el 100% del alto menos la cabecera */
         height: calc(100vh - 60px); 
     }
 
-    /* 3. El panel de contenido principal (similar a .left-panel en index.html) */
     .main-prices {
-        flex: 1; /* Ocupa todo el espacio horizontal disponible (100% de ancho) */
-        padding: 30px; /* Padding similar al de .left-panel */
-        overflow-y: auto; /* Permite scroll si el contenido es muy largo */
-        background: var(--bg); /* Asegura el fondo negro */
+        flex: 1;
+        padding: 30px;
+        overflow-y: auto;
+        background: var(--bg);
     }
     
-    /* --- ESTILOS DE BARRA DE SCROLL --- */
     .main-prices::-webkit-scrollbar {
         width: 12px;
     }
@@ -69,56 +55,43 @@
         border-radius: 4px; 
     }
 
-    .main-prices::-webkit-scrollbar-thumb:hover {
-        background-color: var(--muted);
-    }
-    /* --- FIN ESTILOS DE BARRA DE SCROLL --- */
-    
-    
-    /* 4. El contenedor de precios (nuevo) */
     .prices-wrapper {
       display: flex;
       flex-direction: column;
       align-items: center; 
       justify-content: flex-start; 
-      /* MODIFICACIÓN AQUÍ: Aumentamos el padding inferior */
       padding-bottom: 100px; 
       min-height: 100%; 
-      max-width: 900px; /* Limita el ancho total del contenido */
-      margin: 0 auto; /* Centra el wrapper en el main-prices */
-      margin-top: 3rem;
-      margin-bottom: 3rem;
+      max-width: 900px;
+      margin: 3rem auto;
     }
 
-    /* Estilo para cada bloque de precio: USA FLEXBOX PARA ALINEAR */
     .price-item {
         margin-bottom: 40px;
         color: white;
         width: 100%; 
-        
         display: flex;
         justify-content: space-between; 
         align-items: flex-start; 
         text-align: left; 
         gap: 20px;
-        
-        /* Línea divisoria sutil */
         border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
         padding-bottom: 30px; 
         padding-top: 5px; 
-        
-        /* APLICACIÓN DE LA ANIMACIÓN */
         animation: fadeInUp 0.5s ease-out forwards;
-        opacity: 0; /* Aseguramos que empiecen invisibles */
+        opacity: 0;
     }
     
-    /* Retraso secuencial para la animación */
+    /* Retraso secuencial para los 8 items */
     .price-item:nth-child(1) { animation-delay: 0.1s; }
     .price-item:nth-child(2) { animation-delay: 0.2s; }
     .price-item:nth-child(3) { animation-delay: 0.3s; }
     .price-item:nth-child(4) { animation-delay: 0.4s; }
+    .price-item:nth-child(5) { animation-delay: 0.5s; }
+    .price-item:nth-child(6) { animation-delay: 0.6s; }
+    .price-item:nth-child(7) { animation-delay: 0.7s; }
+    .price-item:nth-child(8) { animation-delay: 0.8s; }
     
-    /* El último item no lleva borde inferior para mejor estética */
     .price-item:last-of-type {
         border-bottom: none;
         margin-bottom: 3rem;
@@ -134,8 +107,6 @@
         text-align: right; 
     }
 
-
-    /* Títulos grandes: Usan fuente 'expend' */
     .price-title {
         font-family: 'scrib', sans-serif;
         font-size: 2.6rem;
@@ -144,7 +115,6 @@
         text-transform: uppercase;
     }
     
-    /* --- ESTILOS DE PRECIOS --- */
     .price-range-line {
         display: block; 
         white-space: nowrap; 
@@ -160,27 +130,6 @@
         display: inline-block;
     }
 
-
-    .price-label {
-        font-family: 'circular', sans-serif;
-        font-size: 1.5rem;
-        color: var(--muted); 
-        display: block; 
-        line-height: 1;
-        margin-bottom: 3px;
-    }
-    
-    .price-small-range {
-        font-family: 'circular', sans-serif;
-        font-size: 1.3rem; 
-        color: var(--muted); 
-        display: block;
-        margin-top: 10px; 
-    }
-    /* --- FIN ESTILOS DE PRECIOS --- */
-
-
-    /* Descripciones y rangos de precio: Usan fuente 'circular' */
     .price-description {
         font-family: 'circular', sans-serif;
         font-size: 1.2rem;
@@ -188,201 +137,162 @@
         margin: 0;
     }
 
-
-    /* Ocultar elementos no necesarios de index.html */
-    .player {
-        display: none; 
+    .top-nav {
+      display: flex;
+      gap: 10px;
     }
 
-    
-.top-nav {
-  display: flex;
-  gap: 10px;
+    .nav-btn {
+      padding: 6px 16px;
+      border-radius: 30px;
+      transition: 0.2s;
+      font-family: 'circular', sans-serif;
+      text-decoration: none;
+    }
 
-}
+    .nav-btn.active {
+      background: #493b90;
+      color: #fff;
+      font-size: 16px;
+    }
 
-.nav-btn {
-  padding: 6px 16px;
-  border-radius: 30px;
-  transition: 0.2s;
-  font-family: 'circular', sans-serif;
-  text-decoration: none;
-}
+    .nav-btn.outline {
+      background: transparent;
+      border: 1px solid #444;
+      color: #fff;
+    }
 
-.nav-btn.active {
-  background: #493b90;
-  color: #fff;
-  font-size: 16px;
-}
-
-.nav-btn.outline {
-  background: transparent;
-  border: 1px solid #444;
-  color: #fff;
-}
-
-.nav-btn:hover {
-  opacity: 0.9;
-}
     .logo {
-  width: 10rem;
-  align-items: center;
-}
-
-    /* Logo final */
-    .logo-final {
-        margin-top: 50px;
-        width: 150px;
-        text-align: center;
-        /* Aplicamos la misma animación al logo */
-        animation: fadeInUp 0.5s ease-out forwards;
-        opacity: 0;
-        animation-delay: 0.5s; /* Un retraso extra */
+      width: 10rem;
     }
-
-    
 
     @media (max-width: 600px) {
-        .price-title {
-            font-size: 1.8rem;
-        }
-        .price-value {
-            font-size: 1.8rem;
-        }
-        .main-prices {
-             padding: 20px 15px;
-        }
+        .price-title, .price-value { font-size: 1.8rem; }
         .price-item {
              flex-direction: column; 
              align-items: center;
              text-align: center;
-             padding: 15px 0; 
         }
-        .price-details {
-            max-width: 100%;
-            text-align: center;
-        }
-        .price-info {
-            text-align: center;
-            margin-top: 15px;
-        }
-        .price-label {
-            display: inline; 
-            margin: 0 5px;
-        }
+        .price-details, .price-info { text-align: center; max-width: 100%; }
+        .price-info { margin-top: 10px; }
     }
   </style>
 </head>
 
 <body>
-  
-  
   <header class="topbar">
     <div class="brand">
       <img src="img/iconos/logo-texto.svg" alt="Logo" class="logo">
     </div>
-
-
-<nav class="top-nav">
+    <nav class="top-nav">
       <a href="index.html" class="nav-btn outline">Diseños</a>
       <button id="btn-precios" class="nav-btn active">Precios</button>
       <a href="contacto.html" class="nav-btn outline">Contacto</a>
     </nav>
-</header>
+  </header>
 
   <div class="app-prices">
     <main class="content main-prices">
-        
         <div class="prices-wrapper">
       
             <div class="price-item">
                 <div class="price-details">
-                    <div class="price-title">PORTADAS MUSICALES</div>
-                    <p class="price-description">incluye formato spotify + youtube</p>
+                    <div class="price-title">PORTADA / COVER ART</div>
+                    <p class="price-description">3000px x 3000px + miniatura YouTube</p>
                 </div>
                 <div class="price-info">
                     <span class="price-range-line">
-                        <small class="price-label">desde</small>
-                        <span class="price-value">$12.000</span>
+                        <span class="price-value">$15mil</span>
                     </span>
-                    <span class="price-small-range">hasta $17.000</span>
                 </div>
             </div>
 
             <div class="price-item">
                 <div class="price-details">
-                    <div class="price-title">FLYERS PROMOCIONALES</div>
-                    <p class="price-description">para fechas, eventos o lanzamientos</p>
+                    <div class="price-title">TAPA + CONTRATAPA</div>
+                    <p class="price-description">3000px x 3000px, con tracklist y vinilo</p>
                 </div>
                 <div class="price-info">
                     <span class="price-range-line">
-                        <small class="price-label">desde</small>
-                        <span class="price-value">$12.000</span>
+                        <span class="price-value">$25mil</span>
                     </span>
-                    <span class="price-small-range">hasta $17.000</span>
-                </div>
-            </div>
-            
-            <div class="price-item">
-                <div class="price-details">
-                    <div class="price-title">IDENTIDAD VISUAL COMPLETA</div>
-                    <p class="price-description">logo • paleta • tipografías • estilo</p>
-                </div>
-                <div class="price-info">
-                    <span class="price-range-line">
-                        <small class="price-label">desde</small>
-                        <span class="price-value">$25.000</span>
-                    </span>
-                    <span class="price-small-range">hasta $35.000</span>
                 </div>
             </div>
 
             <div class="price-item">
                 <div class="price-details">
-                    <div class="price-title">DISEÑO PARA ÁLBUM O EP</div>
-                    <p class="price-description">tapa, contratapa, tracklist, vinilo, etc.</p>
+                    <div class="price-title">FLYER PROMOCIONAL</div>
+                    <p class="price-description">1920px x 1080px para redes sociales</p>
                 </div>
                 <div class="price-info">
                     <span class="price-range-line">
-                        <small class="price-label">desde</small>
-                        <span class="price-value">$17.000</span>
+                        <span class="price-value">$15mil</span>
                     </span>
-                    <span class="price-small-range">hasta $27.000</span>
                 </div>
             </div>
 
             <div class="price-item">
                 <div class="price-details">
-                    <div class="price-title">VIDEO LYRICS / VISUALIZER</div>
-                    <p class="price-description">personalizado, letra sincronizada, graficos simples y animados para redes</p>
+                    <div class="price-title">POSTER CONCEPTUAL</div>
+                    <p class="price-description">1080px x 1350px para Instagram</p>
                 </div>
                 <div class="price-info">
                     <span class="price-range-line">
-                        <small class="price-label">desde</small>
-                        <span class="price-value">$25.000</span>
+                        <span class="price-value">$15mil</span>
                     </span>
-                    <span class="price-small-range">hasta $40.000</span>
                 </div>
             </div>
 
-             <div class="price-item">
+            <div class="price-item">
                 <div class="price-details">
-                    <p class="price-description">El precio de cada servicio varía según la complejidad, rapidez y cantidad de revisiones en el proyecto</p>
+                    <div class="price-title">DISEÑO DE TÍTULO</div>
+                    <p class="price-description">Para agregar a videoclips o visualizer</p>
                 </div>
                 <div class="price-info">
                     <span class="price-range-line">
+                        <span class="price-value">$10mil</span>
                     </span>
                 </div>
             </div>
 
-          
+            <div class="price-item">
+                <div class="price-details">
+                    <div class="price-title">DISEÑO DE LOGOTIPO</div>
+                    <p class="price-description">Formato png, jpg y svg</p>
+                </div>
+                <div class="price-info">
+                    <span class="price-range-line">
+                        <span class="price-value">$20mil</span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="price-item">
+                <div class="price-details">
+                    <div class="price-title">IDENTIDAD VISUAL</div>
+                    <p class="price-description">Completa: Logo, paleta, elementos gráficos, 1 flyer y elección de tipografías</p>
+                </div>
+                <div class="price-info">
+                    <span class="price-range-line">
+                        <span class="price-value">$40mil</span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="price-item">
+                <div class="price-details">
+                    <div class="price-title">VIDEO LYRICS</div>
+                    <p class="price-description">Con letra sincronizada o visualizer. (Portada con movimiento y en bucle)</p>
+                </div>
+                <div class="price-info">
+                    <span class="price-range-line">
+                        <span class="price-value">$35mil</span>
+                    </span>
+                </div>
+            </div>
+
         </div>
     </main>
   </div>
-  
 </body>
-
 </html>
-
-
-
