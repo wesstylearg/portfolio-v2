@@ -2,8 +2,11 @@ const data = {
   // Los datos de 'menu' se mantienen
   menu: [],
   portadas: [
+    { title: "Future Trap", client: "EzeLyrics", src: "img/portadas/futuretrap.png"},
+    { title: "Noche en Capital", client: "Xeon", src: "img/portadas/caribuenas.png"},
     { title: "Te vi", client: "Gondra", src: "img/portadas/te-vi.png" },
     { title: "PUCCA", client: "Niro", src: "img/portadas/Portada Pucca v1 final.png" },
+    { title: "4077", client: "Vazzko", src: "img/portadas/40077.png"},
     { title: "Altibajos", client: "Leitoo", src: "img/portadas/altibajos.png" },
     { title: "Mi ataúd", client: "Gondra", src: "img/portadas/mi-ataud.png" },
     { title: "Como te pensé", client: "Waru Lavv", src: "img/portadas/como_te_pense.png" },
@@ -32,6 +35,8 @@ const data = {
   
   ],
   flyers: [
+    { title: "La Santa Trinidad", client: "Micery", src: "img/flyers/santatrinidad.jpg" },
+    { title: "i gotta feeling", client: "wesstyle.arg", src: "img/flyers/i gotta feeling.png"},
     { title: "Poster Saturacion Pop", client: "wesstyle.arg", src: "img/flyers/saturacionpop.png" },
     { title: "Poster FRO!", client: "wesstyle.arg", src: "img/flyers/fro.png" },
     { title: "Poster Fvck Luv", client: "wesstyle.arg", src: "img/flyers/fuck_luv_poster.png" },
@@ -351,6 +356,7 @@ document.getElementById("next").addEventListener("click", () => {
 
 // INICIO: Llama a renderCategories() al cargar la página para mostrar el índice.
 renderCategories();
+
 
 
 
