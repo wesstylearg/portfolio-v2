@@ -6,14 +6,14 @@ const data = {
     { title: "Noche en Capital", client: "Xeon", src: "img/portadas/caribuenas.png"},
     { title: "Te vi", client: "Gondra", src: "img/portadas/te-vi.png" },
     { title: "PUCCA", client: "Niro", src: "img/portadas/Portada Pucca v1 final.png" },
-    { title: "4077", client: "Vazzko", src: "img/portadas/40077.png"},
-    { title: "Altibajos", client: "Leitoo", src: "img/portadas/altibajos.png" },
     { title: "Mi ataúd", client: "Gondra", src: "img/portadas/mi-ataud.png" },
     { title: "Como te pensé", client: "Waru Lavv", src: "img/portadas/como_te_pense.png" },
     { title: "Thanos", client: "Rull Royce", src: "img/portadas/thanos.png" },
     { title: "El genesis", client: "Frannko", src: "img/portadas/genesis.png" },
     { title: "En Mi Mente <3", client: "Siroe", src: "img/portadas/en_mi_mente.jpg" },
     { title: "SELATROP", client: "Berti", src: "img/portadas/selatrop.png" },
+    { title: "4077", client: "Vazzko", src: "img/portadas/4077.png"},
+    { title: "Altibajos", client: "Leitoo", src: "img/portadas/altibajos.png" },
     { title: "Fvck luv", client: "Duki, C.R.O (Concepto)", src: "img/portadas/fuck_luv.png" },
     { title: "Vampiros", client: "Duki, C.R.O (Concepto)", src: "img/portadas/vampiros.png" },
     { title: "Vuelvo a caer", client: "Niro", src: "img/portadas/vuelvo-a-caer.jpeg" },
@@ -356,6 +356,7 @@ document.getElementById("next").addEventListener("click", () => {
 
 // INICIO: Llama a renderCategories() al cargar la página para mostrar el índice.
 renderCategories();
+
 
 
 
