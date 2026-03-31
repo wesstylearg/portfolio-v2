@@ -2,8 +2,12 @@ const data = {
   // Los datos de 'menu' se mantienen
   menu: [],
   portadas: [
-    { title: "Future Trap", client: "EzeLyrics", src: "img/portadas/futuretrap.png"},
+    { title: "Soul Side", client: "Frannko", src: "img/portadas/soulside.png"},
+    { title: "Ciclo", client: "Gonda", src: "img/portadas/ciclo.png"},
+    { title: "Lejos de ti", client: "Vanek", src: "img/portadas/lejos-de-ti.png"},
     { title: "Noche en Capital", client: "Xeon", src: "img/portadas/caribuenas.png"},
+    { title: "Future Trap", client: "EzeLyrics", src: "img/portadas/futuretrap.png"},
+    { title: "Remember", client: "Siroe", src: "img/portadas/remember.png"},
     { title: "Te vi", client: "Gondra", src: "img/portadas/te-vi.png" },
     { title: "PUCCA", client: "Niro", src: "img/portadas/Portada Pucca v1 final.png" },
     { title: "Nuestro Ayer", client: "Siroe", src: "img/portadas/nuestroayer.png" },
@@ -37,15 +41,17 @@ const data = {
   
   ],
   flyers: [
+     { title: "Noche Mexicana", client: "Viersadingos", src: "img/flyers/frpicante.png" },
     { title: "La Santa Trinidad", client: "Micery", src: "img/flyers/santatrinidad.jpg" },
+    { title: "Te vi (Lanzamiento)", client: "Gondra", src: "img/flyers/tevi.jpg" },
+    { title: "Invitado a Niceto", client: "FRN", src: "img/flyers/frn-niceto.png" },
+    { title: "Poster FRO!", client: "wesstyle.arg", src: "img/flyers/fro.png" },
     { title: "i gotta feeling", client: "wesstyle.arg", src: "img/flyers/i gotta feeling.png"},
     { title: "Poster Saturacion Pop", client: "wesstyle.arg", src: "img/flyers/saturacionpop.png" },
-    { title: "Poster FRO!", client: "wesstyle.arg", src: "img/flyers/fro.png" },
-    { title: "Poster Fvck Luv", client: "wesstyle.arg", src: "img/flyers/fuck_luv_poster.png" },
+    { title: "Poster Fvck Luv", client: "wesstyle.arg", src: "img/flyers/fuckluv.png" },
     { title: "Sorteo de entradas Niceto", client: "FRN", src: "img/flyers/frn-emerfst.png" },
     { title: "Flyer promocional spotify", client: "Gondra", src: "img/flyers/tamonuevo-flyer.png" },
     { title: "Plugtwrd Studio", client: "Yvng Golden", src: "img/flyers/plugtwrd.png" },
-    { title: "Invitado a Niceto", client: "FRN", src: "img/flyers/frn-niceto.png" },
     { title: "Poster C.R.O.", client: "wesstyle.arg", src: "img/flyers/cro.png" },
     
   ],
