@@ -314,6 +314,21 @@ function openPreview(index) {
 
   previewTitle.textContent = item.title;
   previewClient.textContent = item.client;
+  const previewWrapper = document.querySelector('.preview-image');
+  if (item.embed) {
+    previewWrapper.innerHTML = `
+      <iframe 
+        src="${item.embed}" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen
+        style="position:absolute; top:0; left:0; width:100%; height:100%; border-radius:8px;">
+      </iframe>`;
+  } else {
+    previewWrapper.innerHTML = `<img id="preview-image" src="${item.src}" alt="preview" />`;
+    document.getElementById('preview-image').addEventListener('click', openLightbox);
+    previewImage = document.getElementById('preview-image'); // reasignar referencia
+  }
 }
 
 // Event Listeners para la sidebar
