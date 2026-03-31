@@ -13,286 +13,246 @@
   <meta property="og:type" content="website" />
   
   <style>
+    :root {
+        --accent: #493b90; /* Tu color de botones */
+        --bg: #211e27;     /* Tu paleta violeta oscuro */
+        --muted: rgba(255, 255, 255, 0.6);
+    }
+
     body {
         background: var(--bg);
+        color: white;
+        margin: 0;
+        font-family: 'circular', sans-serif;
     }
     
     @keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
     }
 
     .app-prices {
         display: flex;
-        flex-grow: 1;
-        align-items: stretch;
-        height: calc(100vh - 60px); 
+        flex-direction: column;
+        min-height: 100vh;
     }
 
     .main-prices {
         flex: 1;
         padding: 30px;
         overflow-y: auto;
-        background: var(--bg);
-    }
-    
-    .main-prices::-webkit-scrollbar {
-        width: 12px;
-    }
-
-    .main-prices::-webkit-scrollbar-track {
-        background: var(--bg);
-    }
-
-    .main-prices::-webkit-scrollbar-thumb {
-        background-color: #333;
-        border-radius: 4px; 
     }
 
     .prices-wrapper {
       display: flex;
       flex-direction: column;
       align-items: center; 
-      justify-content: flex-start; 
-      padding-bottom: 100px; 
-      min-height: 100%; 
       max-width: 900px;
-      margin: 3rem auto;
+      margin: 2rem auto 100px auto;
     }
 
+    /* Estilo de Item Seleccionable */
     .price-item {
-        margin-bottom: 40px;
-        color: white;
+        margin-bottom: 20px;
         width: 100%; 
         display: flex;
         justify-content: space-between; 
-        align-items: flex-start; 
-        text-align: left; 
+        align-items: center; 
         gap: 20px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
-        padding-bottom: 30px; 
-        padding-top: 5px; 
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        background: rgba(255, 255, 255, 0.02);
+        padding: 25px; 
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease;
         animation: fadeInUp 0.5s ease-out forwards;
         opacity: 0;
     }
-    
-    /* Retraso secuencial para los 8 items */
-    .price-item:nth-child(1) { animation-delay: 0.1s; }
-    .price-item:nth-child(2) { animation-delay: 0.2s; }
-    .price-item:nth-child(3) { animation-delay: 0.3s; }
-    .price-item:nth-child(4) { animation-delay: 0.4s; }
-    .price-item:nth-child(5) { animation-delay: 0.5s; }
-    .price-item:nth-child(6) { animation-delay: 0.6s; }
-    .price-item:nth-child(7) { animation-delay: 0.7s; }
-    .price-item:nth-child(8) { animation-delay: 0.8s; }
-    
-    .price-item:last-of-type {
-        border-bottom: none;
-        margin-bottom: 3rem;
-    }
-    
-    .price-details {
-        flex-grow: 1; 
-        max-width: 70%;
+
+    .price-item:hover {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: var(--accent);
     }
 
-    .price-info {
-        flex-shrink: 0; 
-        text-align: right; 
+    /* Clase cuando el item está seleccionado */
+    .price-item.selected {
+        background: rgba(73, 59, 144, 0.15);
+        border-color: var(--accent);
+        box-shadow: 0 0 20px rgba(73, 59, 144, 0.2);
     }
+
+    .price-details { flex-grow: 1; max-width: 70%; pointer-events: none; }
+    .price-info { text-align: right; pointer-events: none; }
 
     .price-title {
         font-family: 'scrib', sans-serif;
-        font-size: 2.6rem;
+        font-size: 2.2rem;
         line-height: 1.1;
-        margin: 0 0 5px 0;
         text-transform: uppercase;
-    }
-    
-    .price-range-line {
-        display: block; 
-        white-space: nowrap; 
-        text-align: right; 
     }
 
     .price-value {
         font-family: 'scrib', sans-serif;
-        color: #fff; 
-        font-size: 2.6rem; 
-        line-height: 1.1;
-        margin: 0;
-        display: inline-block;
+        font-size: 2.2rem; 
+        color: var(--accent);
     }
 
-    .price-description {
-        font-family: 'circular', sans-serif;
-        font-size: 1.2rem;
-        color: var(--muted); 
-        margin: 0;
+    .price-description { font-size: 1rem; color: var(--muted); margin-top: 5px; }
+
+    /* Checkbox visual */
+    .check-circle {
+        width: 24px;
+        height: 24px;
+        border: 2px solid rgba(255,255,255,0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: 0.3s;
+    }
+    .selected .check-circle {
+        background: var(--accent);
+        border-color: var(--accent);
     }
 
-    .top-nav {
-      display: flex;
-      gap: 10px;
+    /* Botón Flotante de WhatsApp */
+    .wa-float {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%) translateY(100px);
+        background: #25d366;
+        color: white;
+        padding: 15px 30px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        z-index: 1000;
+        visibility: hidden;
     }
 
-    .nav-btn {
-      padding: 6px 16px;
-      border-radius: 30px;
-      transition: 0.2s;
-      font-family: 'circular', sans-serif;
-      text-decoration: none;
+    .wa-float.visible {
+        transform: translateX(-50%) translateY(0);
+        visibility: visible;
     }
 
-    .nav-btn.active {
-      background: #493b90;
-      color: #fff;
-      font-size: 16px;
-    }
-
-    .nav-btn.outline {
-      background: transparent;
-      border: 1px solid #444;
-      color: #fff;
-    }
-
-    .logo {
-      width: 10rem;
-    }
+    /* Delays de animación */
+    .price-item:nth-child(n) { animation-delay: calc(0.1s * var(--i)); }
 
     @media (max-width: 600px) {
-        .price-title, .price-value { font-size: 1.8rem; }
-        .price-item {
-             flex-direction: column; 
-             align-items: center;
-             text-align: center;
-        }
-        .price-details, .price-info { text-align: center; max-width: 100%; }
-        .price-info { margin-top: 10px; }
+        .price-title, .price-value { font-size: 1.5rem; }
+        .price-item { padding: 15px; }
+        .price-details { max-width: 60%; }
     }
   </style>
 </head>
 
 <body>
   <header class="topbar">
-    <div class="brand">
-      <img src="img/iconos/logo-texto.svg" alt="Logo" class="logo">
-    </div>
-    <nav class="top-nav">
-      <a href="index.html" class="nav-btn outline">Diseños</a>
-      <button id="btn-precios" class="nav-btn active">Precios</button>
-      <a href="contacto.html" class="nav-btn outline">Contacto</a>
+    <nav class="top-nav" style="justify-content: center; padding: 20px; display: flex; gap: 10px;">
+      <a href="index.html" class="nav-btn outline" style="color: white; text-decoration: none; border: 1px solid #444; padding: 5px 15px; border-radius: 20px;">Diseños</a>
+      <button class="nav-btn active" style="background: var(--accent); border: none; color: white; padding: 5px 15px; border-radius: 20px;">Precios</button>
+      <a href="contacto.html" class="nav-btn outline" style="color: white; text-decoration: none; border: 1px solid #444; padding: 5px 15px; border-radius: 20px;">Contacto</a>
     </nav>
   </header>
 
   <div class="app-prices">
     <main class="content main-prices">
-        <div class="prices-wrapper">
-      
-            <div class="price-item">
+        <div class="prices-wrapper" id="services-container">
+            <div class="price-item" style="--i:1" data-service="Portada / Cover Art" data-price="15.000">
+                <div class="check-circle"></div>
                 <div class="price-details">
                     <div class="price-title">PORTADA / COVER ART</div>
                     <p class="price-description">3000px x 3000px + miniatura YouTube</p>
                 </div>
-                <div class="price-info">
-                    <span class="price-range-line">
-                        <span class="price-value">$15mil</span>
-                    </span>
-                </div>
+                <div class="price-info"><span class="price-value">$15k</span></div>
             </div>
 
-            <div class="price-item">
+            <div class="price-item" style="--i:2" data-service="Tapa + Contratapa" data-price="25.000">
+                <div class="check-circle"></div>
                 <div class="price-details">
                     <div class="price-title">TAPA + CONTRATAPA</div>
-                    <p class="price-description">3000px x 3000px, con tracklist y vinilo</p>
+                    <p class="price-description">Tracklist y diseño de vinilo</p>
                 </div>
-                <div class="price-info">
-                    <span class="price-range-line">
-                        <span class="price-value">$25mil</span>
-                    </span>
-                </div>
+                <div class="price-info"><span class="price-value">$25k</span></div>
             </div>
 
-            <div class="price-item">
+            <div class="price-item" style="--i:3" data-service="Flyer Promocional" data-price="15.000">
+                <div class="check-circle"></div>
                 <div class="price-details">
                     <div class="price-title">FLYER PROMOCIONAL</div>
-                    <p class="price-description">1920px x 1080px para redes sociales</p>
+                    <p class="price-description">1920px x 1080px para redes</p>
                 </div>
-                <div class="price-info">
-                    <span class="price-range-line">
-                        <span class="price-value">$15mil</span>
-                    </span>
-                </div>
+                <div class="price-info"><span class="price-value">$15k</span></div>
             </div>
 
-            <div class="price-item">
-                <div class="price-details">
-                    <div class="price-title">POSTER CONCEPTUAL</div>
-                    <p class="price-description">1080px x 1350px para Instagram</p>
-                </div>
-                <div class="price-info">
-                    <span class="price-range-line">
-                        <span class="price-value">$15mil</span>
-                    </span>
-                </div>
-            </div>
-
-            <div class="price-item">
-                <div class="price-details">
-                    <div class="price-title">DISEÑO DE TÍTULO</div>
-                    <p class="price-description">Para agregar a videoclips o visualizer</p>
-                </div>
-                <div class="price-info">
-                    <span class="price-range-line">
-                        <span class="price-value">$10mil</span>
-                    </span>
-                </div>
-            </div>
-
-            <div class="price-item">
-                <div class="price-details">
-                    <div class="price-title">DISEÑO DE LOGOTIPO</div>
-                    <p class="price-description">Formato png, jpg y svg</p>
-                </div>
-                <div class="price-info">
-                    <span class="price-range-line">
-                        <span class="price-value">$20mil</span>
-                    </span>
-                </div>
-            </div>
-
-            <div class="price-item">
+            <div class="price-item" style="--i:4" data-service="Identidad Visual" data-price="40.000">
+                <div class="check-circle"></div>
                 <div class="price-details">
                     <div class="price-title">IDENTIDAD VISUAL</div>
-                    <p class="price-description">Completa: Logo, paleta, elementos gráficos, 1 flyer y elección de tipografías</p>
+                    <p class="price-description">Logo, paleta, elementos y tipografías</p>
                 </div>
-                <div class="price-info">
-                    <span class="price-range-line">
-                        <span class="price-value">$40mil</span>
-                    </span>
-                </div>
+                <div class="price-info"><span class="price-value">$40k</span></div>
             </div>
 
-            <div class="price-item">
+            <div class="price-item" style="--i:5" data-service="Video Lyrics" data-price="35.000">
+                <div class="check-circle"></div>
                 <div class="price-details">
                     <div class="price-title">VIDEO LYRICS</div>
-                    <p class="price-description">Con letra sincronizada o visualizer. (Portada con movimiento y en bucle)</p>
+                    <p class="price-description">Letra sincronizada + Visualizer</p>
                 </div>
-                <div class="price-info">
-                    <span class="price-range-line">
-                        <span class="price-value">$35mil</span>
-                    </span>
-                </div>
+                <div class="price-info"><span class="price-value">$35k</span></div>
             </div>
-
+            
+            <p style="opacity: 0.4; font-size: 0.9rem; margin-top: 20px;">* Precios base para artistas emergentes.</p>
         </div>
     </main>
   </div>
+
+  <a href="#" id="wa-button" class="wa-float" target="_blank">
+    <span>PEDIR PRESUPUESTO</span>
+  </a>
+
+  <script>
+    const items = document.querySelectorAll('.price-item');
+    const waButton = document.getElementById('wa-button');
+    let selectedServices = [];
+
+    items.forEach(item => {
+        item.addEventListener('click', () => {
+            item.classList.toggle('selected');
+            const serviceName = item.getAttribute('data-service');
+            
+            if (item.classList.contains('selected')) {
+                selectedServices.push(serviceName);
+            } else {
+                selectedServices = selectedServices.filter(s => s !== serviceName);
+            }
+
+            updateWAButton();
+        });
+    });
+
+    function updateWAButton() {
+        if (selectedServices.length > 0) {
+            waButton.classList.add('visible');
+            
+            // Armar el mensaje
+            const baseText = "Hola Wesstyle! Me interesa consultar por estos servicios:\n\n";
+            const servicesText = selectedServices.map(s => `- ${s}`).join('\n');
+            const fullMessage = encodeURIComponent(baseText + servicesText + "\n\n¿Me podrías pasar más info?");
+            
+            waButton.href = `https://wa.me/5492983448645?text=${fullMessage}`;
+            waButton.querySelector('span').innerText = `CONSULTAR POR ${selectedServices.length} SERVICIO/S`;
+        } else {
+            waButton.classList.remove('visible');
+        }
+    }
+  </script>
 </body>
 </html>
