@@ -40,7 +40,7 @@ const data = {
   flyers: [
     { title: "Noche Mexicana", client: "Viersadingos", src: "img/flyers/frpicante.png" },
     { title: "La Santa Trinidad", client: "Micery", src: "img/flyers/santatrinidad.jpg" },
-    { title: "Te vi (Lanzamiento)", client: "Gondra", src: "img/flyers/tevi.jpg" },
+    { title: "Te vi (Lanzamiento)", client: "Gondra", src: "img/flyers/tevi.png" },
     { title: "Invitado a Niceto", client: "FRN", src: "img/flyers/frn-niceto.png" },
     { title: "Poster FRO!", client: "wesstyle.arg", src: "img/flyers/fro.png" },
     { title: "i gotta feeling", client: "wesstyle.arg", src: "img/flyers/i gotta feeling.png"},
