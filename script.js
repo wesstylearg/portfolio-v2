@@ -118,6 +118,7 @@ function renderCategories() {
   grid.innerHTML = "";
 
   document.querySelector(".right-panel").style.display = "none";
+  document.querySelector(".right-panel").classList.remove("active-mobile");
   document.querySelector(".player").style.display = "none";
 
   sectionNameTitle.textContent = "Menu Principal";
@@ -146,10 +147,6 @@ function renderCategories() {
       card.classList.add("animate");
     }, index * 75);
   });
-
-  if (categories.length === 0) {
-    grid.innerHTML = "<p style='grid-column: 1 / -1; color: var(--muted);'>No hay secciones con contenido.</p>";
-  }
 }
 
 function createLoadMoreButton() {
@@ -158,20 +155,7 @@ function createLoadMoreButton() {
     loadMoreBtn = document.createElement("button");
     loadMoreBtn.id = "load-more-btn";
     loadMoreBtn.textContent = "Ver mas";
-    loadMoreBtn.style.cssText =
-      "padding: 10px 20px;" +
-      "margin: 20px auto 40px auto;" +
-      "display: block;" +
-      "background: var(--wesstyle);" +
-      "color: #fff;" +
-      "border: none;" +
-      "border-radius: 30px;" +
-      "cursor: pointer;" +
-      "font-size: 1rem;" +
-      "transition: opacity 0.2s;" +
-      "font-family: circular;";
-    loadMoreBtn.onmouseover = function() { loadMoreBtn.style.opacity = "0.9"; };
-    loadMoreBtn.onmouseout = function() { loadMoreBtn.style.opacity = "1"; };
+    loadMoreBtn.style.cssText = "padding: 10px 20px; margin: 20px auto 40px auto; display: block; background: var(--wesstyle); color: #fff; border: none; border-radius: 30px; cursor: pointer; font-size: 1rem; transition: opacity 0.2s; font-family: circular;";
     loadMoreBtn.addEventListener("click", loadNextBatch);
     document.querySelector(".left-panel").appendChild(loadMoreBtn);
   }
@@ -193,17 +177,15 @@ function renderBatch(items, start, end) {
     var item = items[i];
     var card = document.createElement("div");
     card.classList.add("card");
-    card.innerHTML =
-      "<img src='" + item.src + "' alt='" + item.title + "' onerror=\"this.src='img/placeholder.jpg'\">" +
-      "<h4>" + item.title + "</h4>" +
-      "<p>" + item.client + "</p>";
+    card.innerHTML = "<img src='" + item.src + "' alt='" + item.title + "' onerror=\"this.src='img/placeholder.jpg'\">" +
+                     "<h4>" + item.title + "</h4>" +
+                     "<p>" + item.client + "</p>";
 
     (function(idx) {
-      card.addEventListener("click", function() { openPreview(idx); });
+      card.addEventListener("click", function() { openPreview(idx, true); });
     })(i);
 
     grid.appendChild(card);
-
     (function(c, delay) {
       setTimeout(function() { c.classList.add("animate"); }, delay);
     })(card, (i - start) * 75);
@@ -218,17 +200,14 @@ function updateLoadMoreButton(totalItems) {
 }
 
 function renderSection(section) {
-  if (section === "menu") {
-    renderCategories();
-    return;
-  }
-
+  if (section === "menu") { renderCategories(); return; }
   currentSection = section;
   grid.innerHTML = "";
   currentDisplayCount = 0;
 
-  // Ajuste para móviles: Permitimos que el panel derecho sea visible
-  document.querySelector(".right-panel").style.display = "flex";
+  if (window.innerWidth > 600) {
+    document.querySelector(".right-panel").style.display = "flex";
+  }
 
   document.querySelector(".player").style.display = "flex";
   sectionNameTitle.textContent = categoryTitles[section] || section.charAt(0).toUpperCase() + section.slice(1);
@@ -241,19 +220,11 @@ function renderSection(section) {
   updateLoadMoreButton(items.length);
 
   if (items.length > 0) {
-    openPreview(0);
-  } else {
-    grid.innerHTML = "<p style='grid-column: 1 / -1; color: var(--muted);'>Aun no hay disenos en esta seccion.</p>";
-    previewTitle.textContent = "Sin contenido";
-    previewClient.textContent = "";
-    playerCover.src = "img/placeholder.jpg";
-    document.querySelector(".right-panel").style.display = "none";
-    document.querySelector(".player").style.display = "none";
-    updateLoadMoreButton(0);
+    openPreview(0, false);
   }
 }
 
-function openPreview(index) {
+function openPreview(index, isManualClick) {
   var items = data[currentSection];
   if (!items || !items.length) return;
 
@@ -265,60 +236,63 @@ function openPreview(index) {
   previewClient.textContent = item.client;
 
   var previewWrapper = document.querySelector(".preview-image");
+  var rightPanel = document.querySelector(".right-panel");
   
-  // Aseguramos visibilidad del panel al seleccionar un ítem
-  document.querySelector(".right-panel").style.display = "flex";
+  // LÓGICA SMART: Solo abre el panel modal en móvil si es un VIDEO
+  if (isManualClick && window.innerWidth <= 600 && item.embed) {
+    rightPanel.classList.add("active-mobile");
+  }
 
   if (item.embed) {
     previewWrapper.innerHTML =
-      "<iframe src='" + item.embed + "' frameborder='0'" +
-      " allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'" +
-      " allowfullscreen" +
-      " style='position:absolute; top:0; left:0; width:100%; height:100%; border-radius:8px;'>" +
-      "</iframe>";
+      "<iframe src='" + item.embed + "' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen style='position:absolute; top:0; left:0; width:100%; height:100%; border-radius:8px;'></iframe>";
     previewImage = null;
   } else {
     previewWrapper.innerHTML = "<img id='preview-image' src='" + item.src + "' alt='preview' />";
     previewImage = document.getElementById("preview-image");
     previewImage.addEventListener("click", openLightbox);
-  }
-
-  // Scroll automático hacia el preview en celulares para que se vea el video
-  if (window.innerWidth <= 600) {
-    document.querySelector(".right-panel").scrollIntoView({ behavior: 'smooth' });
+    
+    // Si es imagen y estamos en móvil, nos aseguramos que el panel no esté tapando la lista
+    if (window.innerWidth <= 600) {
+      rightPanel.classList.remove("active-mobile");
+    }
   }
 }
 
+// Cerrar panel al tocar fuera o en el "X"
+document.querySelector(".right-panel").addEventListener("click", function(e) {
+    if (window.innerWidth <= 600) {
+        if (e.target === this || e.offsetX < 60 && e.offsetY < 60) { 
+            this.classList.remove("active-mobile");
+        }
+    }
+});
+
 document.querySelectorAll(".side-item").forEach(function(btn) {
   btn.addEventListener("click", function() {
-    document.querySelectorAll(".top-nav .nav-btn").forEach(function(navBtn) {
-      navBtn.classList.remove("active");
-    });
+    document.querySelectorAll(".top-nav .nav-btn").forEach(function(n) { n.classList.remove("active"); });
     var disenBtn = document.getElementById("btn-disenos");
     if (disenBtn) disenBtn.classList.add("active");
     renderSection(btn.dataset.section);
   });
 });
 
-var btnDisenos = document.getElementById("btn-disenos");
-if (btnDisenos) {
-  btnDisenos.addEventListener("click", function() {
-    renderCategories();
-  });
+if (document.getElementById("btn-disenos")) {
+  document.getElementById("btn-disenos").addEventListener("click", renderCategories);
 }
 
 document.getElementById("prev").addEventListener("click", function() {
   var items = data[currentSection];
   if (!items || !items.length) return;
   currentIndex = (currentIndex - 1 + items.length) % items.length;
-  openPreview(currentIndex);
+  openPreview(currentIndex, true);
 });
 
 document.getElementById("next").addEventListener("click", function() {
   var items = data[currentSection];
   if (!items || !items.length) return;
   currentIndex = (currentIndex + 1) % items.length;
-  openPreview(currentIndex);
+  openPreview(currentIndex, true);
 });
 
 renderCategories();
