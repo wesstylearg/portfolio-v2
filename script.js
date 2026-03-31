@@ -60,6 +60,9 @@ const data = {
     { title: "Niro", client: "Logotipo", src: "img/logos/niro.png" },
     { title: "JvnRoman", client: "Logotipo", src: "img/logos/jvnroman.png" },
     { title: "D9", client: "Monograma", src: "img/logos/d9.png" },
+    { title: "Mate&Punto", client: "Isologo", src: "img/logos/mateypunto.png" },
+    { title: "Xeon Flow", client: "Imagotipo", src: "img/logos/xeon.png" },
+    { title: "Los Viersadingos", client: "Ilustración", src: "img/logos/fraezel.png" },
     { title: "Wesstyle", client: "Isotipo", src: "img/logos/wesstyle.png" }
   ]
 };
