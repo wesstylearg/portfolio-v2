@@ -74,7 +74,7 @@ const categoryTitles = {
 let currentSection = null;
 let currentIndex = 0;
 let currentDisplayCount = 0;
-const CARDS_PER_LOAD = 4;
+const CARDS_PER_LOAD = 8;
 
 const grid = document.getElementById("grid");
 let previewImage = document.getElementById("preview-image");
