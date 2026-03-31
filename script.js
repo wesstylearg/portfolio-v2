@@ -67,7 +67,7 @@ const data = {
 const categoryTitles = {
     portadas: "Portadas de album",
     flyers: "Flyers & Posters",
-    videolyrics: "Video Lyrics",
+    videos: "Video Lyrics",
     logos: "Logos",
     branding: "Branding" // Añadir título para 'branding'
 };
