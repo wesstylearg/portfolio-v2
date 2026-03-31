@@ -75,7 +75,6 @@ body {
 .top-nav {
   display: flex;
   gap: 10px;
-
 }
 
 .nav-btn {
@@ -189,7 +188,7 @@ body {
   margin-bottom: 4rem;
 }
 
-/* === ESTILOS DE ANIMACIÓN DE ENTRADA (NUEVO) === */
+/* === ESTILOS DE ANIMACIÓN DE ENTRADA === */
 @keyframes fadeInSlideUp {
   from {
     opacity: 0;
@@ -204,19 +203,14 @@ body {
 .card {
   cursor: pointer;
   transition: transform 0.2s ease;
-  /* Estado inicial: oculto y ligeramente abajo */
   opacity: 0; 
   transform: translateY(20px); 
 }
 
-/* Clase que se añade con JS para activar la animación */
 .card.animate {
   animation: fadeInSlideUp 0.4s ease-out forwards;
-  /* Se elimina la transición de transform aquí para que la animación CSS tome el control */
   transition: none;
 }
-/* === FIN ANIMACIÓN === */
-
 
 .card img {
   width: 100%;
@@ -233,10 +227,11 @@ body {
 }
 
 .card p {
-  margin-top: -15px; /* O a 0px si quieres pegarlo al h4 */
+  margin-top: -15px;
   color: var(--muted);
   font-size: 0.9rem;
 }
+
 /* RIGHT PANEL */
 .right-panel {
   width: 400px;
@@ -245,7 +240,7 @@ body {
   border-left: 1px solid #1a1a1a;
   height: 100%; 
   display: flex; 
-  flex-direction: column
+  flex-direction: column;
 }
 
 .preview {
@@ -262,10 +257,10 @@ body {
   height: 0;
   position: relative;
   border-radius: 8px;
-    object-fit: cover;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer; 
+  object-fit: cover;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer; 
 }
 
 .preview-image img {
@@ -274,7 +269,6 @@ body {
   width: 100%;
   height: 100%;
   object-fit: contain; 
-
 }
 
 /* PLAYER */
@@ -286,7 +280,6 @@ body {
   justify-content: space-between; 
   padding: 0 24px; 
   border-top: 1px solid #1a1a1a;
-  
   position: fixed;
   bottom: 0;
   left: 0;
@@ -294,7 +287,6 @@ body {
   z-index: 1000;
 }
 
-/* NUEVO ESTILO: Información de la pista a la izquierda */
 .track-info {
     flex-basis: 33%; 
 }
@@ -310,7 +302,6 @@ body {
     color: var(--muted);
     font-size: 0.8rem;
     text-align: left;
-    right: 0;
 }
 
 .track-cover {
@@ -327,13 +318,11 @@ body {
     object-fit: cover;
 }
 
-/* El elemento de relleno para la derecha */
 .track-placeholder {
     flex-basis: 33%;
     text-align: right; 
 }
 
-/* PLAYER CONTROLS (se mantiene) */
 .player-controls {
   display: flex;
   align-items: center; 
@@ -374,15 +363,9 @@ body {
 
 .player-controls button:hover {
   opacity: 0.8; 
-  color: initial; 
 }
 
-.player-controls button:hover img {
-    opacity: 0.8;
-}
-
-
-/* LIGHTBOX (Modal para ver imagen completa) */
+/* LIGHTBOX */
 .lightbox {
   position: fixed;
   top: 0;
@@ -411,11 +394,6 @@ body {
   cursor: pointer;
   z-index: 2001;
   opacity: 0.8;
-  transition: opacity 0.2s;
-}
-
-.lightbox-close:hover {
-  opacity: 1;
 }
 
 #lightbox-image {
@@ -424,68 +402,89 @@ body {
   object-fit: contain;
 }
 
-/* ESTILOS PARA LA BARRA DE DESPLAZAMIENTO (SCROLLBAR) */
-/* Aplica solo al .left-panel */
+/* SCROLLBAR */
 .left-panel::-webkit-scrollbar {
   width: 12px;
 }
-
 .left-panel::-webkit-scrollbar-track {
   background: var(--bg);
 }
-
 .left-panel::-webkit-scrollbar-thumb {
   background-color: #333;
   border-radius: 4px; 
-}
-
-.left-panel::-webkit-scrollbar-thumb:hover {
-  background-color: var(--muted);
 }
 
 /* ======================================= */
 /* ====== MEDIA QUERIES PARA MÓVIL ======= */
 /* ======================================= */
 @media (max-width: 600px) {
-  /* 1. OCULTAR ELEMENTOS NO DESEADOS */
   .sidebar {
     display: none;
   }
 
-  /* **CRUCIAL:** Ocultar el panel derecho de vista previa (el reproductor grande) */
+  /* El panel derecho se oculta por defecto en móvil */
   .right-panel {
-    display: none; 
-    visibility: hidden; 
-    width: 0;
+    display: none;
+    width: 100%;
+    border-left: none;
   }
-  
-  /* 2. AJUSTAR EL CONTENEDOR PRINCIPAL Y EL PANEL DE CONTENIDO */
+
+  /* Clase activa para mostrar el preview/video en pantalla completa al clickear */
+  .right-panel.active-mobile {
+    display: flex !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: calc(100vh - 60px); /* Deja espacio para el player inferior */
+    z-index: 1500;
+    background: #0f0f0f;
+    padding: 20px;
+    visibility: visible;
+  }
+
+  /* Ajuste para que el video mantenga proporción 16:9 en el modal móvil */
+  .right-panel.active-mobile .preview-image {
+    width: 100%;
+    padding-bottom: 56.25%; 
+    height: 0;
+    margin-top: 50px;
+  }
+
+  /* Botón visual "Volver" en el modal móvil */
+  .right-panel.active-mobile::before {
+    content: "✕ VOLVER A LA LISTA";
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-family: 'circular', sans-serif;
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: var(--muted);
+    border: 1px solid #333;
+    padding: 6px 12px;
+    border-radius: 20px;
+  }
+
   .content {
-    flex-direction: row; 
+    flex-direction: column; 
   }
 
-  /* **CRUCIAL:** El panel izquierdo debe ocupar el 100% del espacio horizontal */
   .left-panel {
-    flex: 1 1 100%; /* Ocupa todo el ancho disponible */
-    padding: 20px 15px; /* Reducir padding en móvil */
-    /* Ajusta la altura: Altura de la ventana - Topbar (60px) - Player (60px) */
+    flex: 1;
+    padding: 20px 15px;
     height: calc(100vh - 60px - 60px); 
-    margin-bottom: 0; 
   }
 
-  /* 3. FORMATO DE ÍTEMS */
   .grid {
-    /* **CRUCIAL:** Una sola columna para que cada ítem ocupe todo el ancho */
     grid-template-columns: 1fr; 
     gap: 15px; 
-    margin-bottom: 2rem; 
   }
   
   .card:hover {
-    transform: none; /* Eliminar el zoom en hover para mejor UX táctil */
+    transform: none; 
   }
 
-  /* 4. AJUSTES EN EL ENCABEZADO Y REPRODUCTOR INFERIOR */
   .topbar {
     padding: 0 15px; 
   }
@@ -493,15 +492,9 @@ body {
   .brand-name {
     font-size: 20px; 
   }
-  
-  .nav-btn {
-    padding: 4px 10px; 
-    font-size: 14px; 
-  }
-  
+
   .player {
     padding: 0 15px; 
-    height: 60px; 
   }
   
   .track-placeholder {
@@ -511,7 +504,6 @@ body {
   .track-cover {
     width: 40px; 
     height: 40px;
-    margin-right: 10px;
   }
 
   .track-info h2 {
@@ -522,5 +514,3 @@ body {
       font-size: 0.7rem;
   }
 }
-
-
