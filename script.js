@@ -55,6 +55,10 @@ const data = {
     { title: "Poster C.R.O.", client: "wesstyle.arg", src: "img/flyers/cro.png" },
     
   ],
+  videos: [
+  { title: "Pasa un rato (Video Lyrics)", client: "NIRO", embed: "https://www.youtube.com/embed/oTmju9RE8qs", src: "img/miniaturas/pasaunrato.png" },
+  // src = thumbnail para la card, embed = el iframe del panel derecho
+]
   logos: [
     { title: "Niro", client: "Logotipo", src: "img/logos/niro.png" },
     { title: "JvnRoman", client: "Logotipo", src: "img/logos/jvnroman.png" },
@@ -67,7 +71,7 @@ const data = {
 const categoryTitles = {
     portadas: "Portadas de album",
     flyers: "Flyers & Posters",
-    videos: "Video Lyrics",
+    videolyrics: "Video Lyrics",
     logos: "Logos",
     branding: "Branding" // Añadir título para 'branding'
 };
@@ -314,21 +318,6 @@ function openPreview(index) {
 
   previewTitle.textContent = item.title;
   previewClient.textContent = item.client;
-  const previewWrapper = document.querySelector('.preview-image');
-  if (item.embed) {
-    previewWrapper.innerHTML = `
-      <iframe 
-        src="${item.embed}" 
-        frameborder="0" 
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-        allowfullscreen
-        style="position:absolute; top:0; left:0; width:100%; height:100%; border-radius:8px;">
-      </iframe>`;
-  } else {
-    previewWrapper.innerHTML = `<img id="preview-image" src="${item.src}" alt="preview" />`;
-    document.getElementById('preview-image').addEventListener('click', openLightbox);
-    previewImage = document.getElementById('preview-image'); // reasignar referencia
-  }
 }
 
 // Event Listeners para la sidebar
