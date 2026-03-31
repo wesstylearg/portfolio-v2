@@ -224,11 +224,8 @@ function renderSection(section) {
   grid.innerHTML = "";
   currentDisplayCount = 0;
 
-  if (window.matchMedia("(min-width: 601px)").matches) {
-    document.querySelector(".right-panel").style.display = "flex";
-  } else {
-    document.querySelector(".right-panel").style.display = "none";
-  }
+  // Ajuste para móviles: Permitimos que el panel derecho sea visible
+  document.querySelector(".right-panel").style.display = "flex";
 
   document.querySelector(".player").style.display = "flex";
   sectionNameTitle.textContent = categoryTitles[section] || section.charAt(0).toUpperCase() + section.slice(1);
@@ -265,6 +262,9 @@ function openPreview(index) {
   previewClient.textContent = item.client;
 
   var previewWrapper = document.querySelector(".preview-image");
+  
+  // Aseguramos visibilidad del panel al seleccionar un ítem
+  document.querySelector(".right-panel").style.display = "flex";
 
   if (item.embed) {
     previewWrapper.innerHTML =
@@ -278,6 +278,11 @@ function openPreview(index) {
     previewWrapper.innerHTML = "<img id='preview-image' src='" + item.src + "' alt='preview' />";
     previewImage = document.getElementById("preview-image");
     previewImage.addEventListener("click", openLightbox);
+  }
+
+  // Scroll automático hacia el preview en celulares para que se vea el video
+  if (window.innerWidth <= 600) {
+    document.querySelector(".right-panel").scrollIntoView({ behavior: 'smooth' });
   }
 }
 
