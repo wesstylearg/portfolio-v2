@@ -10,12 +10,12 @@ const data = {
     { title: "Te vi", client: "Gondra", src: "img/portadas/te-vi.png" },
     { title: "PUCCA", client: "Niro", src: "img/portadas/Portada Pucca v1 final.png" },
     { title: "Nuestro Ayer", client: "Siroe", src: "img/portadas/nuestroayer.png" },
-    { title: "Mi ataúd", client: "Gondra", src: "img/portadas/mi-ataud.png" },
-    { title: "Como te pensé", client: "Waru Lavv", src: "img/portadas/como_te_pense.png" },
+    { title: "Mi ataud", client: "Gondra", src: "img/portadas/mi-ataud.png" },
+    { title: "Como te pense", client: "Waru Lavv", src: "img/portadas/como_te_pense.png" },
     { title: "0 Movimiento", client: "DCHINX", src: "img/portadas/ceromovimiento.png"},
     { title: "Thanos", client: "Rull Royce", src: "img/portadas/thanos.png" },
     { title: "El genesis", client: "Frannko", src: "img/portadas/genesis.png" },
-    { title: "En Mi Mente <3", client: "Siroe", src: "img/portadas/en_mi_mente.jpg" },
+    { title: "En Mi Mente", client: "Siroe", src: "img/portadas/en_mi_mente.jpg" },
     { title: "SELATROP", client: "Berti", src: "img/portadas/selatrop.png" },
     { title: "4077", client: "Vazzko", src: "img/portadas/4077.png"},
     { title: "Altibajos", client: "Leitoo", src: "img/portadas/altibajos.png" },
@@ -35,7 +35,7 @@ const data = {
     { title: "Reversionado", client: "RodriiLA", src: "img/portadas/reversionado.png" },
     { title: "DOPAMINA", client: "D CHINX", src: "img/portadas/dopamina.png" },
     { title: "AW", client: "ONCE", src: "img/portadas/aw.png" },
-    { title: "CHINA LAKE", client: "ORBE", src: "img/portadas/china-lake.png" },
+    { title: "CHINA LAKE", client: "ORBE", src: "img/portadas/china-lake.png" }
   ],
   flyers: [
     { title: "Noche Mexicana", client: "Viersadingos", src: "img/flyers/frpicante.png" },
@@ -49,25 +49,24 @@ const data = {
     { title: "Sorteo de entradas Niceto", client: "FRN", src: "img/flyers/frn-emerfst.png" },
     { title: "Flyer promocional spotify", client: "Gondra", src: "img/flyers/tamonuevo-flyer.png" },
     { title: "Plugtwrd Studio", client: "Yvng Golden", src: "img/flyers/plugtwrd.png" },
-    { title: "Poster C.R.O.", client: "wesstyle.arg", src: "img/flyers/cro.png" },
+    { title: "Poster C.R.O.", client: "wesstyle.arg", src: "img/flyers/cro.png" }
   ],
-  // ✅ FIX: coma al final del array anterior, y 'videos' como key correcta
   videos: [
-    { title: "Pasa un rato (Video Lyrics)", client: "NIRO", embed: "https://www.youtube.com/embed/oTmju9RE8qs", src: "img/miniaturas/pasaunrato.png" },
+    { title: "Pasa un rato (Video Lyrics)", client: "NIRO", embed: "https://www.youtube.com/embed/oTmju9RE8qs", src: "img/miniaturas/pasaunrato.png" }
   ],
   logos: [
     { title: "Niro", client: "Logotipo", src: "img/logos/niro.png" },
     { title: "JvnRoman", client: "Logotipo", src: "img/logos/jvnroman.png" },
     { title: "D9", client: "Monograma", src: "img/logos/d9.png" },
-    { title: "Wesstyle", client: "Isotipo", src: "img/logos/wesstyle.png" },
+    { title: "Wesstyle", client: "Isotipo", src: "img/logos/wesstyle.png" }
   ]
 };
 
 const categoryTitles = {
   portadas: "Portadas de album",
   flyers: "Flyers & Posters",
-  videos: "Videos",      // ✅ FIX: era 'videolyrics', ahora coincide con la key del data
-  logos: "Logos",
+  videos: "Videos",
+  logos: "Logos"
 };
 
 let currentSection = null;
@@ -76,7 +75,7 @@ let currentDisplayCount = 0;
 const CARDS_PER_LOAD = 4;
 
 const grid = document.getElementById("grid");
-let previewImage = document.getElementById("preview-image"); // ✅ let en lugar de const (se reasigna en openPreview)
+let previewImage = document.getElementById("preview-image");
 const previewTitle = document.getElementById("preview-title");
 const previewClient = document.getElementById("preview-client");
 const playerCover = document.getElementById("player-cover");
@@ -86,15 +85,12 @@ const lightbox = document.getElementById("lightbox");
 const lightboxImage = document.getElementById("lightbox-image");
 const lightboxClose = document.querySelector(".lightbox-close");
 
-// --- LÓGICA DEL LIGHTBOX ---
 function openLightbox() {
-  // No abrir lightbox si es menú o si el preview actual es un video (embed)
-  const items = data[currentSection];
+  var items = data[currentSection];
   if (!items || !items.length) return;
-  const item = items[currentIndex];
-  if (item && item.embed) return; // ✅ No lightbox para videos
-
-  if (currentSection && currentSection !== 'menu') {
+  var item = items[currentIndex];
+  if (item && item.embed) return;
+  if (currentSection && currentSection !== "menu") {
     lightboxImage.src = previewImage.src;
     lightbox.classList.add("open");
   }
@@ -104,125 +100,120 @@ function closeLightbox() {
   lightbox.classList.remove("open");
 }
 
-// El listener de click en previewImage se maneja dinámicamente en openPreview
 lightboxClose.addEventListener("click", closeLightbox);
-lightbox.addEventListener("click", (e) => {
-  if (e.target.id === 'lightbox' || e.target === lightbox) {
+lightbox.addEventListener("click", function(e) {
+  if (e.target.id === "lightbox" || e.target === lightbox) {
     closeLightbox();
   }
 });
 
-// --- RENDERIZADO DE CATEGORÍAS (MENÚ PRINCIPAL) ---
 function renderCategories() {
-  currentSection = 'menu';
+  currentSection = "menu";
   currentIndex = 0;
   grid.innerHTML = "";
 
-  document.querySelector('.right-panel').style.display = 'none';
-  document.querySelector('.player').style.display = 'none';
+  document.querySelector(".right-panel").style.display = "none";
+  document.querySelector(".player").style.display = "none";
 
-  sectionNameTitle.textContent = "Menú Principal";
+  sectionNameTitle.textContent = "Menu Principal";
 
-  const loadMoreBtn = document.getElementById('load-more-btn');
+  var loadMoreBtn = document.getElementById("load-more-btn");
   if (loadMoreBtn) loadMoreBtn.remove();
 
-  const categories = Object.keys(data).filter(key => key !== 'menu');
+  var categories = Object.keys(data).filter(function(key) { return key !== "menu"; });
 
-  categories.forEach((key, index) => {
-    const title = categoryTitles[key] || key.charAt(0).toUpperCase() + key.slice(1);
-    const finalImgSrc = `img/playlist/${key}.png`;
-    const clientText = `Ver ${data[key] ? data[key].length : 0} diseños`;
+  categories.forEach(function(key, index) {
+    var title = categoryTitles[key] || key.charAt(0).toUpperCase() + key.slice(1);
+    var finalImgSrc = "img/playlist/" + key + ".png";
+    var count = data[key] ? data[key].length : 0;
 
-    const card = document.createElement("div");
+    var card = document.createElement("div");
     card.classList.add("card");
-    card.innerHTML = `
-      <img src="${finalImgSrc}" alt="${title}" onerror="this.src='img/placeholder.jpg'">
-      <h4>${title}</h4>
-      <p>${clientText}</p>
-    `;
-    card.addEventListener("click", () => renderSection(key));
+    card.innerHTML =
+      "<img src='" + finalImgSrc + "' alt='" + title + "' onerror=\"this.src='img/placeholder.jpg'\">" +
+      "<h4>" + title + "</h4>" +
+      "<p>Ver " + count + " disenos</p>";
+
+    card.addEventListener("click", function() { renderSection(key); });
     grid.appendChild(card);
 
-    setTimeout(() => {
-      card.classList.add('animate');
+    setTimeout(function() {
+      card.classList.add("animate");
     }, index * 75);
   });
 
   if (categories.length === 0) {
-    grid.innerHTML = `<p style="grid-column: 1 / -1; color: var(--muted);">No hay secciones con contenido para mostrar.</p>`;
+    grid.innerHTML = "<p style='grid-column: 1 / -1; color: var(--muted);'>No hay secciones con contenido.</p>";
   }
 }
 
-// --- BOTÓN "VER MÁS" ---
 function createLoadMoreButton() {
-  let loadMoreBtn = document.getElementById('load-more-btn');
+  var loadMoreBtn = document.getElementById("load-more-btn");
   if (!loadMoreBtn) {
-    loadMoreBtn = document.createElement('button');
-    loadMoreBtn.id = 'load-more-btn';
-    loadMoreBtn.textContent = 'Ver más';
-    loadMoreBtn.style.cssText = `
-      grid-column: 1 / -1;
-      padding: 10px 20px;
-      margin: 20px auto 40px auto;
-      display: block;
-      background: var(--wesstyle);
-      color: #fff;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: opacity 0.2s;
-      font-family: circular;
-    `;
-    loadMoreBtn.onmouseover = () => loadMoreBtn.style.opacity = 0.9;
-    loadMoreBtn.onmouseout = () => loadMoreBtn.style.opacity = 1;
-    loadMoreBtn.addEventListener('click', loadNextBatch);
-    document.querySelector('.left-panel').appendChild(loadMoreBtn);
+    loadMoreBtn = document.createElement("button");
+    loadMoreBtn.id = "load-more-btn";
+    loadMoreBtn.textContent = "Ver mas";
+    loadMoreBtn.style.cssText =
+      "padding: 10px 20px;" +
+      "margin: 20px auto 40px auto;" +
+      "display: block;" +
+      "background: var(--wesstyle);" +
+      "color: #fff;" +
+      "border: none;" +
+      "border-radius: 30px;" +
+      "cursor: pointer;" +
+      "font-size: 1rem;" +
+      "transition: opacity 0.2s;" +
+      "font-family: circular;";
+    loadMoreBtn.onmouseover = function() { loadMoreBtn.style.opacity = "0.9"; };
+    loadMoreBtn.onmouseout = function() { loadMoreBtn.style.opacity = "1"; };
+    loadMoreBtn.addEventListener("click", loadNextBatch);
+    document.querySelector(".left-panel").appendChild(loadMoreBtn);
   }
   return loadMoreBtn;
 }
 
 function loadNextBatch() {
-  const items = data[currentSection];
+  var items = data[currentSection];
   if (!items) return;
-
-  const start = currentDisplayCount;
-  const end = Math.min(items.length, start + CARDS_PER_LOAD);
-
+  var start = currentDisplayCount;
+  var end = Math.min(items.length, start + CARDS_PER_LOAD);
   renderBatch(items, start, end);
   currentDisplayCount = end;
   updateLoadMoreButton(items.length);
 }
 
 function renderBatch(items, start, end) {
-  for (let i = start; i < end; i++) {
-    const item = items[i];
-    const card = document.createElement("div");
+  for (var i = start; i < end; i++) {
+    var item = items[i];
+    var card = document.createElement("div");
     card.classList.add("card");
-    card.innerHTML = `
-      <img src="${item.src}" alt="${item.title}" onerror="this.src='img/placeholder.jpg'">
-      <h4>${item.title}</h4>
-      <p>${item.client}</p>
-    `;
-    card.addEventListener("click", () => openPreview(i));
+    card.innerHTML =
+      "<img src='" + item.src + "' alt='" + item.title + "' onerror=\"this.src='img/placeholder.jpg'\">" +
+      "<h4>" + item.title + "</h4>" +
+      "<p>" + item.client + "</p>";
+
+    (function(idx) {
+      card.addEventListener("click", function() { openPreview(idx); });
+    })(i);
+
     grid.appendChild(card);
 
-    setTimeout(() => {
-      card.classList.add('animate');
-    }, (i - start) * 75);
+    (function(c, delay) {
+      setTimeout(function() { c.classList.add("animate"); }, delay);
+    })(card, (i - start) * 75);
   }
 }
 
 function updateLoadMoreButton(totalItems) {
-  const loadMoreBtn = document.getElementById('load-more-btn');
+  var loadMoreBtn = document.getElementById("load-more-btn");
   if (loadMoreBtn) {
-    loadMoreBtn.style.display = currentDisplayCount < totalItems ? 'block' : 'none';
+    loadMoreBtn.style.display = currentDisplayCount < totalItems ? "block" : "none";
   }
 }
 
-// --- RENDERIZADO DE SECCIÓN ---
 function renderSection(section) {
-  if (section === 'menu') {
+  if (section === "menu") {
     renderCategories();
     return;
   }
@@ -231,17 +222,16 @@ function renderSection(section) {
   grid.innerHTML = "";
   currentDisplayCount = 0;
 
-  if (window.matchMedia('(min-width: 601px)').matches) {
-    document.querySelector('.right-panel').style.display = 'flex';
+  if (window.matchMedia("(min-width: 601px)").matches) {
+    document.querySelector(".right-panel").style.display = "flex";
   } else {
-    document.querySelector('.right-panel').style.display = 'none';
+    document.querySelector(".right-panel").style.display = "none";
   }
 
-  document.querySelector('.player').style.display = 'flex';
-
+  document.querySelector(".player").style.display = "flex";
   sectionNameTitle.textContent = categoryTitles[section] || section.charAt(0).toUpperCase() + section.slice(1);
 
-  const items = data[section];
+  var items = data[section];
   if (!items) return;
 
   loadNextBatch();
@@ -251,87 +241,74 @@ function renderSection(section) {
   if (items.length > 0) {
     openPreview(0);
   } else {
-    grid.innerHTML = `<p style="grid-column: 1 / -1; color: var(--muted);">Aún no hay diseños en esta sección.</p>`;
+    grid.innerHTML = "<p style='grid-column: 1 / -1; color: var(--muted);'>Aun no hay disenos en esta seccion.</p>";
     previewTitle.textContent = "Sin contenido";
     previewClient.textContent = "";
     playerCover.src = "img/placeholder.jpg";
-    document.querySelector('.right-panel').style.display = 'none';
-    document.querySelector('.player').style.display = 'none';
+    document.querySelector(".right-panel").style.display = "none";
+    document.querySelector(".player").style.display = "none";
     updateLoadMoreButton(0);
   }
 }
 
-// ✅ FIX PRINCIPAL: openPreview maneja tanto imágenes como videos (embed)
 function openPreview(index) {
-  const items = data[currentSection];
+  var items = data[currentSection];
   if (!items || !items.length) return;
 
   currentIndex = index;
-  const item = items[index];
+  var item = items[index];
 
   playerCover.src = item.src;
   previewTitle.textContent = item.title;
   previewClient.textContent = item.client;
 
-  const previewWrapper = document.querySelector('.preview-image');
+  var previewWrapper = document.querySelector(".preview-image");
 
   if (item.embed) {
-    // Es un video: mostrar iframe de YouTube
-    previewWrapper.innerHTML = `
-      <iframe
-        src="${item.embed}"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-        style="position:absolute; top:0; left:0; width:100%; height:100%; border-radius:8px;">
-      </iframe>`;
-    previewImage = null; // No hay imagen en este modo
+    previewWrapper.innerHTML =
+      "<iframe src='" + item.embed + "' frameborder='0'" +
+      " allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'" +
+      " allowfullscreen" +
+      " style='position:absolute; top:0; left:0; width:100%; height:100%; border-radius:8px;'>" +
+      "</iframe>";
+    previewImage = null;
   } else {
-    // Es una imagen: restaurar el <img> y el listener del lightbox
-    previewWrapper.innerHTML = `<img id="preview-image" src="${item.src}" alt="preview" />`;
-    previewImage = document.getElementById('preview-image');
-    previewImage.addEventListener('click', openLightbox);
+    previewWrapper.innerHTML = "<img id='preview-image' src='" + item.src + "' alt='preview' />";
+    previewImage = document.getElementById("preview-image");
+    previewImage.addEventListener("click", openLightbox);
   }
 }
 
-// --- EVENT LISTENERS SIDEBAR ---
-document.querySelectorAll(".side-item").forEach((btn) => {
-  btn.addEventListener("click", () => {
-    document.querySelectorAll(".top-nav .nav-btn").forEach(navBtn => {
-      if (navBtn.textContent === 'Diseños') {
-        navBtn.classList.add('active');
-      } else {
-        navBtn.classList.remove('active');
-      }
+document.querySelectorAll(".side-item").forEach(function(btn) {
+  btn.addEventListener("click", function() {
+    document.querySelectorAll(".top-nav .nav-btn").forEach(function(navBtn) {
+      navBtn.classList.remove("active");
     });
+    var disenBtn = document.getElementById("btn-disenos");
+    if (disenBtn) disenBtn.classList.add("active");
     renderSection(btn.dataset.section);
   });
 });
 
-document.getElementById("btn-disenos")?.addEventListener("click", () => {
-  renderCategories();
-  document.querySelectorAll(".top-nav .nav-btn").forEach(navBtn => {
-    if (navBtn.textContent === 'Diseños') {
-      navBtn.classList.add('active');
-    } else {
-      navBtn.classList.remove('active');
-    }
+var btnDisenos = document.getElementById("btn-disenos");
+if (btnDisenos) {
+  btnDisenos.addEventListener("click", function() {
+    renderCategories();
   });
-});
+}
 
-document.getElementById("prev").addEventListener("click", () => {
-  const items = data[currentSection];
+document.getElementById("prev").addEventListener("click", function() {
+  var items = data[currentSection];
   if (!items || !items.length) return;
   currentIndex = (currentIndex - 1 + items.length) % items.length;
   openPreview(currentIndex);
 });
 
-document.getElementById("next").addEventListener("click", () => {
-  const items = data[currentSection];
+document.getElementById("next").addEventListener("click", function() {
+  var items = data[currentSection];
   if (!items || !items.length) return;
   currentIndex = (currentIndex + 1) % items.length;
   openPreview(currentIndex);
 });
 
-// INICIO
 renderCategories();
