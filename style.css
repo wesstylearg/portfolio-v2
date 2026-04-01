@@ -4,11 +4,11 @@
 @font-face { font-family: "circular"; src: url("fonts/circular-medium.woff2") format("woff2"); }
 
 :root {
-  --bg: #211e27;
-  --panel: #1a171f;
+  --bg: #1a171f;
+  --panel: #141218;
   --accent: #493b90;
-  --border: rgba(255, 255, 255, 0.08);
-  --muted: rgba(255, 255, 255, 0.5);
+  --border: rgba(255, 255, 255, 0.05);
+  --muted: #a0a0a0;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -18,165 +18,171 @@ body {
   color: #fff;
   font-family: 'circular', sans-serif;
   height: 100vh;
-  overflow: hidden; /* Evita el scroll global del navegador */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 /* TOPBAR */
 .topbar {
-  height: 60px;
-  background: var(--bg);
+  height: 65px;
+  background: #1a171f;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 24px;
   border-bottom: 1px solid var(--border);
+  z-index: 100;
 }
 
-.logo { width: 9rem; }
+.logo { width: 140px; }
 
 .top-nav { display: flex; gap: 10px; }
 
 .nav-btn {
-  padding: 6px 16px;
+  padding: 8px 18px;
   border-radius: 30px;
   text-decoration: none;
   color: #fff;
   font-size: 14px;
-  border: 1px solid transparent;
+  transition: 0.2s;
 }
 
 .nav-btn.active { background: var(--accent); }
-.nav-btn.outline { border: 1px solid #444; }
+.nav-btn.outline { border: 1px solid #333; }
+.nav-btn.outline:hover { border-color: var(--accent); }
 
-/* LAYOUT PRINCIPAL */
+/* LAYOUT */
 .app {
   display: flex;
-  height: calc(100vh - 140px); /* Resta Header (60) y Player (80) */
-  width: 100%;
+  flex: 1;
+  overflow: hidden;
 }
 
 /* SIDEBAR */
 .sidebar {
   width: 85px;
-  background: var(--panel);
+  background: #000;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 20px;
   border-right: 1px solid var(--border);
-  flex-shrink: 0;
 }
+
+.sidebar ul { list-style: none; }
 
 .side-item {
   background: none;
   border: none;
   cursor: pointer;
-  margin-bottom: 15px;
-  opacity: 0.6;
+  margin-bottom: 12px;
+  opacity: 0.5;
   transition: 0.3s;
 }
 
-.side-item img { width: 52px; border-radius: 8px; }
+.side-item img { width: 55px; border-radius: 8px; }
 
 .side-item:hover, .side-item.active { opacity: 1; transform: scale(1.05); }
 
-/* CONTENIDO CENTRAL */
+/* CONTENIDO PRINCIPAL */
 .content {
   display: flex;
   flex: 1;
-  overflow: hidden; /* Clave para que los paneles internos no se desborden */
+  overflow: hidden;
 }
 
 .left-panel {
   flex: 1;
   padding: 30px;
-  overflow-y: auto; /* Solo scrollea este panel */
-  background: linear-gradient(to bottom, #2a2632 0%, var(--bg) 100%);
+  overflow-y: auto;
+  background: linear-gradient(180deg, #25202b 0%, #1a171f 100%);
 }
 
-.section-header h1 {
-  font-family: 'expend', sans-serif; /* Usamos expend para el título de categoría */
-  font-size: clamp(2rem, 5vw, 4rem);
-  margin-bottom: 30px;
-  text-transform: uppercase;
-}
+.section-header h3 { color: var(--muted); font-size: 12px; letter-spacing: 1px; text-transform: uppercase; }
+.section-header h1 { font-family: 'expend', sans-serif; font-size: 45px; margin: 10px 0 30px; }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
-  max-width: 100%;
+  gap: 25px;
+  padding-bottom: 50px;
 }
 
 .card {
   background: rgba(255, 255, 255, 0.03);
-  padding: 12px;
-  border-radius: 10px;
+  padding: 15px;
+  border-radius: 12px;
   cursor: pointer;
-  border: 1px solid transparent;
+  transition: 0.3s;
 }
+
+.card:hover { background: rgba(255, 255, 255, 0.08); }
 
 .card img {
   width: 100%;
   aspect-ratio: 1/1;
   object-fit: cover;
-  border-radius: 6px;
+  border-radius: 8px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.4);
 }
+
+.card h4 { margin-top: 15px; font-size: 15px; }
+.card p { color: var(--muted); font-size: 13px; margin-top: 5px; }
 
 /* PANEL DERECHO */
 .right-panel {
-  width: 350px;
+  width: 380px;
   background: var(--panel);
-  border-left: 1px solid var(--border);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
-  flex-shrink: 0;
+  padding: 25px;
+  border-left: 1px solid var(--border);
 }
 
-.preview-container { width: 100%; }
-
-.preview-container img, .preview-container video {
+.preview-image { width: 100%; position: relative; }
+.preview-image img, .preview-image video {
   width: 100%;
-  border-radius: 8px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  border-radius: 12px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.6);
 }
 
 /* PLAYER */
 .player {
-  height: 80px;
-  background: #121014;
+  height: 90px;
+  background: #111;
   display: flex;
   align-items: center;
-  padding: 0 24px;
+  padding: 0 25px;
   border-top: 1px solid var(--border);
-  position: fixed;
-  bottom: 0;
-  width: 100%;
+  z-index: 100;
 }
 
-.track-cover {
-  width: 55px;
-  height: 55px;
-  margin-right: 15px;
-  flex-shrink: 0;
-}
+.track-cover { width: 58px; height: 58px; flex-shrink: 0; margin-right: 15px; }
+.track-cover img { width: 100%; height: 100%; object-fit: cover; border-radius: 4px; }
 
-.track-cover img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 4px;
-}
+.track-info { flex: 1; }
+.track-info h2 { font-size: 14px; color: #fff; margin: 0; }
+.track-info p { font-size: 12px; color: var(--muted); margin-top: 4px; }
 
-.track-info h2 { font-size: 0.9rem; }
-.track-info p { font-size: 0.75rem; color: var(--muted); }
+.player-controls { display: flex; align-items: center; gap: 20px; flex: 1; justify-content: center; }
+.player-controls button { background: none; border: none; cursor: pointer; transition: 0.2s; }
+.player-controls button img { width: 18px; filter: invert(1); }
+
+.main-player-btn {
+  background: #fff !important;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.main-player-btn img { width: 14px !important; filter: none !important; }
+
+.track-placeholder { flex: 1; }
 
 /* SCROLLBAR */
-.left-panel::-webkit-scrollbar { width: 6px; }
-.left-panel::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
-
-@media (max-width: 1000px) {
-    .right-panel { display: none; }
-}
+.left-panel::-webkit-scrollbar { width: 10px; }
+.left-panel::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
