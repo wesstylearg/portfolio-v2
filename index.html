@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>wesstyle.arg — portfolio</title>
   <link rel="icon" type="image/ico" href="img/iconos/logo.ico" />
   <link rel="stylesheet" href="style.css" />
@@ -43,6 +43,11 @@
           <h1 id="section-name">wesstyle.arg</h1>
         </div>
         <div id="grid" class="grid"></div>
+        <div id="load-more-container" style="display: flex; justify-content: center; margin-bottom: 50px;">
+    <button id="btn-load-more" class="nav-btn outline" style="display: none; cursor: pointer; padding: 10px 30px;">
+        Ver más
+    </button>
+</div>
       </section>
 
       <aside class="right-panel">
@@ -55,7 +60,6 @@
     </main>
   </div>
 
-  <!-- ✅ FIX: faltaba el > de cierre en <footer class="player"> -->
   <footer class="player">
     <div class="track-cover">
       <img src="" alt="Portada de la pista actual" id="player-cover">
@@ -81,7 +85,9 @@
   </footer>
 
   <div id="lightbox" class="lightbox">
-    <button class="lightbox-close">X</button>
+    <button class="lightbox-close">✕</button>
+    <button id="lightbox-back" class="lightbox-back" style="display:none;">← Volver</button>
+    <div id="video-container" style="display:none; width:90%; max-width:800px; aspect-ratio:16/9; position:relative;"></div>
     <img id="lightbox-image" src="" alt="Imagen completa" />
   </div>
 

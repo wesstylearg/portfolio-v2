@@ -8,120 +8,105 @@
   <link rel="stylesheet" href="style.css" />
   <link href="fonts/circular.woff2" rel="stylesheet" />
   <style>
-    /* Reset de scroll para esta página específica */
+    /* Eliminamos cualquier rastro de blur o fondos extraños */
     body {
         overflow-y: auto !important;
         height: auto;
         min-height: 100vh;
-        background: radial-gradient(circle at top right, rgba(73, 59, 144, 0.15), var(--bg));
+        background: var(--bg); /* Fondo sólido original */
     }
 
-    .contact-container {
+    .app-contact {
         display: flex;
         flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 60px 20px;
+        width: 100%;
+        padding-bottom: 80px;
+    }
+
+    .contact-wrapper {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 0 20px;
         width: 100%;
     }
 
-    /* Tarjeta de contacto principal */
-    .contact-card {
-        background: rgba(255, 255, 255, 0.02);
-        border: 1px solid var(--border);
-        backdrop-filter: blur(15px);
-        padding: 60px 40px;
-        border-radius: 24px;
-        max-width: 700px;
-        width: 100%;
-        text-align: center;
-        animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-    }
-
-    .contact-card h1 {
-        font-family: 'scrib', sans-serif;
-        font-size: 3.5rem;
-        line-height: 1;
-        margin-bottom: 40px;
-        color: #fff;
-        text-transform: uppercase;
-    }
-
-    /* Grid de opciones de contacto */
-    .contact-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 30px;
-        margin-bottom: 50px;
+    /* Contenedor de opciones con la estética de precios.html */
+    .contact-list {
+        margin-top: 30px;
     }
 
     .contact-item {
-        padding: 20px;
-        border-radius: 15px;
-        transition: transform 0.3s ease, background 0.3s ease;
-        border: 1px solid transparent;
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid var(--border-soft); /* Borde sutil del style.css */
+        border-radius: 12px;
+        padding: 25px;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        text-decoration: none;
+        transition: all 0.3s ease;
     }
 
     .contact-item:hover {
-        transform: translateY(-5px);
-        background: rgba(255, 255, 255, 0.03);
-        border-color: var(--border);
+        background: rgba(255, 255, 255, 0.05);
+        border-color: var(--wesstyle); /* Color de tu marca */
     }
 
-    .contact-item h2 {
-        font-size: 0.7rem;
-        letter-spacing: 2px;
-        color: var(--accent);
-        margin-bottom: 12px;
-        font-weight: 700;
+    .contact-info {
+        flex: 1;
+    }
+
+    .contact-label {
+        font-size: 0.75rem;
+        color: var(--wesstyle);
         text-transform: uppercase;
-    }
-
-    .contact-item a {
-        font-family: 'scrib', sans-serif;
-        font-size: 1.8rem;
-        color: #fff;
-        text-decoration: none;
-        transition: color 0.3s;
+        letter-spacing: 1px;
+        font-weight: bold;
+        margin-bottom: 4px;
         display: block;
     }
 
-    .contact-item a:hover {
-        color: var(--accent);
-    }
-
-    /* Sección de confianza / footer de la card */
-    .social-proof {
-        border-top: 1px solid var(--border);
-        padding-top: 30px;
-        margin-top: 20px;
-    }
-
-    .social-proof p {
-        font-family: 'circular', sans-serif;
-        font-size: 0.95rem;
-        color: var(--muted);
-        line-height: 1.6;
-        max-width: 480px;
-        margin: 0 auto;
-    }
-
-    .highlight {
+    .contact-title {
+        font-family: 'scrib', sans-serif; /* Tipografía para títulos */
+        font-size: 2.2rem;
         color: #fff;
-        font-weight: 500;
+        line-height: 1;
+        text-transform: uppercase;
     }
 
-    /* Media Queries */
+    .contact-desc {
+        color: var(--muted);
+        font-size: 0.9rem;
+        margin-top: 5px;
+    }
+
+    /* Icono de flecha para indicar que es clickeable */
+    .contact-arrow {
+        font-family: 'circular', sans-serif;
+        color: var(--wesstyle);
+        font-size: 1.5rem;
+        margin-left: 20px;
+        transition: transform 0.3s ease;
+    }
+
+    .contact-item:hover .contact-arrow {
+        transform: translateX(5px);
+    }
+
+    /* Footer de texto simple */
+    .contact-footer {
+        text-align: center;
+        color: var(--muted);
+        margin-top: 50px;
+        font-size: 0.85rem;
+        border-top: 1px solid var(--border-soft);
+        padding-top: 30px;
+    }
+
     @media (max-width: 600px) {
-        .contact-card { 
-            padding: 40px 20px; 
-            background: transparent; 
-            border: none; 
-            backdrop-filter: none;
-        }
-        .contact-card h1 { font-size: 2.6rem; }
-        .contact-item a { font-size: 1.5rem; }
-        .contact-grid { grid-template-columns: 1fr; gap: 20px; }
+        .contact-title { font-size: 1.8rem; }
+        .contact-item { padding: 20px; }
     }
   </style>
 </head>
@@ -138,42 +123,47 @@
     </nav>
   </header>
 
-  <main class="contact-container">
-      <div class="contact-card">
-          <h1>Hablemos de tu próximo lanzamiento</h1>
-          
-          <div class="contact-grid">
-              <div class="contact-item">
-                  <h2>INSTAGRAM</h2>
-                  <a href="https://instagram.com/wesstyle.arg" target="_blank">@wesstyle.arg</a>
-              </div>
+  <div class="app-contact">
+    <div class="contact-wrapper">
+        <div class="section-header">
+            <h3>Wesstyle.arg — 2026</h3>
+            <h1>Hablemos de tu próximo lanzamiento</h1>
+        </div>
 
-              <div class="contact-item">
-                  <h2>WHATSAPP</h2>
-                  <a href="https://wa.me/5492983448645" target="_blank">Chat Directo</a>
-              </div>
-              
-              <div class="contact-item">
-                  <h2>EMAIL</h2>
-                  <a href="mailto:wesstyle.arg@email.com">Enviar Mail</a>
-              </div>
-          </div>
+        <div class="contact-list">
+            <a href="https://wa.me/5492983448645" target="_blank" class="contact-item">
+                <div class="contact-info">
+                    <span class="contact-label">Presupuestos</span>
+                    <div class="contact-title">WHATSAPP</div>
+                    <p class="contact-desc">Chat directo para consultas inmediatas.</p>
+                </div>
+                <div class="contact-arrow">→</div>
+            </a>
 
-          <div class="social-proof">
-              <p>
-                  Más de <span class="highlight">50 artistas</span> de todo el mundo ya confían en <span class="highlight">wesstyle.arg</span>. 
-                  Tu próxima identidad visual empieza acá.
-              </p>
-          </div>
-      </div>
-  </main>
+            <a href="https://instagram.com/wesstyle.arg" target="_blank" class="contact-item">
+                <div class="contact-info">
+                    <span class="contact-label">Portfolio Social</span>
+                    <div class="contact-title">INSTAGRAM</div>
+                    <p class="contact-desc">Seguí mis últimos trabajos y procesos. Descuentos todos los meses por ahí.</p>
+                </div>
+                <div class="contact-arrow">→</div>
+            </a>
 
-  <script>
-    // Pequeña animación de entrada adicional para los items
-    document.querySelectorAll('.contact-item').forEach((item, index) => {
-        item.style.opacity = "0";
-        item.style.animation = `fadeInUp 0.5s ease forwards ${0.3 + (index * 0.1)}s`;
-    });
-  </script>
+            <a href="mailto:wesstyle.arg@email.com" class="contact-item">
+                <div class="contact-info">
+                    <span class="contact-label">Consultas</span>
+                    <div class="contact-title">EMAIL</div>
+                    <p class="contact-desc">Para propuestas o envío de archivos, wesstyle.arg@gmail.com</p>
+                </div>
+                <div class="contact-arrow">→</div>
+            </a>
+        </div>
+
+        <div class="contact-footer">
+            <p>Más de <span style="color: #fff;">50 artistas</span> de todo el mundo ya confían en wesstyle.arg.</p>
+        </div>
+    </div>
+  </div>
+
 </body>
 </html>

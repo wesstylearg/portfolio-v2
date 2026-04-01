@@ -10,7 +10,7 @@
   <style>
     /* Ajustes específicos para que el scroll funcione perfecto */
     body {
-        overflow-y: auto !important; /* Fuerza el scroll vertical */
+        overflow-y: auto !important;
         height: auto;
         min-height: 100vh;
     }
@@ -19,7 +19,7 @@
         display: flex;
         flex-direction: column;
         width: 100%;
-        padding-bottom: 120px; /* Espacio para que el botón flotante no tape el último item */
+        padding-bottom: 120px;
     }
 
     .prices-wrapper {
@@ -73,10 +73,28 @@
         margin-top: 5px;
     }
 
+    /* Estilo para el prefijo "desde" */
+    .price-info {
+        text-align: right;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    .price-prefix {
+        font-size: 0.8rem;
+        color: var(--muted);
+        text-transform: lowercase;
+        margin-bottom: -5px;
+    }
+
     .price-value {
-        font-family: 'scrib', sans-serif;
+        font-family: 'circular', sans-serif;
         font-size: 2rem;
-        color: var(--accent);
+        text-decoration: none;
+        font-weight: bold;
+        font-family: 'circular', sans-serif;
+        color: var(--wesstyle);
     }
 
     /* Checkbox visual */
@@ -146,48 +164,108 @@
   <div class="app-prices">
     <div class="prices-wrapper">
         <div class="section-header">
-            <h3>Tarifario 2026</h3>
+            <h3>Catálogo 2026</h3>
             <h1>Elegí tus servicios</h1>
         </div>
 
         <div class="price-item" data-service="Portada / Cover Art">
             <div class="check-circle"></div>
             <div class="price-details">
-                <div class="price-title">PORTADA / COVER ART</div>
-                <p class="price-description">Diseño profesional + Miniatura YT</p>
+                <div class="price-title">PORTADA SPOTIFY</div>
+                <p class="price-description">3000px x 3000px + miniatura YouTube (+$2000)</p>
             </div>
-            <div class="price-info"><span class="price-value">$15k</span></div>
+            <div class="price-info">
+                <span class="price-prefix">desde</span>
+                <span class="price-value">$15.000</span>
+            </div>
+        </div>
+
+        <div class="price-item" data-service="Tapa + Contratapa">
+            <div class="check-circle"></div>
+            <div class="price-details">
+                <div class="price-title">TAPA + CONTRATAPA</div>
+                <p class="price-description">3000px x 3000px, con tracklist y vinilo</p>
+            </div>
+            <div class="price-info">
+                <span class="price-prefix">desde</span>
+                <span class="price-value">$25.000</span>
+            </div>
+        </div>
+
+        <div class="price-item" data-service="Flyer Promocional">
+            <div class="check-circle"></div>
+            <div class="price-details">
+                <div class="price-title">FLYER PROMOCIONAL</div>
+                <p class="price-description">1920px x 1080px para redes sociales</p>
+            </div>
+            <div class="price-info">
+                <span class="price-prefix">desde</span>
+                <span class="price-value">$15.000</span>
+            </div>
+        </div>
+
+        <div class="price-item" data-service="Poster Conceptual">
+            <div class="check-circle"></div>
+            <div class="price-details">
+                <div class="price-title">POSTER CONCEPTUAL</div>
+                <p class="price-description">1080px x 1350 px para Instagram</p>
+            </div>
+            <div class="price-info">
+                <span class="price-prefix">desde</span>
+                <span class="price-value">$15.000</span>
+            </div>
+        </div>
+
+        <div class="price-item" data-service="Diseño de Título">
+            <div class="check-circle"></div>
+            <div class="price-details">
+                <div class="price-title">DISEÑO DE TÍTULO</div>
+                <p class="price-description">Para agregar a videoclips o visualizer</p>
+            </div>
+            <div class="price-info">
+                <span class="price-prefix">desde</span>
+                <span class="price-value">$10.000</span>
+            </div>
+        </div>
+
+        <div class="price-item" data-service="Diseño de Logotipo">
+            <div class="check-circle"></div>
+            <div class="price-details">
+                <div class="price-title">DISEÑO DE LOGOTIPO</div>
+                <p class="price-description">Formato png, jpg y svg</p>
+            </div>
+            <div class="price-info">
+                <span class="price-prefix">desde</span>
+                <span class="price-value">$20.000</span>
+            </div>
         </div>
 
         <div class="price-item" data-service="Identidad Visual">
             <div class="check-circle"></div>
             <div class="price-details">
                 <div class="price-title">IDENTIDAD VISUAL</div>
-                <p class="price-description">Logo, Tipografía y Paleta de colores</p>
+                <p class="price-description">Logo, paleta, elementos gráficos, 1 flyer y tipografías</p>
             </div>
-            <div class="price-info"><span class="price-value">$25k</span></div>
+            <div class="price-info">
+                <span class="price-prefix">desde</span>
+                <span class="price-value">$40.000</span>
+            </div>
         </div>
 
-        <div class="price-item" data-service="Video Producción / Lyrics">
+        <div class="price-item" data-service="Video Lyrics">
             <div class="check-circle"></div>
             <div class="price-details">
                 <div class="price-title">VIDEO LYRICS</div>
-                <p class="price-description">Visualizer animado con letra</p>
+                <p class="price-description">Letra sincronizada o visualizer (loop animado)</p>
             </div>
-            <div class="price-info"><span class="price-value">$30k</span></div>
-        </div>
-
-        <div class="price-item" data-service="Flyer Promocional">
-            <div class="check-circle"></div>
-            <div class="price-details">
-                <div class="price-title">FLYER PROMO</div>
-                <p class="price-description">Arte para historias y post de lanzamiento</p>
+            <div class="price-info">
+                <span class="price-prefix">desde</span>
+                <span class="price-value">$35.000</span>
             </div>
-            <div class="price-info"><span class="price-value">$15k</span></div>
         </div>
 
         <p style="text-align: center; color: var(--muted); margin-top: 30px; font-size: 0.8rem;">
-            * Los precios pueden variar según la complejidad del proyecto.
+            * Los precios están expresados en pesos argentinos y pueden variar según la complejidad.
         </p>
     </div>
   </div>

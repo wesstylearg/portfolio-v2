@@ -46,10 +46,10 @@ const data = {
     { title: "i gotta feeling", client: "wesstyle.arg", src: "img/flyers/i gotta feeling.png"},
     { title: "Poster Saturacion Pop", client: "wesstyle.arg", src: "img/flyers/saturacionpop.png" },
     { title: "Poster Fvck Luv", client: "wesstyle.arg", src: "img/flyers/fuckluv.png" },
+    { title: "Poster C.R.O.", client: "wesstyle.arg", src: "img/flyers/cro.png" },
     { title: "Sorteo de entradas Niceto", client: "FRN", src: "img/flyers/frn-emerfst.png" },
     { title: "Flyer promocional spotify", client: "Gondra", src: "img/flyers/tamonuevo-flyer.png" },
-    { title: "Plugtwrd Studio", client: "Yvng Golden", src: "img/flyers/plugtwrd.png" },
-    { title: "Poster C.R.O.", client: "wesstyle.arg", src: "img/flyers/cro.png" }
+    { title: "Plugtwrd Studio", client: "Yvng Golden", src: "img/flyers/plugtwrd.png" }
   ],
   videos: [
     { title: "Pasa un rato", client: "NIRO", embed: "https://www.youtube.com/embed/oTmju9RE8qs", src: "img/miniaturas/pasaunrato.png" },
@@ -57,10 +57,13 @@ const data = {
     { title: "PUCCA", client: "NIRO", embed: "https://www.youtube.com/embed/09eJfGjJs0w", src: "img/miniaturas/pucca.jpg" }
   ],
   logos: [
-    { title: "Niro", client: "Logotipo", src: "img/logos/niro.png" },
-    { title: "JvnRoman", client: "Logotipo", src: "img/logos/jvnroman.png" },
-    { title: "D9", client: "Monograma", src: "img/logos/d9.png" },
-    { title: "Wesstyle", client: "Isotipo", src: "img/logos/wesstyle.png" }
+    { title: "Niro", client: "Artista", src: "img/logos/niro.png" },
+    { title: "JvnRoman", client: "Artista", src: "img/logos/jvnroman.png" },
+    { title: "Mate&Punto", client: "Emprendimiento", src: "img/logos/mateypunto.png"},
+    { title: "D9", client: "Artista", src: "img/logos/d9.png" },
+    { title: "Xeon Flow", client: "Artista", src: "img/logos/xeon.png"},
+    { title: "Los Viersadingos", client: "Artistas", src: "img/logos/fraezel.png"},
+    { title: "Wesstyle", client: "Diseñador", src: "img/logos/wesstyle.png" }
   ]
 };
 
@@ -77,240 +80,207 @@ let currentDisplayCount = 0;
 const CARDS_PER_LOAD = 8;
 
 const grid = document.getElementById("grid");
-let previewImage = document.getElementById("preview-image");
 const previewTitle = document.getElementById("preview-title");
 const previewClient = document.getElementById("preview-client");
 const playerCover = document.getElementById("player-cover");
 const sectionNameTitle = document.getElementById("section-name");
+const loadMoreBtn = document.getElementById("btn-load-more");
 
 const lightbox = document.getElementById("lightbox");
 const lightboxImage = document.getElementById("lightbox-image");
+const videoContainer = document.getElementById("video-container");
 const lightboxClose = document.querySelector(".lightbox-close");
+const lightboxBack = document.getElementById("lightbox-back");
 
-function openLightbox() {
-  var items = data[currentSection];
-  if (!items || !items.length) return;
-  var item = items[currentIndex];
-  if (item && item.embed) return;
-  if (currentSection && currentSection !== "menu") {
-    lightboxImage.src = previewImage.src;
-    lightbox.classList.add("open");
-  }
+// ─── helpers ────────────────────────────────────────────────
+function isMobile() {
+  return window.matchMedia("(max-width: 600px)").matches;
+}
+
+// ─── lightbox ───────────────────────────────────────────────
+function openImageLightbox(src) {
+  lightboxImage.src = src;
+  lightboxImage.style.display = "block";
+  videoContainer.style.display = "none";
+  videoContainer.innerHTML = "";
+  lightboxBack.style.display = "none";
+  lightbox.classList.add("open");
+}
+
+function openVideoLightbox(embedUrl) {
+  videoContainer.innerHTML = '<iframe src="' + embedUrl + '?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="width:100%; height:100%; border-radius:8px;"></iframe>';
+  videoContainer.style.display = "block";
+  lightboxImage.style.display = "none";
+  // Show back button on mobile so users can return to the list
+  lightboxBack.style.display = isMobile() ? "flex" : "none";
+  lightbox.classList.add("open");
 }
 
 function closeLightbox() {
   lightbox.classList.remove("open");
+  videoContainer.innerHTML = "";
+  videoContainer.style.display = "none";
+  lightboxImage.src = "";
+  lightboxImage.style.display = "block";
 }
 
 lightboxClose.addEventListener("click", closeLightbox);
+lightboxBack.addEventListener("click", closeLightbox);
 lightbox.addEventListener("click", function(e) {
-  if (e.target.id === "lightbox" || e.target === lightbox) {
-    closeLightbox();
-  }
+  if (e.target === lightbox) closeLightbox();
 });
 
-function renderCategories() {
-  currentSection = "menu";
-  currentIndex = 0;
-  grid.innerHTML = "";
-
-  document.querySelector(".right-panel").style.display = "none";
-  document.querySelector(".player").style.display = "none";
-
-  sectionNameTitle.textContent = "Menu Principal";
-
-  var loadMoreBtn = document.getElementById("load-more-btn");
-  if (loadMoreBtn) loadMoreBtn.remove();
-
-  var categories = Object.keys(data).filter(function(key) { return key !== "menu"; });
-
-  categories.forEach(function(key, index) {
-    var title = categoryTitles[key] || key.charAt(0).toUpperCase() + key.slice(1);
-    var finalImgSrc = "img/playlist/" + key + ".png";
-    var count = data[key] ? data[key].length : 0;
-
-    var card = document.createElement("div");
-    card.classList.add("card");
-    card.innerHTML =
-      "<img src='" + finalImgSrc + "' alt='" + title + "' onerror=\"this.src='img/placeholder.jpg'\">" +
-      "<h4>" + title + "</h4>" +
-      "<p>Ver " + count + " disenos</p>";
-
-    card.addEventListener("click", function() { renderSection(key); });
-    grid.appendChild(card);
-
-    setTimeout(function() {
-      card.classList.add("animate");
-    }, index * 75);
-  });
-
-  if (categories.length === 0) {
-    grid.innerHTML = "<p style='grid-column: 1 / -1; color: var(--muted);'>No hay secciones con contenido.</p>";
-  }
-}
-
-function createLoadMoreButton() {
-  var loadMoreBtn = document.getElementById("load-more-btn");
-  if (!loadMoreBtn) {
-    loadMoreBtn = document.createElement("button");
-    loadMoreBtn.id = "load-more-btn";
-    loadMoreBtn.textContent = "Ver mas";
-    loadMoreBtn.style.cssText =
-      "padding: 10px 20px;" +
-      "margin: 20px auto 40px auto;" +
-      "display: block;" +
-      "background: var(--wesstyle);" +
-      "color: #fff;" +
-      "border: none;" +
-      "border-radius: 30px;" +
-      "cursor: pointer;" +
-      "font-size: 1rem;" +
-      "transition: opacity 0.2s;" +
-      "font-family: circular;";
-    loadMoreBtn.onmouseover = function() { loadMoreBtn.style.opacity = "0.9"; };
-    loadMoreBtn.onmouseout = function() { loadMoreBtn.style.opacity = "1"; };
-    loadMoreBtn.addEventListener("click", loadNextBatch);
-    document.querySelector(".left-panel").appendChild(loadMoreBtn);
-  }
-  return loadMoreBtn;
-}
-
-function loadNextBatch() {
-  var items = data[currentSection];
-  if (!items) return;
-  var start = currentDisplayCount;
-  var end = Math.min(items.length, start + CARDS_PER_LOAD);
-  renderBatch(items, start, end);
-  currentDisplayCount = end;
-  updateLoadMoreButton(items.length);
-}
-
-function renderBatch(items, start, end) {
-  for (var i = start; i < end; i++) {
-    var item = items[i];
-    var card = document.createElement("div");
-    card.classList.add("card");
-    card.innerHTML =
-      "<img src='" + item.src + "' alt='" + item.title + "' onerror=\"this.src='img/placeholder.jpg'\">" +
-      "<h4>" + item.title + "</h4>" +
-      "<p>" + item.client + "</p>";
-
-    (function(idx) {
-      card.addEventListener("click", function() { openPreview(idx); });
-    })(i);
-
-    grid.appendChild(card);
-
-    (function(c, delay) {
-      setTimeout(function() { c.classList.add("animate"); }, delay);
-    })(card, (i - start) * 75);
-  }
-}
-
-function updateLoadMoreButton(totalItems) {
-  var loadMoreBtn = document.getElementById("load-more-btn");
-  if (loadMoreBtn) {
-    loadMoreBtn.style.display = currentDisplayCount < totalItems ? "block" : "none";
-  }
-}
-
-function renderSection(section) {
-  if (section === "menu") {
-    renderCategories();
-    return;
-  }
-
-  currentSection = section;
-  grid.innerHTML = "";
-  currentDisplayCount = 0;
-
-  if (window.matchMedia("(min-width: 601px)").matches) {
-    document.querySelector(".right-panel").style.display = "flex";
+// ─── desktop preview panel ───────────────────────────────────
+function setDesktopPreview(item) {
+  var previewImageContainer = document.querySelector(".preview-image");
+  if (item.embed) {
+    previewImageContainer.innerHTML = '<iframe src="' + item.embed + '" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:8px;"></iframe>';
   } else {
-    document.querySelector(".right-panel").style.display = "none";
-  }
-
-  document.querySelector(".player").style.display = "flex";
-  sectionNameTitle.textContent = categoryTitles[section] || section.charAt(0).toUpperCase() + section.slice(1);
-
-  var items = data[section];
-  if (!items) return;
-
-  loadNextBatch();
-  createLoadMoreButton();
-  updateLoadMoreButton(items.length);
-
-  if (items.length > 0) {
-    openPreview(0);
-  } else {
-    grid.innerHTML = "<p style='grid-column: 1 / -1; color: var(--muted);'>Aun no hay disenos en esta seccion.</p>";
-    previewTitle.textContent = "Sin contenido";
-    previewClient.textContent = "";
-    playerCover.src = "img/placeholder.jpg";
-    document.querySelector(".right-panel").style.display = "none";
-    document.querySelector(".player").style.display = "none";
-    updateLoadMoreButton(0);
+    previewImageContainer.innerHTML = '<img id="preview-image" src="' + item.src + '" alt="' + item.title + '" />';
+    document.getElementById("preview-image").addEventListener("click", function() {
+      openImageLightbox(item.src);
+    });
   }
 }
 
-function openPreview(index) {
-  var items = data[currentSection];
-  if (!items || !items.length) return;
-
+// ─── open preview ───────────────────────────────────────────
+// userTriggered: true = user clicked a card; false = auto-load first item
+function openPreview(index, userTriggered) {
   currentIndex = index;
-  var item = items[index];
+  var item = data[currentSection][index];
 
+  // Update player bar
   playerCover.src = item.src;
   previewTitle.textContent = item.title;
   previewClient.textContent = item.client;
 
-  var previewWrapper = document.querySelector(".preview-image");
+  // Highlight active card
+  document.querySelectorAll(".card").forEach(function(c, i) {
+    c.classList.toggle("active", i === index);
+  });
+
+  var mobile = isMobile();
 
   if (item.embed) {
-    previewWrapper.innerHTML =
-      "<iframe src='" + item.embed + "' frameborder='0'" +
-      " allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'" +
-      " allowfullscreen" +
-      " style='position:absolute; top:0; left:0; width:100%; height:100%; border-radius:8px;'>" +
-      "</iframe>";
-    previewImage = null;
+    if (mobile) {
+      // Mobile: open video in fullscreen lightbox with back button
+      openVideoLightbox(item.embed);
+    } else {
+      // Desktop: embed in right panel
+      setDesktopPreview(item);
+    }
   } else {
-    previewWrapper.innerHTML = "<img id='preview-image' src='" + item.src + "' alt='preview' />";
-    previewImage = document.getElementById("preview-image");
-    previewImage.addEventListener("click", openLightbox);
+    if (mobile) {
+      // Mobile: open image in lightbox only when user explicitly taps
+      if (userTriggered) {
+        openImageLightbox(item.src);
+      }
+    } else {
+      setDesktopPreview(item);
+    }
   }
 }
 
-document.querySelectorAll(".side-item").forEach(function(btn) {
-  btn.addEventListener("click", function() {
-    document.querySelectorAll(".top-nav .nav-btn").forEach(function(navBtn) {
-      navBtn.classList.remove("active");
-    });
-    var disenBtn = document.getElementById("btn-disenos");
-    if (disenBtn) disenBtn.classList.add("active");
-    renderSection(btn.dataset.section);
-  });
-});
+// ─── render categories ──────────────────────────────────────
+function renderCategories() {
+  currentSection = "menu";
+  grid.innerHTML = "";
+  document.querySelector(".right-panel").style.display = "none";
+  document.querySelector(".player").style.display = "none";
+  sectionNameTitle.textContent = "Menu Principal";
 
-var btnDisenos = document.getElementById("btn-disenos");
-if (btnDisenos) {
-  btnDisenos.addEventListener("click", function() {
-    renderCategories();
+  var categories = Object.keys(data).filter(function(k) { return k !== "menu"; });
+  categories.forEach(function(key, index) {
+    var card = document.createElement("div");
+    card.classList.add("card");
+    card.innerHTML = '<img src="img/playlist/' + key + '.png" onerror="this.src=\'img/placeholder.jpg\'" alt="' + categoryTitles[key] + '"><h4>' + categoryTitles[key] + '</h4><p>Ver ' + data[key].length + ' diseños</p>';
+    card.addEventListener("click", function() { renderSection(key); });
+    grid.appendChild(card);
+    setTimeout(function() { card.classList.add("animate"); }, index * 75);
   });
 }
 
-document.getElementById("prev").addEventListener("click", function() {
+// ─── render section ─────────────────────────────────────────
+function renderSection(section) {
+  if (section === "menu") { 
+    loadMoreBtn.style.display = "none";
+    renderCategories(); 
+    return; 
+  }
+
+  currentSection = section;
+  currentIndex = 0;
+  grid.innerHTML = "";
+  currentDisplayCount = 0;
+
+  var mobile = isMobile();
+  var rightPanel = document.querySelector(".right-panel");
+  rightPanel.style.display = mobile ? "none" : "flex";
+  document.querySelector(".player").style.display = "flex";
+  sectionNameTitle.textContent = categoryTitles[section];
+
+  loadNextBatch();
+
+  // 👇 mostrar botón SOLO si hay más de 8
+  if (data[section].length > CARDS_PER_LOAD) {
+    loadMoreBtn.style.display = "block";
+  } else {
+    loadMoreBtn.style.display = "none";
+  }
+
+  if (!mobile && data[section].length > 0) {
+    openPreview(0, false);
+  }
+}
+
+// ─── load batch ─────────────────────────────────────────────
+function loadNextBatch() {
   var items = data[currentSection];
-  if (!items || !items.length) return;
-  currentIndex = (currentIndex - 1 + items.length) % items.length;
-  openPreview(currentIndex);
+  var start = currentDisplayCount;
+  var end = Math.min(items.length, start + CARDS_PER_LOAD);
+
+  for (var i = start; i < end; i++) {
+    (function(capturedIndex) {
+      var item = items[capturedIndex];
+      var card = document.createElement("div");
+      card.classList.add("card");
+      card.innerHTML = '<img src="' + item.src + '" alt="' + item.title + '" loading="lazy"><h4>' + item.title + '</h4><p>' + item.client + '</p>';
+      card.addEventListener("click", function() {
+        openPreview(capturedIndex, true);
+      });
+      grid.appendChild(card);
+      setTimeout(function() { card.classList.add("animate"); }, (capturedIndex - start) * 75);
+    })(i);
+  }
+
+  currentDisplayCount = end;
+
+  // 👇 ocultar botón si ya cargaste todo
+  if (currentDisplayCount >= items.length) {
+    loadMoreBtn.style.display = "none";
+  }
+}
+
+// ─── sidebar & nav buttons ──────────────────────────────────
+document.querySelectorAll(".side-item").forEach(function(btn) {
+  btn.addEventListener("click", function() { renderSection(btn.dataset.section); });
+});
+
+document.getElementById("btn-disenos").addEventListener("click", renderCategories);
+
+document.getElementById("prev").addEventListener("click", function() {
+  if (!currentSection || currentSection === "menu") return;
+  currentIndex = (currentIndex - 1 + data[currentSection].length) % data[currentSection].length;
+  openPreview(currentIndex, true);
 });
 
 document.getElementById("next").addEventListener("click", function() {
-  var items = data[currentSection];
-  if (!items || !items.length) return;
-  currentIndex = (currentIndex + 1) % items.length;
-  openPreview(currentIndex);
+  if (!currentSection || currentSection === "menu") return;
+  currentIndex = (currentIndex + 1) % data[currentSection].length;
+  openPreview(currentIndex, true);
 });
 
+loadMoreBtn.addEventListener("click", loadNextBatch);
+
+// ─── init ────────────────────────────────────────────────────
 renderCategories();
