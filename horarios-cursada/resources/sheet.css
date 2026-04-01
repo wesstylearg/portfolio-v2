@@ -9,6 +9,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    text-transform: uppercase;
 }
 
 :root {
@@ -38,22 +39,17 @@ body {
 table.waffle {
     width: 100%;
     height: 100%;
-    border-collapse: collapse; /* Crucial para que los bordes se unan */
+    border-collapse: collapse;
     background-color: #12121a;
 }
 
-/* Ocultar Sábado (Col 8) y Domingo (Col 9) */
-.waffle th:nth-child(8), .waffle td:nth-child(8),
-.waffle th:nth-child(9), .waffle td:nth-child(9) {
-    display: none !important;
-}
+/* Se ha eliminado el código que ocultaba las columnas de fin de semana */
 
 /* 4. Estilos de celdas con divisores violetas */
 .waffle td, .waffle th {
     text-align: center !important;
     vertical-align: middle !important;
     padding: 10px;
-    /* AQUÍ ESTÁ EL CAMBIO: Divisor violeta */
     border: 1px solid var(--accent-violet) !important; 
     color: var(--text-color);
     font-family: 'Scrib', sans-serif !important;
@@ -67,8 +63,8 @@ table.waffle {
     letter-spacing: 1.5px;
 }
 
-/* Contenido de las cajas (mantenemos estilo original) */
-.s0, .s1, .s2, .s3 {
+/* Contenido de las materias */
+.materia {
     background-color: transparent !important;
     color: #b3b3ff !important;
     font-size: 1rem;
@@ -82,7 +78,7 @@ table.waffle {
 /* Ajuste móvil */
 @media only screen and (max-width: 600px) {
     .waffle td, .waffle th {
-        font-size: 0.7rem;
+        font-size: 0.6rem;
         padding: 5px;
     }
 }
