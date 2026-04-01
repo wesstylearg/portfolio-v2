@@ -7,66 +7,41 @@
   <link rel="icon" type="image/ico" href="img/iconos/logo.ico" />
   <link rel="stylesheet" href="style.css" />
   <link href="fonts/circular.woff2" rel="stylesheet" />
-  <meta property="og:description" content="Priorizamos la estética." />
-  <meta property="og:image" content="img/iconos/logo.ico" />
-  <meta property="og:url" content="https://wesstyle.site/" />
-  <meta property="og:type" content="website" />
-  
   <style>
-    :root {
-        --accent: #493b90; /* Tu color de botones */
-        --bg: #211e27;     /* Tu paleta violeta oscuro */
-        --muted: rgba(255, 255, 255, 0.6);
-    }
-
+    /* Ajustes específicos para que el scroll funcione perfecto */
     body {
-        background: var(--bg);
-        color: white;
-        margin: 0;
-        font-family: 'circular', sans-serif;
-    }
-    
-    @keyframes fadeInUp {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
+        overflow-y: auto !important; /* Fuerza el scroll vertical */
+        height: auto;
+        min-height: 100vh;
     }
 
     .app-prices {
         display: flex;
         flex-direction: column;
-        min-height: 100vh;
-    }
-
-    .main-prices {
-        flex: 1;
-        padding: 30px;
-        overflow-y: auto;
+        width: 100%;
+        padding-bottom: 120px; /* Espacio para que el botón flotante no tape el último item */
     }
 
     .prices-wrapper {
-      display: flex;
-      flex-direction: column;
-      align-items: center; 
-      max-width: 900px;
-      margin: 2rem auto 100px auto;
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 0 20px;
+        width: 100%;
     }
 
-    /* Estilo de Item Seleccionable */
+    /* Estilo de las Cards de Selección */
     .price-item {
-        margin-bottom: 20px;
-        width: 100%; 
-        display: flex;
-        justify-content: space-between; 
-        align-items: center; 
-        gap: 20px;
-        border: 1px solid rgba(255, 255, 255, 0.05);
         background: rgba(255, 255, 255, 0.02);
-        padding: 25px; 
+        border: 1px solid var(--border);
         border-radius: 12px;
+        padding: 25px;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         cursor: pointer;
         transition: all 0.3s ease;
         animation: fadeInUp 0.5s ease-out forwards;
-        opacity: 0;
     }
 
     .price-item:hover {
@@ -74,30 +49,35 @@
         border-color: var(--accent);
     }
 
-    /* Clase cuando el item está seleccionado */
     .price-item.selected {
         background: rgba(73, 59, 144, 0.15);
         border-color: var(--accent);
         box-shadow: 0 0 20px rgba(73, 59, 144, 0.2);
     }
 
-    .price-details { flex-grow: 1; max-width: 70%; pointer-events: none; }
-    .price-info { text-align: right; pointer-events: none; }
+    .price-details {
+        flex: 1;
+        padding-left: 20px;
+    }
 
     .price-title {
         font-family: 'scrib', sans-serif;
-        font-size: 2.2rem;
-        line-height: 1.1;
+        font-size: 2rem;
         text-transform: uppercase;
+        line-height: 1;
+    }
+
+    .price-description {
+        color: var(--muted);
+        font-size: 0.9rem;
+        margin-top: 5px;
     }
 
     .price-value {
         font-family: 'scrib', sans-serif;
-        font-size: 2.2rem; 
+        font-size: 2rem;
         color: var(--accent);
     }
-
-    .price-description { font-size: 1rem; color: var(--muted); margin-top: 5px; }
 
     /* Checkbox visual */
     .check-circle {
@@ -109,7 +89,9 @@
         align-items: center;
         justify-content: center;
         transition: 0.3s;
+        flex-shrink: 0;
     }
+
     .selected .check-circle {
         background: var(--accent);
         border-color: var(--accent);
@@ -123,16 +105,17 @@
         transform: translateX(-50%) translateY(100px);
         background: #25d366;
         color: white;
-        padding: 15px 30px;
+        padding: 18px 35px;
         border-radius: 50px;
         text-decoration: none;
         font-weight: bold;
+        font-family: 'circular', sans-serif;
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 12px;
         box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        z-index: 1000;
+        z-index: 2000;
         visibility: hidden;
     }
 
@@ -141,81 +124,76 @@
         visibility: visible;
     }
 
-    /* Delays de animación */
-    .price-item:nth-child(n) { animation-delay: calc(0.1s * var(--i)); }
-
     @media (max-width: 600px) {
         .price-title, .price-value { font-size: 1.5rem; }
         .price-item { padding: 15px; }
-        .price-details { max-width: 60%; }
     }
   </style>
 </head>
 
 <body>
   <header class="topbar">
-    <nav class="top-nav" style="justify-content: center; padding: 20px; display: flex; gap: 10px;">
-      <a href="index.html" class="nav-btn outline" style="color: white; text-decoration: none; border: 1px solid #444; padding: 5px 15px; border-radius: 20px;">Diseños</a>
-      <button class="nav-btn active" style="background: var(--accent); border: none; color: white; padding: 5px 15px; border-radius: 20px;">Precios</button>
-      <a href="contacto.html" class="nav-btn outline" style="color: white; text-decoration: none; border: 1px solid #444; padding: 5px 15px; border-radius: 20px;">Contacto</a>
+    <div class="brand">
+        <img src="img/iconos/logo-texto.svg" alt="Logo" class="logo">
+    </div>
+    <nav class="top-nav">
+      <a href="index.html" class="nav-btn outline">Diseños</a>
+      <button class="nav-btn active">Precios</button>
+      <a href="contacto.html" class="nav-btn outline">Contacto</a>
     </nav>
   </header>
 
   <div class="app-prices">
-    <main class="content main-prices">
-        <div class="prices-wrapper" id="services-container">
-            <div class="price-item" style="--i:1" data-service="Portada / Cover Art" data-price="15.000">
-                <div class="check-circle"></div>
-                <div class="price-details">
-                    <div class="price-title">PORTADA / COVER ART</div>
-                    <p class="price-description">3000px x 3000px + miniatura YouTube</p>
-                </div>
-                <div class="price-info"><span class="price-value">$15k</span></div>
-            </div>
-
-            <div class="price-item" style="--i:2" data-service="Tapa + Contratapa" data-price="25.000">
-                <div class="check-circle"></div>
-                <div class="price-details">
-                    <div class="price-title">TAPA + CONTRATAPA</div>
-                    <p class="price-description">Tracklist y diseño de vinilo</p>
-                </div>
-                <div class="price-info"><span class="price-value">$25k</span></div>
-            </div>
-
-            <div class="price-item" style="--i:3" data-service="Flyer Promocional" data-price="15.000">
-                <div class="check-circle"></div>
-                <div class="price-details">
-                    <div class="price-title">FLYER PROMOCIONAL</div>
-                    <p class="price-description">1920px x 1080px para redes</p>
-                </div>
-                <div class="price-info"><span class="price-value">$15k</span></div>
-            </div>
-
-            <div class="price-item" style="--i:4" data-service="Identidad Visual" data-price="40.000">
-                <div class="check-circle"></div>
-                <div class="price-details">
-                    <div class="price-title">IDENTIDAD VISUAL</div>
-                    <p class="price-description">Logo, paleta, elementos y tipografías</p>
-                </div>
-                <div class="price-info"><span class="price-value">$40k</span></div>
-            </div>
-
-            <div class="price-item" style="--i:5" data-service="Video Lyrics" data-price="35.000">
-                <div class="check-circle"></div>
-                <div class="price-details">
-                    <div class="price-title">VIDEO LYRICS</div>
-                    <p class="price-description">Letra sincronizada + Visualizer</p>
-                </div>
-                <div class="price-info"><span class="price-value">$35k</span></div>
-            </div>
-            
-            <p style="opacity: 0.4; font-size: 0.9rem; margin-top: 20px;">* Precios base para artistas emergentes.</p>
+    <div class="prices-wrapper">
+        <div class="section-header">
+            <h3>Tarifario 2026</h3>
+            <h1>Elegí tus servicios</h1>
         </div>
-    </main>
+
+        <div class="price-item" data-service="Portada / Cover Art">
+            <div class="check-circle"></div>
+            <div class="price-details">
+                <div class="price-title">PORTADA / COVER ART</div>
+                <p class="price-description">Diseño profesional + Miniatura YT</p>
+            </div>
+            <div class="price-info"><span class="price-value">$15k</span></div>
+        </div>
+
+        <div class="price-item" data-service="Identidad Visual">
+            <div class="check-circle"></div>
+            <div class="price-details">
+                <div class="price-title">IDENTIDAD VISUAL</div>
+                <p class="price-description">Logo, Tipografía y Paleta de colores</p>
+            </div>
+            <div class="price-info"><span class="price-value">$25k</span></div>
+        </div>
+
+        <div class="price-item" data-service="Video Producción / Lyrics">
+            <div class="check-circle"></div>
+            <div class="price-details">
+                <div class="price-title">VIDEO LYRICS</div>
+                <p class="price-description">Visualizer animado con letra</p>
+            </div>
+            <div class="price-info"><span class="price-value">$30k</span></div>
+        </div>
+
+        <div class="price-item" data-service="Flyer Promocional">
+            <div class="check-circle"></div>
+            <div class="price-details">
+                <div class="price-title">FLYER PROMO</div>
+                <p class="price-description">Arte para historias y post de lanzamiento</p>
+            </div>
+            <div class="price-info"><span class="price-value">$15k</span></div>
+        </div>
+
+        <p style="text-align: center; color: var(--muted); margin-top: 30px; font-size: 0.8rem;">
+            * Los precios pueden variar según la complejidad del proyecto.
+        </p>
+    </div>
   </div>
 
   <a href="#" id="wa-button" class="wa-float" target="_blank">
-    <span>PEDIR PRESUPUESTO</span>
+    <span>SOLICITAR PRESUPUESTO</span>
   </a>
 
   <script>
@@ -242,10 +220,9 @@
         if (selectedServices.length > 0) {
             waButton.classList.add('visible');
             
-            // Armar el mensaje
             const baseText = "Hola Wesstyle! Me interesa consultar por estos servicios:\n\n";
-            const servicesText = selectedServices.map(s => `- ${s}`).join('\n');
-            const fullMessage = encodeURIComponent(baseText + servicesText + "\n\n¿Me podrías pasar más info?");
+            const servicesText = selectedServices.map(s => `• ${s}`).join('\n');
+            const fullMessage = encodeURIComponent(baseText + servicesText + "\n\n¿Qué disponibilidad tenés?");
             
             waButton.href = `https://wa.me/5492983448645?text=${fullMessage}`;
             waButton.querySelector('span').innerText = `CONSULTAR POR ${selectedServices.length} SERVICIO/S`;
