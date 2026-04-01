@@ -8,113 +8,118 @@
   <link rel="stylesheet" href="style.css" />
   <link href="fonts/circular.woff2" rel="stylesheet" />
   <style>
-    /* Estilos específicos para la página de Contacto */
-    .logo {
-  width: 10rem;
-  align-items: center;
-}
+    /* El body ya trae var(--bg) de style.css */
+    
     .app-contact {
         display: flex;
-        flex-grow: 1; 
-        align-items: stretch;
-        height: calc(100vh - 60px); 
+        flex-direction: column;
+        min-height: calc(100vh - 60px);
+        background: linear-gradient(180deg, rgba(73, 59, 144, 0.05) 0%, var(--bg) 100%);
     }
 
     .main-contact {
         flex: 1;
-        padding: 30px;
-        overflow-y: auto;
-        background: var(--bg);
-        display: flex; /* Añadido para centrar el contenido */
-        justify-content: center; /* Centrar horizontalmente */
-        align-items: flex-start; /* Alinear arriba */
-        padding-top: 80px; /* Espacio extra desde el top */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 40px 20px;
     }
 
-    .contact-wrapper {
-        max-width: 600px;
+    .contact-card {
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        padding: 60px 40px;
+        border-radius: 24px;
+        max-width: 700px;
         width: 100%;
         text-align: center;
-        color: #fff;
-        /* Reutilizamos la animación fadeInUp */
-        animation: fadeInUp 0.5s ease-out forwards; 
-        opacity: 0;
-        animation-delay: 0.1s;
+        animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
     }
 
-    /* Definición de la animación (copiada de precios.html) */
     @keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
     }
-    
-    .contact-wrapper h1 {
+
+    .contact-card h1 {
         font-family: 'scrib', sans-serif;
-        font-size: 3rem;
+        font-size: 3.5rem;
+        line-height: 1;
+        margin-bottom: 40px;
+        color: #fff;
+        text-transform: uppercase;
+    }
+
+    .contact-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 30px;
         margin-bottom: 50px;
-        color: var(--wesstyle);
     }
 
     .contact-item {
-        margin-bottom: 25px;
+        transition: transform 0.3s ease;
+    }
+
+    .contact-item:hover {
+        transform: translateY(-5px);
     }
 
     .contact-item h2 {
-        font-size: 1.5rem;
-        margin: 0;
-        color: var(--muted);
-        font-weight: 400;
+        font-size: 0.7rem;
+        letter-spacing: 2px;
+        color: var(--accent);
+        margin-bottom: 10px;
+        font-weight: 700;
     }
 
-
     .contact-item a {
-        font-size: 2rem;
+        font-family: 'scrib', sans-serif;
+        font-size: 1.8rem;
         color: #fff;
         text-decoration: none;
-        font-family: 'scrib', sans-serif;
-        transition: color 0.2s;
-        display: block; /* Para que ocupe todo el ancho */
+        transition: color 0.3s;
     }
 
     .contact-item a:hover {
-        color: var(--wesstyle);
-    }
-    
-    .player { /* Oculta el player */
-        display: none; 
+        color: var(--accent);
     }
 
-    /* Media Queries para móvil */
+    .social-proof {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-top: 30px;
+        margin-top: 20px;
+    }
+
+    .social-proof p {
+        font-family: 'circular', sans-serif;
+        font-size: 0.9rem;
+        color: var(--muted);
+        line-height: 1.6;
+        max-width: 450px;
+        margin: 0 auto;
+    }
+
+    .highlight {
+        color: #fff;
+        font-weight: 500;
+    }
+
     @media (max-width: 600px) {
-        .contact-wrapper h1 {
-            font-size: 2.5rem;
-            margin-bottom: 30px;
-        }
-        .contact-item a {
-            font-size: 1.5rem;
-        }
-        .main-contact {
-            padding: 40px 15px;
-        }
+        .contact-card { padding: 40px 20px; border: none; background: transparent; }
+        .contact-card h1 { font-size: 2.5rem; }
+        .contact-item a { font-size: 1.5rem; }
+        .contact-grid { grid-template-columns: 1fr; gap: 40px; }
     }
   </style>
 </head>
 
 <body>
-  
-   
   <header class="topbar">
     <div class="brand">
       <img src="img/iconos/logo-texto.svg" alt="Logo" class="logo">
     </div>
-
-
     <nav class="top-nav">
       <a href="index.html" class="nav-btn outline">Diseños</a>
       <a href="precios.html" class="nav-btn outline">Precios</a>
@@ -123,38 +128,35 @@
   </header>
 
   <div class="app-contact">
-    <main class="content main-contact">
-        
-        <div class="contact-wrapper">
-            <h1>Hablemos de tu proximo lanzamiento:</h1>
-            <div class="contact-item">
-                <h2>INSTAGRAM</h2>
-                <a href="https://instagram.com/wesstyle.arg" target="_blank">@wesstyle.arg</a>
-            </div>
-
-            <div class="contact-item">
-                <h2>WHATSAPP</h2>
-                <a href="http://wa.me/+5492983448645" target="_blank">+54 9 2983 44-8645</a>
-            </div>
+    <main class="main-contact">
+        <div class="contact-card">
+            <h1>Hablemos de tu próximo lanzamiento</h1>
             
-            <div class="contact-item">
-                <h2>EMAIL</h2>
-                <a href="mailto:wesstyle.arg@email.com">wesstyle.arg@email.com</a>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <h2>INSTAGRAM</h2>
+                    <a href="https://instagram.com/wesstyle.arg" target="_blank">@wesstyle.arg</a>
+                </div>
+
+                <div class="contact-item">
+                    <h2>WHATSAPP</h2>
+                    <a href="https://wa.me/5492983448645" target="_blank">Chat Directo</a>
+                </div>
+                
+                <div class="contact-item">
+                    <h2>EMAIL</h2>
+                    <a href="mailto:wesstyle.arg@email.com">Email</a>
+                </div>
             </div>
 
-<div class="contact-item">
-                <h2>Más de 50 artistas de todo el mundo que confíaron en wesstyle.arg. Tu próxima portada puede ser la siguiente</h2>
+            <div class="social-proof">
+                <p>
+                    Más de <span class="highlight">50 artistas</span> de todo el mundo ya confían en el estudio. 
+                    Tu próxima identidad visual empieza acá.
+                </p>
             </div>
-
-
-      
-
         </div>
     </main>
   </div>
-  
 </body>
-
 </html>
-
-
