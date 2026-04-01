@@ -6,29 +6,15 @@
   <title>wesstyle.arg — portfolio</title>
   <link rel="icon" type="image/ico" href="img/iconos/logo.ico" />
   <link rel="stylesheet" href="style.css" />
-  <link href="fonts/circular.woff2" rel="stylesheet" />
-  
-  <meta property="og:description" content="Priorizamos la estética — Portfolio 2026." />
-  <meta property="og:image" content="img/iconos/logo.ico" />
-  <meta property="og:url" content="https://wesstyle.site/" />
-  <meta property="og:type" content="website" />
-
-  <style>
-    /* Fix local para el contenedor de la App */
-    .app {
-      height: calc(100vh - 60px - 80px); /* Resta Header y Player */
-      overflow: hidden;
-    }
-  </style>
 </head>
-<body class="app-index">
+<body>
 
   <header class="topbar">
     <div class="brand">
       <img src="img/iconos/logo-texto.svg" alt="Logo" class="logo">
     </div>
     <nav class="top-nav">
-      <button id="btn-disenos" class="nav-btn active">Diseños</button>
+      <button class="nav-btn active">Diseños</button>
       <a href="precios.html" class="nav-btn outline">Precios</a>
       <a href="contacto.html" class="nav-btn outline">Contacto</a>
     </nav>
@@ -48,19 +34,16 @@
     <main class="content">
       <section class="left-panel">
         <div class="section-header">
-          <h3>Portfolio</h3>
-          <h1 id="section-name">WESSTYLE.ARG</h1>
+          <h1 id="section-name">PORTFOLIO</h1>
         </div>
         <div id="grid" class="grid">
-            </div>
+          </div>
       </section>
 
       <aside class="right-panel">
-        <div class="preview">
-          <div class="preview-image" id="preview-container">
-            <img id="preview-image" src="img/portadas/01.jpg" alt="preview" />
-            <video id="preview-video" loop muted playsinline style="display: none; width: 100%; border-radius: 8px;"></video>
-          </div>
+        <div class="preview-container">
+          <img id="preview-image" src="img/portadas/01.jpg" alt="Preview">
+          <video id="preview-video" muted loop playsinline style="display:none;"></video>
         </div>
       </aside>
     </main>
@@ -68,33 +51,13 @@
 
   <footer class="player">
     <div class="track-cover">
-      <img src="img/portadas/01.jpg" alt="Cover" id="player-cover">
+      <img src="img/portadas/01.jpg" id="player-cover" alt="Cover">
     </div>
-    
     <div class="track-info">
       <h2 id="preview-title">Selecciona un diseño</h2>
-      <p id="preview-client">Wesstyle Studio — 2026</p>
+      <p id="preview-client">wesstyle.arg — 2026</p>
     </div>
-
-    <div class="player-controls">
-      <button id="prev">
-        <img src="img/iconos/player_left.svg" alt="Anterior" />
-      </button>
-      <button id="play" class="main-player-btn">
-        <img src="img/iconos/player_button.svg" alt="Play" />
-      </button>
-      <button id="next">
-        <img src="img/iconos/player_right.svg" alt="Siguiente" />
-      </button>
-    </div>
-
-    <div class="track-placeholder" style="flex: 1; max-width: 200px;"></div>
-  </footer>
-
-  <div id="lightbox" class="lightbox">
-    <button class="lightbox-close">✕</button>
-    <img id="lightbox-image" src="" alt="Zoom" />
-  </div>
+    </footer>
 
   <script src="script.js"></script>
 </body>
