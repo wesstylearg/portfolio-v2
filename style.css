@@ -1,133 +1,20 @@
-/* FUENTES */
-@font-face { font-family: "expend"; src: url("fonts/expend.woff2") format("woff2"); }
-@font-face { font-family: "circular"; src: url("fonts/circular-medium.woff2") format("woff2"); }
-
-:root {
-  --bg: #1a171f;
-  --panel: #141218;
-  --accent: #493b90;
-  --border: rgba(255, 255, 255, 0.05);
-  --muted: #a0a0a0;
+/* Evita que las imágenes se estiren de forma rara */
+.grid img {
+    max-width: 100%;
+    display: block;
+    height: auto;
+    object-fit: cover;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-  background: var(--bg);
-  color: #fff;
-  font-family: 'circular', sans-serif;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
+/* Evita el desborde horizontal que rompe el layout */
+.app {
+    max-width: 100vw;
+    overflow: hidden;
 }
 
-.topbar {
-  height: 65px;
-  background: var(--bg);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 24px;
-  border-bottom: 1px solid var(--border);
-}
-
-.logo { width: 140px; }
-
-.top-nav { display: flex; gap: 10px; }
-
-.nav-btn {
-  padding: 8px 18px;
-  border-radius: 30px;
-  text-decoration: none;
-  color: #fff;
-  font-size: 14px;
-  border: 1px solid transparent;
-  cursor: pointer;
-  background: none;
-}
-
-.nav-btn.active { background: var(--accent); }
-.nav-btn.outline { border: 1px solid #333; }
-
-.app { display: flex; flex: 1; overflow: hidden; }
-
-.sidebar {
-  width: 85px;
-  background: #000;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 20px;
-  border-right: 1px solid var(--border);
-}
-
-.side-item {
-  background: none; border: none; cursor: pointer;
-  margin-bottom: 15px; opacity: 0.5; transition: 0.3s;
-}
-
-.side-item img { width: 55px; border-radius: 8px; }
-.side-item:hover, .side-item.active { opacity: 1; transform: scale(1.1); }
-
-.content { flex: 1; display: flex; overflow: hidden; }
-
+/* Asegura que el panel izquierdo sea el único que scrollea */
 .left-panel {
-  flex: 1; padding: 30px; overflow-y: auto;
-  background: linear-gradient(180deg, #25202b 0%, #1a171f 100%);
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
-
-.section-header h1 { 
-  font-family: 'expend', sans-serif; font-size: 45px; 
-  margin-bottom: 30px; text-transform: uppercase;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 20px;
-}
-
-.card {
-  background: rgba(255, 255, 255, 0.03);
-  padding: 15px; border-radius: 12px; cursor: pointer; transition: 0.3s;
-}
-
-.card:hover { background: rgba(255, 255, 255, 0.08); }
-.card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 6px; }
-
-.right-panel {
-  width: 380px; background: var(--panel);
-  display: flex; align-items: center; justify-content: center;
-  padding: 25px; border-left: 1px solid var(--border);
-}
-
-.preview-image { width: 100%; }
-.preview-image img { width: 100%; border-radius: 12px; box-shadow: 0 10px 30px #000; }
-
-.player {
-  height: 90px; background: #111;
-  display: flex; align-items: center; padding: 0 24px;
-  border-top: 1px solid var(--border);
-}
-
-.track-cover { width: 58px; height: 58px; margin-right: 15px; flex-shrink: 0; }
-.track-cover img { width: 100%; height: 100%; object-fit: cover; border-radius: 4px; }
-
-.player-controls { display: flex; gap: 20px; flex: 1; justify-content: center; align-items: center; }
-.player-controls button { background: none; border: none; cursor: pointer; }
-.player-controls button img { width: 20px; filter: invert(1); }
-
-.main-player-btn {
-  background: #fff !important; width: 40px; height: 40px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-}
-.main-player-btn img { filter: none !important; width: 16px !important; }
-
-/* Lightbox */
-.lightbox {
-  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(0,0,0,0.9); display: none; z-index: 2000;
-  align-items: center; justify-content: center;
-}
-.lightbox-close { position: absolute; top: 20px; right: 30px; font-size: 40px; cursor: pointer; }
