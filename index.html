@@ -6,6 +6,11 @@
   <title>wesstyle.arg — portfolio</title>
   <link rel="icon" type="image/ico" href="img/iconos/logo.ico" />
   <link rel="stylesheet" href="style.css" />
+  <link href="fonts/circular.woff2" rel="stylesheet" />
+  <meta property="og:description" content="Priorizamos la estética." />
+  <meta property="og:image" content="img/iconos/logo.ico" />
+  <meta property="og:url" content="https://wesstyle.site/" />
+  <meta property="og:type" content="website" />
 </head>
 <body>
 
@@ -23,11 +28,11 @@
   <div class="app">
     <aside class="sidebar">
       <ul>
-        <li><button class="side-item active" data-section="menu" title="Home"><img src="img/playlist/megusta.png" alt=""></button></li>
-        <li><button class="side-item" data-section="portadas" title="Portadas"><img src="img/playlist/portadas.png" alt=""></button></li>
-        <li><button class="side-item" data-section="flyers" title="Flyers"><img src="img/playlist/flyers.png" alt=""></button></li>
-        <li><button class="side-item" data-section="logos" title="Logos"><img src="img/playlist/logos.png" alt=""></button></li>
-        <li><button class="side-item" data-section="videos" title="Videos"><img src="img/playlist/videos.png" alt=""></button></li>
+        <li><button class="side-item" data-section="menu"><img src="img/playlist/megusta.png" alt=""/></button></li>
+        <li><button class="side-item" data-section="portadas"><img src="img/playlist/portadas.png" alt="Portadas"/></button></li>
+        <li><button class="side-item" data-section="flyers"><img src="img/playlist/flyers.png" alt="Flyers/Poster"/></button></li>
+        <li><button class="side-item" data-section="logos"><img src="img/playlist/logos.png" alt="Logos"/></button></li>
+        <li><button class="side-item" data-section="videos"><img src="img/playlist/videos.png" alt="Videos"/></button></li>
       </ul>
     </aside>
 
@@ -35,42 +40,49 @@
       <section class="left-panel">
         <div class="section-header">
           <h3>Portfolio</h3>
-          <h1 id="section-name">WESSTYLE.ARG</h1>
+          <h1 id="section-name">wesstyle.arg</h1>
         </div>
-        <div id="grid" class="grid">
-          </div>
+        <div id="grid" class="grid"></div>
       </section>
 
       <aside class="right-panel">
-        <div class="preview-container" id="preview-container">
-          <img id="preview-image" src="img/portadas/soulside.png" alt="Preview">
-          <div id="video-wrapper"></div>
+        <div class="preview">
+          <div class="preview-image">
+            <img id="preview-image" src="img/portadas/01.jpg" alt="preview" />
+          </div>
         </div>
       </aside>
     </main>
   </div>
 
+  <!-- ✅ FIX: faltaba el > de cierre en <footer class="player"> -->
   <footer class="player">
     <div class="track-cover">
-      <img id="player-cover" src="img/portadas/soulside.png" alt="Cover">
+      <img src="" alt="Portada de la pista actual" id="player-cover">
     </div>
-    
     <div class="track-info">
-      <h2 id="preview-title">Selecciona un diseño</h2>
-      <p id="preview-client">wesstyle.arg — 2026</p>
+      <h2 id="preview-title">Título portada ejemplo</h2>
+      <p id="preview-client">Cliente portada ejemplo</p>
     </div>
 
     <div class="player-controls">
-      <button id="prev"><img src="img/iconos/player_left.svg" alt="Ant"></button>
-      <button id="play" class="main-player-btn"><img src="img/iconos/player_button.svg" alt="Play"></button>
-      <button id="next"><img src="img/iconos/player_right.svg" alt="Sig"></button>
+      <button id="prev">
+        <img src="img/iconos/player_left.svg" alt="Anterior" />
+      </button>
+      <button id="play" class="main-player-btn">
+        <img src="img/iconos/player_button.svg" alt="Reproducir/Pausar" />
+      </button>
+      <button id="next">
+        <img src="img/iconos/player_right.svg" alt="Siguiente" />
+      </button>
     </div>
+
     <div class="track-placeholder"></div>
   </footer>
 
   <div id="lightbox" class="lightbox">
-    <span class="lightbox-close">&times;</span>
-    <img id="lightbox-image" src="" alt="">
+    <button class="lightbox-close">X</button>
+    <img id="lightbox-image" src="" alt="Imagen completa" />
   </div>
 
   <script src="script.js"></script>
