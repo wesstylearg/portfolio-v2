@@ -23,7 +23,7 @@
   <div class="app">
     <aside class="sidebar">
       <ul>
-        <li><button class="side-item active" data-section="menu"><img src="img/playlist/megusta.png" alt=""></button></li>
+        <li><button class="side-item active" data-section="menu"><img src="img/playlist/megusta.png" alt="Home"></button></li>
         <li><button class="side-item" data-section="portadas"><img src="img/playlist/portadas.png" alt="Portadas"></button></li>
         <li><button class="side-item" data-section="flyers"><img src="img/playlist/flyers.png" alt="Flyers"></button></li>
         <li><button class="side-item" data-section="logos"><img src="img/playlist/logos.png" alt="Logos"></button></li>
@@ -43,8 +43,8 @@
 
       <aside class="right-panel">
         <div class="preview-image" id="preview-container">
-          <img id="preview-image" src="img/portadas/01.jpg" alt="Preview">
-          <video id="preview-video" muted loop playsinline style="display:none;"></video>
+          <img id="preview-image" src="img/portadas/soulside.png" alt="Preview">
+          <div id="video-wrapper"></div>
         </div>
       </aside>
     </main>
@@ -52,7 +52,7 @@
 
   <footer class="player">
     <div class="track-cover">
-      <img id="player-cover" src="img/portadas/01.jpg" alt="Cover">
+      <img id="player-cover" src="img/portadas/soulside.png" alt="Cover">
     </div>
     
     <div class="track-info">
@@ -61,13 +61,17 @@
     </div>
 
     <div class="player-controls">
-      <button id="prev"><img src="img/iconos/player_left.svg" alt="Ant"></button>
+      <button id="prev"><img src="img/iconos/player_left.svg" alt="Anterior"></button>
       <button id="play" class="main-player-btn"><img src="img/iconos/player_button.svg" alt="Play"></button>
-      <button id="next"><img src="img/iconos/player_right.svg" alt="Sig"></button>
+      <button id="next"><img src="img/iconos/player_right.svg" alt="Siguiente"></button>
     </div>
-
     <div class="track-placeholder"></div>
   </footer>
+
+  <div id="lightbox" class="lightbox">
+    <span class="lightbox-close">&times;</span>
+    <img id="lightbox-image" src="" alt="">
+  </div>
 
   <script src="script.js"></script>
 </body>
