@@ -23,11 +23,11 @@
   <div class="app">
     <aside class="sidebar">
       <ul>
-        <li><button class="side-item active" data-section="menu"><img src="img/playlist/megusta.png" alt="Home"></button></li>
-        <li><button class="side-item" data-section="portadas"><img src="img/playlist/portadas.png" alt="Portadas"></button></li>
-        <li><button class="side-item" data-section="flyers"><img src="img/playlist/flyers.png" alt="Flyers"></button></li>
-        <li><button class="side-item" data-section="logos"><img src="img/playlist/logos.png" alt="Logos"></button></li>
-        <li><button class="side-item" data-section="videos"><img src="img/playlist/videos.png" alt="Videos"></button></li>
+        <li><button class="side-item active" data-section="menu" title="Home"><img src="img/playlist/megusta.png" alt=""></button></li>
+        <li><button class="side-item" data-section="portadas" title="Portadas"><img src="img/playlist/portadas.png" alt=""></button></li>
+        <li><button class="side-item" data-section="flyers" title="Flyers"><img src="img/playlist/flyers.png" alt=""></button></li>
+        <li><button class="side-item" data-section="logos" title="Logos"><img src="img/playlist/logos.png" alt=""></button></li>
+        <li><button class="side-item" data-section="videos" title="Videos"><img src="img/playlist/videos.png" alt=""></button></li>
       </ul>
     </aside>
 
@@ -37,11 +37,12 @@
           <h3>Portfolio</h3>
           <h1 id="section-name">WESSTYLE.ARG</h1>
         </div>
-        <div id="grid" class="grid"></div>
+        <div id="grid" class="grid">
+          </div>
       </section>
 
       <aside class="right-panel">
-        <div class="preview-image" id="preview-container">
+        <div class="preview-container" id="preview-container">
           <img id="preview-image" src="img/portadas/soulside.png" alt="Preview">
           <div id="video-wrapper"></div>
         </div>
@@ -60,9 +61,9 @@
     </div>
 
     <div class="player-controls">
-      <button id="prev"><img src="img/iconos/player_left.svg" alt=""></button>
-      <button id="play" class="main-player-btn"><img src="img/iconos/player_button.svg" alt=""></button>
-      <button id="next"><img src="img/iconos/player_right.svg" alt=""></button>
+      <button id="prev"><img src="img/iconos/player_left.svg" alt="Ant"></button>
+      <button id="play" class="main-player-btn"><img src="img/iconos/player_button.svg" alt="Play"></button>
+      <button id="next"><img src="img/iconos/player_right.svg" alt="Sig"></button>
     </div>
     <div class="track-placeholder"></div>
   </footer>
