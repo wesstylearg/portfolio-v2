@@ -1,4 +1,4 @@
-/* fuentess */
+/* fuentes */
 @font-face {
   font-family: "expend";
   src: url("fonts/expend.woff2") format("woff2");
@@ -24,19 +24,13 @@
   font-style: light;
 }
 
+
 :root {
-  /* Fondo texturizado oscuro de image_0.png */
-  --bg: #030005; /* Fondo negro profundo con matiz púrpura */
-  --panel: rgba(15, 10, 20, 0.9); /* Paneles oscuros y transparentes */
-  
-  /* Púrpura eléctrico de image_0.png */
-  --accent: #bc2cff; 
-  --wesstyle: #a000ff; /* Púrpura de marca principal */
+  --bg: #000;
+  --panel: #0f0f0f;
+  --accent: #58477a;
+  --wesstyle: #493b90;
   --muted: #8a8a8a;
-  
-  /* Cromo y metal */
-  --chrome-border: #d4a9ff; /* Cromo claro para bordes */
-  --chrome-highlight: rgba(255, 255, 255, 0.4); /* Resaltado cromo */
 }
 
 * {
@@ -45,48 +39,34 @@
 
 body {
   margin: 0;
-  color: #fff; /* Blanco puro de graffiti */
+  background: var(--bg);
+  color: #fff;
   font-family: 'circular', sans-serif;
-  
-  /* Fondo texturizado granulado púrpura de image_0.png */
-  background: 
-    radial-gradient(circle at 10% 10%, rgba(160, 0, 255, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 90% 90%, rgba(160, 0, 255, 0.05) 0%, transparent 40%),
-    url('img/texturas/granulado_purpura.png'), /* Reemplaza por tu textura granulada si la tienes */
-    var(--bg);
-  background-size: auto, auto, cover, cover;
-  background-blend-mode: soft-light;
 }
 
 /* HEADER */
 .topbar {
   height: 60px;
-  background: rgba(20, 20, 20, 0.85); /* Efecto vidrio soplado */
-  backdrop-filter: blur(10px);
+  background: #141414;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 24px;
-  
-  /* Borde de cromo metálico */
-  border-bottom: 2px solid var(--chrome-border);
-  box-shadow: 0 4px 15px rgba(160, 0, 255, 0.2);
+  border-bottom: 1px solid #1a1a1a;
 }
 
 .brand {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-family: 'expend', sans-serif; /* Usamos expend para un toque graffiti weirdcore */
+  font-family: expend;
   font-size: 26px;
-  color: #fff;
 }
 
 .logo {
   width: 10rem;
   align-items: center;
 }
-
 .brand-name {
   font-weight: 700;
   font-size: 24px;
@@ -95,6 +75,7 @@ body {
 .top-nav {
   display: flex;
   gap: 10px;
+
 }
 
 .nav-btn {
@@ -103,14 +84,12 @@ body {
   transition: 0.2s;
   font-family: 'circular', sans-serif;
   text-decoration: none;
-  border: 1px solid transparent; /* Para el efecto cromo */
 }
 
 .nav-btn.active {
-  background: var(--wesstyle);
+  background: #493b90;
   color: #fff;
   font-size: 16px;
-  box-shadow: 0 0 10px var(--wesstyle);
 }
 
 .nav-btn.outline {
@@ -121,7 +100,6 @@ body {
 
 .nav-btn:hover {
   opacity: 0.9;
-  border-color: var(--chrome-border);
 }
 
 /* LAYOUT */
@@ -138,19 +116,15 @@ body {
   padding: 30px;
   overflow-y: auto; 
 }
-
 /* SIDEBAR */
 .sidebar {
   width: 80px;
-  background: var(--panel);
+  background: #0a0a0a;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 20px;
-  
-  /* Cromo y metal sutil */
-  border-right: 2px solid var(--chrome-border);
-  box-shadow: 4px 0 15px rgba(160, 0, 255, 0.1);
+  border-right: 1px solid #1a1a1a;
 }
 
 .sidebar ul {
@@ -176,17 +150,11 @@ body {
 .side-item img {
   width: 54px;
   margin-bottom: 6px;
-  /* Iconos cromados */
-  filter: grayscale(100%) brightness(150%) sepia(100%) hue-rotate(240deg) saturate(200%);
 }
 
 .side-item:hover {
   color: var(--accent);
   transform: scale(1.05);
-}
-
-.side-item:hover img {
-    filter: none; /* Recupera color original */
 }
 
 /* MAIN CONTENT */
@@ -212,8 +180,6 @@ body {
 .section-header h1 {
   margin: 5px 0 25px;
   font-size: 20px;
-  font-family: 'expend', sans-serif; /* Usamos expend para títulos principales */
-  color: var(--accent);
 }
 
 .grid {
@@ -223,7 +189,7 @@ body {
   margin-bottom: 4rem;
 }
 
-/* === ESTILOS DE ANIMACIÓN DE ENTRADA (MANTENIDO) === */
+/* === ESTILOS DE ANIMACIÓN DE ENTRADA (NUEVO) === */
 @keyframes fadeInSlideUp {
   from {
     opacity: 0;
@@ -238,64 +204,48 @@ body {
 .card {
   cursor: pointer;
   transition: transform 0.2s ease;
-  /* Estado inicial */
+  /* Estado inicial: oculto y ligeramente abajo */
   opacity: 0; 
   transform: translateY(20px); 
 }
 
-/* Clase que se añade con JS */
+/* Clase que se añade con JS para activar la animación */
 .card.animate {
   animation: fadeInSlideUp 0.4s ease-out forwards;
+  /* Se elimina la transición de transform aquí para que la animación CSS tome el control */
   transition: none;
 }
 /* === FIN ANIMACIÓN === */
 
+
 .card img {
   width: 100%;
   border-radius: 8px;
-  /* Efecto cromo sutil en las previsualizaciones */
-  border: 1px solid transparent;
-  transition: 0.3s;
 }
 
 .card:hover {
   transform: scale(1.05);
 }
-
-.card:hover img {
-    border-color: var(--chrome-border);
-    box-shadow: 0 0 10px rgba(160, 0, 255, 0.4);
-}
-
 .card h4, 
 .card p {
   margin: 15px;
   top: 0px; 
 }
 
-.card h4 {
-  font-family: 'circular', sans-serif;
-  color: #fff;
-}
-
 .card p {
-  margin-top: -15px;
+  margin-top: -15px; /* O a 0px si quieres pegarlo al h4 */
   color: var(--muted);
   font-size: 0.9rem;
 }
-
 /* RIGHT PANEL */
 .right-panel {
   width: 400px;
   background: var(--panel);
   padding: 15px;
+  border-left: 1px solid #1a1a1a;
   height: 100%; 
   display: flex; 
-  flex-direction: column;
-  
-  /* Cromo y metal sutil */
-  border-left: 2px solid var(--chrome-border);
-  box-shadow: -4px 0 15px rgba(160, 0, 255, 0.1);
+  flex-direction: column
 }
 
 .preview {
@@ -324,30 +274,27 @@ body {
   width: 100%;
   height: 100%;
   object-fit: contain; 
+
 }
 
 /* PLAYER */
 .player {
   height: 60px;
-  background: rgba(16, 16, 16, 0.8); /* Vidrio soplado oscuro */
-  backdrop-filter: blur(10px);
+  background: #101010;
   display: flex;
   align-items: center;
   justify-content: space-between; 
   padding: 0 24px; 
+  border-top: 1px solid #1a1a1a;
   
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
   z-index: 1000;
-  
-  /* Borde de cromo metálico inferior */
-  border-top: 2px solid var(--chrome-border);
-  box-shadow: 0 -4px 15px rgba(160, 0, 255, 0.2);
 }
 
-/* NUEVO ESTILO (MANTENIDO) */
+/* NUEVO ESTILO: Información de la pista a la izquierda */
 .track-info {
     flex-basis: 33%; 
 }
@@ -356,7 +303,6 @@ body {
     margin: 0;
     font-size: 1rem;
     text-align: left; 
-    font-family: 'circular', sans-serif;
 }
 
 .track-info p {
@@ -373,8 +319,6 @@ body {
     border-radius: 4px;
     overflow: hidden;
     margin-right: 20px;
-    /* Efecto cromo sutil en portada */
-    border: 1px solid var(--chrome-highlight);
 }
 
 .track-cover img {
@@ -389,7 +333,7 @@ body {
     text-align: right; 
 }
 
-/* PLAYER CONTROLS (MANTENIDO) */
+/* PLAYER CONTROLS (se mantiene) */
 .player-controls {
   display: flex;
   align-items: center; 
@@ -410,12 +354,10 @@ body {
 .player-controls button img {
   width: 16px; 
   display: block;
-  /* Botones cromados */
-  filter: brightness(150%) sepia(100%) hue-rotate(240deg) saturate(200%);
 }
 
 .player-controls .main-player-btn {
-  background: #fff; /* Cromo puro */
+  background: #fff;
   width: 28px;
   height:28px;
   border-radius: 50%;
@@ -423,13 +365,11 @@ body {
   align-items: center;
   justify-content: center;
   margin: 0 16px; 
-  box-shadow: 0 0 10px var(--chrome-highlight);
 }
 
 .player-controls .main-player-btn img {
   width: 12px;
   transform: translateX(1px); 
-  filter: none; /* Icono interior oscuro */
 }
 
 .player-controls button:hover {
@@ -441,7 +381,8 @@ body {
     opacity: 0.8;
 }
 
-/* LIGHTBOX (MANTENIDO) */
+
+/* LIGHTBOX (Modal para ver imagen completa) */
 .lightbox {
   position: fixed;
   top: 0;
@@ -484,68 +425,69 @@ body {
 }
 
 /* ESTILOS PARA LA BARRA DE DESPLAZAMIENTO (SCROLLBAR) */
+/* Aplica solo al .left-panel */
 .left-panel::-webkit-scrollbar {
   width: 12px;
 }
 
 .left-panel::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.1); /* Sutil */
+  background: var(--bg);
 }
 
 .left-panel::-webkit-scrollbar-thumb {
-  background-color: var(--chrome-border); /* Cromo metálico */
-  border-radius: 6px; 
-  border: 3px solid rgba(0, 0, 0, 0.1);
+  background-color: #333;
+  border-radius: 4px; 
 }
 
 .left-panel::-webkit-scrollbar-thumb:hover {
-  background-color: var(--accent); /* Púrpura eléctrico */
+  background-color: var(--muted);
 }
 
 /* ======================================= */
-/* ====== MEDIA QUERIES PARA MÓVIL (MANTENIDO) ======= */
+/* ====== MEDIA QUERIES PARA MÓVIL ======= */
 /* ======================================= */
 @media (max-width: 600px) {
-  /* Fondo más plano para móvil para rendimiento */
-  body {
-    background: var(--bg);
-  }
-
+  /* 1. OCULTAR ELEMENTOS NO DESEADOS */
   .sidebar {
     display: none;
   }
 
+  /* **CRUCIAL:** Ocultar el panel derecho de vista previa (el reproductor grande) */
   .right-panel {
     display: none; 
     visibility: hidden; 
     width: 0;
   }
   
+  /* 2. AJUSTAR EL CONTENEDOR PRINCIPAL Y EL PANEL DE CONTENIDO */
   .content {
     flex-direction: row; 
   }
 
+  /* **CRUCIAL:** El panel izquierdo debe ocupar el 100% del espacio horizontal */
   .left-panel {
-    flex: 1 1 100%; 
-    padding: 20px 15px; 
+    flex: 1 1 100%; /* Ocupa todo el ancho disponible */
+    padding: 20px 15px; /* Reducir padding en móvil */
+    /* Ajusta la altura: Altura de la ventana - Topbar (60px) - Player (60px) */
     height: calc(100vh - 60px - 60px); 
     margin-bottom: 0; 
   }
 
+  /* 3. FORMATO DE ÍTEMS */
   .grid {
+    /* **CRUCIAL:** Una sola columna para que cada ítem ocupe todo el ancho */
     grid-template-columns: 1fr; 
     gap: 15px; 
     margin-bottom: 2rem; 
   }
   
   .card:hover {
-    transform: none;
+    transform: none; /* Eliminar el zoom en hover para mejor UX táctil */
   }
 
+  /* 4. AJUSTES EN EL ENCABEZADO Y REPRODUCTOR INFERIOR */
   .topbar {
     padding: 0 15px; 
-    backdrop-filter: none; /* Mejor rendimiento */
-    background: #141414;
   }
   
   .brand-name {
@@ -560,8 +502,6 @@ body {
   .player {
     padding: 0 15px; 
     height: 60px; 
-    backdrop-filter: none; /* Mejor rendimiento */
-    background: #101010;
   }
   
   .track-placeholder {
