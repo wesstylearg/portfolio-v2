@@ -39,16 +39,16 @@ const data = {
   ],
   flyers: [
     { title: "Noche Mexicana", client: "Viersadingos", src: "img/flyers/frpicante.png" },
-    { title: "La Santa Trinidad", client: "Micery", src: "img/flyers/santatrinidad.jpg" },
     { title: "Te vi (Lanzamiento)", client: "Gondra", src: "img/flyers/tevi.png" },
-    { title: "Invitado a Niceto", client: "FRN", src: "img/flyers/frn-niceto.png" },
+    { title: "Niceto FRN & KAU!", client: "FRN", src: "img/flyers/frn-niceto.png" },
+    { title: "Sorteo Niceto", client: "FRN", src: "img/flyers/frn-emerfst.png" },
     { title: "Poster FRO!", client: "wesstyle.arg", src: "img/flyers/fro.png" },
+    { title: "La Santa Trinidad", client: "Micery", src: "img/flyers/santatrinidad.jpg" },
     { title: "i gotta feeling", client: "wesstyle.arg", src: "img/flyers/i gotta feeling.png"},
-    { title: "Poster Saturacion Pop", client: "wesstyle.arg", src: "img/flyers/saturacionpop.png" },
-    { title: "Poster Fvck Luv", client: "wesstyle.arg", src: "img/flyers/fuckluv.png" },
-    { title: "Poster C.R.O.", client: "wesstyle.arg", src: "img/flyers/cro.png" },
-    { title: "Sorteo de entradas Niceto", client: "FRN", src: "img/flyers/frn-emerfst.png" },
-    { title: "Flyer promocional spotify", client: "Gondra", src: "img/flyers/tamonuevo-flyer.png" },
+    { title: "SATURACION POP", client: "wesstyle.arg", src: "img/flyers/saturacionpop.png" },
+    { title: "Fvck Luv", client: "wesstyle.arg", src: "img/flyers/fuckluv.png" },
+    { title: "C.R.O.", client: "wesstyle.arg", src: "img/flyers/cro.png" },
+    { title: "Lanzamiento TAMO NUEVO", client: "Gondra", src: "img/flyers/tamonuevo-flyer.png" },
     { title: "Plugtwrd Studio", client: "Yvng Golden", src: "img/flyers/plugtwrd.png" }
   ],
   videos: [
