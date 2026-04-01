@@ -14,7 +14,7 @@
       <img src="img/iconos/logo-texto.svg" alt="Logo" class="logo">
     </div>
     <nav class="top-nav">
-      <button class="nav-btn active">Diseños</button>
+      <button id="btn-disenos" class="nav-btn active">Diseños</button>
       <a href="precios.html" class="nav-btn outline">Precios</a>
       <a href="contacto.html" class="nav-btn outline">Contacto</a>
     </nav>
@@ -23,25 +23,26 @@
   <div class="app">
     <aside class="sidebar">
       <ul>
-        <li><button class="side-item active" data-section="menu"><img src="img/playlist/megusta.png" alt="Todo"/></button></li>
-        <li><button class="side-item" data-section="portadas"><img src="img/playlist/portadas.png" alt="Portadas"/></button></li>
-        <li><button class="side-item" data-section="flyers"><img src="img/playlist/flyers.png" alt="Flyers"/></button></li>
-        <li><button class="side-item" data-section="logos"><img src="img/playlist/logos.png" alt="Logos"/></button></li>
-        <li><button class="side-item" data-section="videos"><img src="img/playlist/videos.png" alt="Videos"/></button></li>
+        <li><button class="side-item active" data-section="menu"><img src="img/playlist/megusta.png" alt=""></button></li>
+        <li><button class="side-item" data-section="portadas"><img src="img/playlist/portadas.png" alt="Portadas"></button></li>
+        <li><button class="side-item" data-section="flyers"><img src="img/playlist/flyers.png" alt="Flyers"></button></li>
+        <li><button class="side-item" data-section="logos"><img src="img/playlist/logos.png" alt="Logos"></button></li>
+        <li><button class="side-item" data-section="videos"><img src="img/playlist/videos.png" alt="Videos"></button></li>
       </ul>
     </aside>
 
     <main class="content">
       <section class="left-panel">
         <div class="section-header">
-          <h1 id="section-name">PORTFOLIO</h1>
+          <h3>Portfolio</h3>
+          <h1 id="section-name">WESSTYLE.ARG</h1>
         </div>
         <div id="grid" class="grid">
-          </div>
+            </div>
       </section>
 
       <aside class="right-panel">
-        <div class="preview-container">
+        <div class="preview-image" id="preview-container">
           <img id="preview-image" src="img/portadas/01.jpg" alt="Preview">
           <video id="preview-video" muted loop playsinline style="display:none;"></video>
         </div>
@@ -51,13 +52,22 @@
 
   <footer class="player">
     <div class="track-cover">
-      <img src="img/portadas/01.jpg" id="player-cover" alt="Cover">
+      <img id="player-cover" src="img/portadas/01.jpg" alt="Cover">
     </div>
+    
     <div class="track-info">
       <h2 id="preview-title">Selecciona un diseño</h2>
       <p id="preview-client">wesstyle.arg — 2026</p>
     </div>
-    </footer>
+
+    <div class="player-controls">
+      <button id="prev"><img src="img/iconos/player_left.svg" alt="Ant"></button>
+      <button id="play" class="main-player-btn"><img src="img/iconos/player_button.svg" alt="Play"></button>
+      <button id="next"><img src="img/iconos/player_right.svg" alt="Sig"></button>
+    </div>
+
+    <div class="track-placeholder"></div>
+  </footer>
 
   <script src="script.js"></script>
 </body>
