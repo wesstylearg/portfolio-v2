@@ -8,38 +8,34 @@
   <link rel="stylesheet" href="style.css" />
   <link href="fonts/circular.woff2" rel="stylesheet" />
   <style>
-    /* El body ya trae var(--bg) de style.css */
-    
-    .app-contact {
+    /* Reset de scroll para esta página específica */
+    body {
+        overflow-y: auto !important;
+        height: auto;
+        min-height: 100vh;
+        background: radial-gradient(circle at top right, rgba(73, 59, 144, 0.15), var(--bg));
+    }
+
+    .contact-container {
         display: flex;
         flex-direction: column;
-        min-height: calc(100vh - 60px);
-        background: linear-gradient(180deg, rgba(73, 59, 144, 0.05) 0%, var(--bg) 100%);
-    }
-
-    .main-contact {
-        flex: 1;
-        display: flex;
-        justify-content: center;
         align-items: center;
-        padding: 40px 20px;
+        justify-content: center;
+        padding: 60px 20px;
+        width: 100%;
     }
 
+    /* Tarjeta de contacto principal */
     .contact-card {
         background: rgba(255, 255, 255, 0.02);
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(10px);
+        border: 1px solid var(--border);
+        backdrop-filter: blur(15px);
         padding: 60px 40px;
         border-radius: 24px;
         max-width: 700px;
         width: 100%;
         text-align: center;
         animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-    }
-
-    @keyframes fadeInUp {
-        from { opacity: 0; transform: translateY(30px); }
-        to { opacity: 1; transform: translateY(0); }
     }
 
     .contact-card h1 {
@@ -51,6 +47,7 @@
         text-transform: uppercase;
     }
 
+    /* Grid de opciones de contacto */
     .contact-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -59,19 +56,25 @@
     }
 
     .contact-item {
-        transition: transform 0.3s ease;
+        padding: 20px;
+        border-radius: 15px;
+        transition: transform 0.3s ease, background 0.3s ease;
+        border: 1px solid transparent;
     }
 
     .contact-item:hover {
         transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.03);
+        border-color: var(--border);
     }
 
     .contact-item h2 {
         font-size: 0.7rem;
         letter-spacing: 2px;
         color: var(--accent);
-        margin-bottom: 10px;
+        margin-bottom: 12px;
         font-weight: 700;
+        text-transform: uppercase;
     }
 
     .contact-item a {
@@ -80,24 +83,26 @@
         color: #fff;
         text-decoration: none;
         transition: color 0.3s;
+        display: block;
     }
 
     .contact-item a:hover {
         color: var(--accent);
     }
 
+    /* Sección de confianza / footer de la card */
     .social-proof {
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        border-top: 1px solid var(--border);
         padding-top: 30px;
         margin-top: 20px;
     }
 
     .social-proof p {
         font-family: 'circular', sans-serif;
-        font-size: 0.9rem;
+        font-size: 0.95rem;
         color: var(--muted);
         line-height: 1.6;
-        max-width: 450px;
+        max-width: 480px;
         margin: 0 auto;
     }
 
@@ -106,11 +111,17 @@
         font-weight: 500;
     }
 
+    /* Media Queries */
     @media (max-width: 600px) {
-        .contact-card { padding: 40px 20px; border: none; background: transparent; }
-        .contact-card h1 { font-size: 2.5rem; }
+        .contact-card { 
+            padding: 40px 20px; 
+            background: transparent; 
+            border: none; 
+            backdrop-filter: none;
+        }
+        .contact-card h1 { font-size: 2.6rem; }
         .contact-item a { font-size: 1.5rem; }
-        .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+        .contact-grid { grid-template-columns: 1fr; gap: 20px; }
     }
   </style>
 </head>
@@ -118,7 +129,7 @@
 <body>
   <header class="topbar">
     <div class="brand">
-      <img src="img/iconos/logo-texto.svg" alt="Logo" class="logo">
+        <img src="img/iconos/logo-texto.svg" alt="Logo" class="logo">
     </div>
     <nav class="top-nav">
       <a href="index.html" class="nav-btn outline">Diseños</a>
@@ -127,36 +138,42 @@
     </nav>
   </header>
 
-  <div class="app-contact">
-    <main class="main-contact">
-        <div class="contact-card">
-            <h1>Hablemos de tu próximo lanzamiento</h1>
-            
-            <div class="contact-grid">
-                <div class="contact-item">
-                    <h2>INSTAGRAM</h2>
-                    <a href="https://instagram.com/wesstyle.arg" target="_blank">@wesstyle.arg</a>
-                </div>
+  <main class="contact-container">
+      <div class="contact-card">
+          <h1>Hablemos de tu próximo lanzamiento</h1>
+          
+          <div class="contact-grid">
+              <div class="contact-item">
+                  <h2>INSTAGRAM</h2>
+                  <a href="https://instagram.com/wesstyle.arg" target="_blank">@wesstyle.arg</a>
+              </div>
 
-                <div class="contact-item">
-                    <h2>WHATSAPP</h2>
-                    <a href="https://wa.me/5492983448645" target="_blank">Chat Directo</a>
-                </div>
-                
-                <div class="contact-item">
-                    <h2>EMAIL</h2>
-                    <a href="mailto:wesstyle.arg@email.com">Email</a>
-                </div>
-            </div>
+              <div class="contact-item">
+                  <h2>WHATSAPP</h2>
+                  <a href="https://wa.me/5492983448645" target="_blank">Chat Directo</a>
+              </div>
+              
+              <div class="contact-item">
+                  <h2>EMAIL</h2>
+                  <a href="mailto:wesstyle.arg@email.com">Enviar Mail</a>
+              </div>
+          </div>
 
-            <div class="social-proof">
-                <p>
-                    Más de <span class="highlight">50 artistas</span> de todo el mundo ya confían en el estudio. 
-                    Tu próxima identidad visual empieza acá.
-                </p>
-            </div>
-        </div>
-    </main>
-  </div>
+          <div class="social-proof">
+              <p>
+                  Más de <span class="highlight">50 artistas</span> de todo el mundo ya confían en <span class="highlight">wesstyle.arg</span>. 
+                  Tu próxima identidad visual empieza acá.
+              </p>
+          </div>
+      </div>
+  </main>
+
+  <script>
+    // Pequeña animación de entrada adicional para los items
+    document.querySelectorAll('.contact-item').forEach((item, index) => {
+        item.style.opacity = "0";
+        item.style.animation = `fadeInUp 0.5s ease forwards ${0.3 + (index * 0.1)}s`;
+    });
+  </script>
 </body>
 </html>
