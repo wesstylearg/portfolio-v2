@@ -143,9 +143,32 @@
     }
 
     @media (max-width: 600px) {
-        .price-title, .price-value { font-size: 1.5rem; }
-        .price-item { padding: 15px; }
+    .price-item {
+        padding: 15px;
+        flex-direction: row; /* Mantiene la fila */
+        flex-wrap: wrap;    /* Permite que si el precio no cabe, baje */
+        gap: 10px;
     }
+
+    .price-details {
+        padding-left: 10px;
+        flex: 1 1 60%; /* Le da prioridad al texto */
+    }
+
+    .price-title {
+        font-size: 1.2rem; /* Achicamos un poco más para que no rompa */
+    }
+
+    .price-info {
+        flex: 1 1 auto;
+        align-items: flex-end;
+        justify-content: center;
+    }
+
+    .price-value {
+        font-size: 1.3rem;
+    }
+}
   </style>
 </head>
 
