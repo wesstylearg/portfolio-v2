@@ -27,7 +27,7 @@
 
 :root {
   --bg: #22222c;
-  --panel: #24242f;
+  --panel: #0f0f0f;
   --accent: #58477a;
   --wesstyle: #493b90;
   --muted: #8a8a8a;
@@ -47,7 +47,7 @@ body {
 /* HEADER */
 .topbar {
   height: 60px;
-  background: #282833;
+  background: #141414;
   display: flex;
   align-items: center;
   justify-content: space-between;
