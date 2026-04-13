@@ -1,6 +1,7 @@
 const data = {
   menu: [],
   portadas: [
+    { title: "FUGAZ", client: "Mou G", src: "img/portadas/fugaz.png"},
     { title: "Soul Side", client: "Frannko", src: "img/portadas/soulside.png"},
     { title: "Ciclo", client: "Gonda", src: "img/portadas/ciclo.png"},
     { title: "Lejos de ti", client: "Vanek", src: "img/portadas/lejos-de-ti.png"},
