@@ -94,6 +94,8 @@ const videoContainer = document.getElementById("video-container");
 const lightboxClose = document.querySelector(".lightbox-close");
 const lightboxBack = document.getElementById("lightbox-back");
 
+const fontPopup = document.querySelector(".font-popup"); // Selector para el popup
+
 // ─── helpers ────────────────────────────────────────────────
 function isMobile() {
   return window.matchMedia("(max-width: 600px)").matches;
@@ -185,6 +187,8 @@ function openPreview(index, userTriggered) {
 
 // ─── render categories ──────────────────────────────────────
 function renderCategories() {
+  if (fontPopup) fontPopup.style.display = "flex"; // Volver a mostrar el popup en el menú
+
   currentSection = "menu";
   grid.innerHTML = "";
   document.querySelector(".right-panel").style.display = "none";
@@ -209,6 +213,8 @@ function renderSection(section) {
     renderCategories(); 
     return; 
   }
+
+  if (fontPopup) fontPopup.style.display = "none"; // Ocultar el popup al entrar en una sección
 
   currentSection = section;
   currentIndex = 0;

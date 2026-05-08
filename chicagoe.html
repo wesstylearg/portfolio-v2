@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0" />
+
+  <title>CHICAGOE — Font Release</title>
+
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+
+    @font-face {
+      font-family: "chicagoe";
+      src: url("fonts/chicagoe.ttf") format("truetype");
+    }
+
+    body {
+      background: var(--bg);
+      color: white;
+      margin: 0;
+      font-family: 'circular', sans-serif;
+    }
+
+    .font-page {
+
+      width: 100%;
+      min-height: 100vh;
+
+      padding-bottom: 120px;
+    }
+
+    .font-hero {
+
+      max-width: 1250px;
+
+      margin: auto;
+
+      padding:
+        70px
+        40px
+        40px;
+
+      display: grid;
+
+      grid-template-columns:
+        500px
+        1fr;
+
+      gap: 60px;
+
+      align-items: center;
+    }
+
+    .font-cover {
+
+      width: 100%;
+      aspect-ratio: 1/1;
+
+      border-radius: 24px;
+
+      overflow: hidden;
+
+      box-shadow:
+        0 0 50px rgba(73,59,144,.12),
+        0 20px 60px rgba(0,0,0,.4);
+    }
+
+    .font-cover img {
+
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+    }
+
+    .font-info small {
+
+      color: #cbbdff;
+
+      letter-spacing: .15em;
+
+      font-size: .7rem;
+    }
+
+    .font-info h1 {
+
+      font-size: 5rem;
+
+      margin:
+        10px 0
+        15px;
+
+      line-height: .95;
+
+      font-family: "chicagoe";
+      font-weight: normal;
+    }
+
+    .font-description {
+
+      color: var(--muted);
+
+      font-size: 1rem;
+
+      max-width: 550px;
+
+      line-height: 1.6;
+    }
+
+    .font-buttons {
+
+      display: flex;
+      gap: 15px;
+
+      margin-top: 35px;
+    }
+
+    .font-btn {
+
+      height: 52px;
+
+      padding:
+        0
+        26px;
+
+      border-radius: 999px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      text-decoration: none;
+
+      transition: .25s ease;
+    }
+
+    .font-btn.primary {
+
+      background: var(--wesstyle);
+      color: white;
+    }
+
+    .font-btn.secondary {
+
+      border: 1px solid rgba(255,255,255,.08);
+
+      color: white;
+    }
+
+    .font-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    /* PREVIEW */
+
+    .preview-section {
+
+      max-width: 1250px;
+
+      margin: auto;
+
+      padding: 30px 40px;
+    }
+
+    .preview-title {
+
+      color: var(--muted);
+
+      margin-bottom: 20px;
+    }
+
+    .font-preview-input {
+
+      width: 100%;
+
+      background: rgba(255,255,255,.03);
+
+      border:
+        1px solid
+        rgba(255,255,255,.05);
+
+      border-radius: 20px;
+
+      padding: 35px;
+
+      color: white;
+
+      outline: none;
+
+      font-family: "chicagoe";
+
+      font-size: clamp(2rem, 8vw, 7rem);
+
+      transition: .25s ease;
+    }
+
+    .font-preview-input:focus {
+
+      border-color:
+        rgba(73,59,144,.4);
+
+      box-shadow:
+        0 0 25px rgba(73,59,144,.12);
+    }
+
+    /* GALLERY */
+
+    .gallery {
+
+      max-width: 1250px;
+
+      margin: auto;
+
+      padding:
+        20px
+        40px;
+
+      display: flex;
+      flex-direction: column;
+
+      gap: 25px;
+    }
+
+    .gallery img {
+
+      width: 100%;
+
+      border-radius: 24px;
+
+      display: block;
+    }
+
+    /* INFO */
+
+    .meta {
+
+      max-width: 1250px;
+
+      margin: auto;
+
+      padding:
+        50px
+        40px;
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(4,1fr);
+
+      gap: 20px;
+    }
+
+    .meta-card {
+
+      background:
+        rgba(255,255,255,.03);
+
+      border:
+        1px solid
+        rgba(255,255,255,.05);
+
+      border-radius: 18px;
+
+      padding: 24px;
+    }
+
+    .meta-card span {
+
+      color: var(--muted);
+
+      font-size: .75rem;
+
+      display: block;
+
+      margin-bottom: 10px;
+    }
+
+    .meta-card h3 {
+
+      margin: 0;
+
+      font-size: 1rem;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 900px) {
+
+      .font-hero {
+
+        grid-template-columns: 1fr;
+
+        gap: 30px;
+      }
+
+      .font-info h1 {
+
+        font-size: 3.5rem;
+      }
+
+      .meta {
+
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+
+      .font-hero,
+      .preview-section,
+      .gallery,
+      .meta {
+
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .font-info h1 {
+
+        font-size: 2.6rem;
+      }
+
+      .font-buttons {
+
+        flex-direction: column;
+      }
+
+      .meta {
+
+        grid-template-columns: 1fr;
+      }
+
+      .font-preview-input {
+
+        padding: 22px;
+      }
+    }
+    .font-btn.paypal {
+  background: #ffffff; /* Fondo blanco para que resalte el logo de PayPal */
+  color: #003087;      /* Azul corporativo de PayPal */
+  font-weight: bold;
+  border: 1px solid #003087;
+}
+
+.font-btn.paypal:hover {
+  background: #f0f7ff;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 48, 135, 0.2);
+}
+
+/* Ajuste para móviles: asegurar que quepan 3 botones */
+@media (max-width: 600px) {
+  .font-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+  </style>
+
+</head>
+
+<body>
+
+    <header class="topbar">
+    <div class="brand">
+      <img src="img/iconos/logo-texto.svg" alt="Logo" class="logo">
+    </div>
+    <nav class="top-nav">
+      <a href="index.html" class="nav-btn outline">Diseños</a>
+      <a href="precios.html" class="nav-btn outline">Precios</a>
+      <a href="contacto.html" class="nav-btn outline">Contacto</a>
+      <button id="btn-disenos" class="nav-btn active">Chicagoe Font</button>
+    </nav>
+  </header>
+
+  <div class="font-page">
+
+    <!-- HERO -->
+
+    <section class="font-hero">
+
+      <div class="font-cover">
+        <img
+          src="img/chicagoe/chicagoe.png"
+          alt="CHICAGOE FONT">
+      </div>
+
+      <div class="font-info">
+
+        <small>NEW FONT RELEASE.</small>
+
+        <h1>CHICAGOE FoNt</h1>
+
+        <p class="font-description">
+          Una tipografía gótica inspirada en Chicago y en el underground.
+        </p>
+
+        <p class="font-description">
+          Licencia: Gratis
+        </p>
+
+        <div class="font-buttons">
+
+  <a href="fonts/chicagoe.otf" download class="font-btn primary">
+     DESCARGAR OTF
+  </a>
+
+  <a href="fonts/chicagoe.ttf" download class="font-btn secondary">
+     DESCARGAR TTF
+  </a>
+
+  <a href="https://www.paypal.com/donate/?hosted_button_id=DFCBUJEZ68KH8" 
+     target="_blank" 
+     class="font-btn paypal">
+     <img src="https://www.paypalobjects.com/webstatic/mktg/logo/pp_cc_mark_37x23.jpg" alt="PayPal" style="height:20px; margin-right:10px; border-radius:3px;">
+     DONAR
+  </a>
+
+</div>
+
+      </div>
+
+    </section>
+
+    <!-- LIVE PREVIEW -->
+
+    <section class="preview-section">
+
+      <p class="preview-title">
+        PRUEBA AQUI LA FUENTE
+      </p>
+
+      <input
+        type="text"
+        class="font-preview-input"
+        value="CHICAGOE FONT"
+        id="previewInput">
+
+    </section>
+
+    <!-- GALLERY -->
+
+    <section class="gallery">
+
+      <img
+        loading="lazy"
+        src="img/chicagoe/showcase2.png"
+        alt="Showcase">
+
+      <img
+        loading="lazy"
+        src="img/chicagoe/showcase1.png"
+        alt="Chicagoe">
+
+    </section>
+
+    <!-- META -->
+
+    <section class="meta">
+
+      <div class="meta-card">
+        <span>DISEÑADOR</span>
+        <h3>@wesstyle.arg</h3>
+      </div>
+
+      <div class="meta-card">
+        <span>ESTILO</span>
+        <h3>GOTHIC / GÓTICO</h3>
+      </div>
+
+      <div class="meta-card">
+        <span>VERSIÓN</span>
+        <h3>v1.0</h3>
+      </div>
+
+      <div class="meta-card">
+        <span>FORMATOS</span>
+        <h3>OTF / TTF</h3>
+      </div>
+
+    </section>
+
+  </div>
+
+</body>
+
+</html>
