@@ -55,8 +55,11 @@ const data = {
   ],
   videos: [
     { title: "Pasa un rato", client: "NIRO", embed: "https://www.youtube.com/embed/oTmju9RE8qs", src: "img/miniaturas/pasaunrato.png" },
+    { title: "CARIBUENAS", client: "XeonFlow", embed: "https://www.youtube.com/embed//H4q8AsuHyhs", src: "img/miniaturas/caribuenas.jpg"},
     { title: "Lejos de ti", client: "Vanek", embed: "https://www.youtube.com/embed/SwzMAK-N-IE", src: "img/miniaturas/lejosdeti.png" },
+    { title: "CrazzyKitty", client: "Siroe", embed: "https://www.youtube.com/embed/AISxOeh41o0", src: "img/miniaturas/crazzykitty.jpg"},
     { title: "PUCCA", client: "NIRO", embed: "https://www.youtube.com/embed/09eJfGjJs0w", src: "img/miniaturas/pucca.jpg" }
+    
   ],
   logos: [
     { title: "Niro", client: "Artista", src: "img/logos/niro.png" },
